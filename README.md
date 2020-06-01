@@ -60,3 +60,14 @@ Twitter APIs.
 I recommend checking out the
 [documentation for the twitter library](https://www.rubydoc.info/gems/twitter) as
 a next step.
+
+__5. Write a tweet__
+
+You could write a tweet with the following Ruby code:
+
+    client.update "I'm tweeting from twenv"
+
+Or, rely on a Pry command that's part of twenv that will open your editor and
+afterwards post your tweet:
+
+    write-tweet 
