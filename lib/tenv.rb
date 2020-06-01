@@ -5,7 +5,7 @@ class Tenv
   require_relative 'tenv/dot_env'
   require_relative 'tenv/command'
   require_relative 'tenv/write_tweet'
-  require_relative 'tenv/koala'
+  require_relative 'tenv/random_tweet'
 
   def self.start_repl
     glob = File.join __dir__, '..', 'commands', '*.rb'
