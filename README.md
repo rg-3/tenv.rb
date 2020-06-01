@@ -53,21 +53,23 @@ If you didn't, from the twenv root:
 
 	bin/twenv
 
-Once started, you'll have access to a `client` method. It returns an instance
+__5. The "client" local__
+
+Once started, you'll have access to a `client` local. It returns an instance
 of `Twitter::REST::Client`, from there you can play around with numerous
 Twitter APIs.
 
 I recommend checking out the
-[documentation for the twitter library](https://www.rubydoc.info/gems/twitter) as
-a next step.
+[documentation for the twitter library](https://www.rubydoc.info/gems/twitter)
+to see what's possible.
 
-__5. Write a tweet__
+__6. Write a tweet__
 
 You could write a tweet with the following Ruby code:
 
     client.update "I'm tweeting from twenv"
 
-Or, rely on a Pry command that's part of twenv that will open your editor and
+Or, rely on a Pry command that's part of twenv. It will open your editor and
 afterwards post your tweet:
 
     write-tweet 
