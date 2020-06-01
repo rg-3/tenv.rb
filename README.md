@@ -93,6 +93,8 @@ class RandomTweet < Tenv::Command
   description 'A random tweet from your home timeline'
 
   def process
+    # Extended tweet mode provides access to the full tweet text rather
+    # than a truncated version.
     tweet = twitter_client.home_timeline(tweet_mode: 'extended').sample
     out = format "%{tweet}\n- %{author}",
           tweet: word_wrap(tweet.full_text),
