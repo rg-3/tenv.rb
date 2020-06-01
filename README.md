@@ -73,3 +73,31 @@ Or, rely on a Pry command that's part of twenv. It will open your editor and
 afterwards post your tweet:
 
     write-tweet
+
+__7. Write your own commands__
+
+The `commands/` directory is a place where you can add Ruby scripts that will be
+loaded when twenv starts. It's intended as a place you can add your own commands
+and scripts.
+
+A twenv command is a class who has inherited from the Pry command class, it
+implements a `twitter_client` method that returns an instance of
+`Twitter::REST::Client`. This gives all twenv commands access to a Twitter
+object.
+
+The following example is a twenv command that prints a random tweet from your
+timeline:
+
+```ruby
+class RandomTweet < TwEnv::Command
+  match 'random-tweet'
+  description 'Randomly print the contents of a tweet'
+
+  def process
+    # Extended tweet mode provides access to the full tweet text rather
+    # than a truncated version.
+    tweets = twitter_client.home_timeline(tweet_mode: 'extended')
+    puts bold(tweets.sample.full_text)
+  end
+end
+```

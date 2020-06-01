@@ -6,6 +6,8 @@ class TwEnv
   require_relative 'twenv/write_tweet'
 
   def self.start_repl
+    glob = File.join __dir__, '..', 'commands', '*.rb'
+    Dir[glob].each {|path| require_command(path)}
     Pry.start new, extra_sticky_locals: {
       client: Twitter::REST::Client.new { |config|
         config.consumer_key        = ENV['TWENV_CONSUMER_KEY']
@@ -15,6 +17,13 @@ class TwEnv
       }
     }
   end
+
+  def self.require_command(path)
+    require path
+  rescue
+    warn "#{path} couldn't be loaded"
+  end
+  private_class_method :require_command
 
   def initialize
     read_env_dotfile

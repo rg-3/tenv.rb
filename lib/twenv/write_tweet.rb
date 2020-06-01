@@ -13,6 +13,4 @@ class TwEnv::WriteTweet < TwEnv::Command
     file.unlink
     file.close
   end
-
-  Pry.commands.add_command(self)
 end
