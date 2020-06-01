@@ -16,7 +16,7 @@ then adopt it as your own environment.
 	git clone https://github.com/rg-3/tenv.rb
 	cd tenv.rb
 
-__2. Set keys__
+__2. Configure env__
 
 For the next step, you should copy the sample `.env` file and then update it to
 have the correct consumer keys and access tokens for your Twitter user. If you
