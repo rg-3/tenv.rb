@@ -90,13 +90,14 @@ timeline:
 ```ruby
 class RandomTweet < Tenv::Command
   match 'random-tweet'
-  description 'Randomly print the contents of a tweet'
+  description 'A random tweet from your home timeline'
 
   def process
-    # Extended tweet mode provides access to the full tweet text rather
-    # than a truncated version.
-    tweets = twitter_client.home_timeline(tweet_mode: 'extended')
-    puts bold(tweets.sample.full_text)
+    tweet = twitter_client.home_timeline(tweet_mode: 'extended').sample
+    out = format "%{tweet}\n- %{author}",
+          tweet: word_wrap(tweet.full_text),
+          author: bold("@#{tweet.user.screen_name}")
+    puts out
   end
 end
 ```
