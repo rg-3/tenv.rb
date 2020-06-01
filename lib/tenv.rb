@@ -11,10 +11,10 @@ class Tenv
     Dir[glob].each {|path| require_command(path)}
     Pry.start new, extra_sticky_locals: {
       client: Twitter::REST::Client.new { |config|
-        config.consumer_key        = ENV['TWENV_CONSUMER_KEY']
-        config.consumer_secret     = ENV['TWENV_CONSUMER_KEY_SECRET']
-        config.access_token        = ENV['TWENV_ACCESS_TOKEN']
-        config.access_token_secret = ENV['TWENV_ACCESS_TOKEN_SECRET']
+        config.consumer_key        = ENV['TENV_CONSUMER_KEY']
+        config.consumer_secret     = ENV['TENV_CONSUMER_KEY_SECRET']
+        config.access_token        = ENV['TENV_ACCESS_TOKEN']
+        config.access_token_secret = ENV['TENV_ACCESS_TOKEN_SECRET']
       }
     }
   end
@@ -28,6 +28,6 @@ class Tenv
 
   def initialize
     path = File.join(__dir__, '..', '.env')
-    DotEnv.set_vars DotEnv.read_file(path)
+    DotEnv.set_env_vars DotEnv.read_file(path)
   end
 end

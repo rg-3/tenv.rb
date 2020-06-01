@@ -9,7 +9,7 @@ module Tenv::DotEnv
     end.compact
   end
 
-  def set_vars(vars)
+  def set_env_vars(vars)
     vars.each do |(key, value)|
       ENV[key] = value.strip
     end
