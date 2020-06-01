@@ -69,7 +69,7 @@ You could write a tweet with the following Ruby code:
 
     client.update "I'm tweeting from tenv"
 
-Or, rely on a Pry command that's part of tenv. It will open your editor and
+Or, rely on a Pry command that's part of tenv. It will open an editor and
 afterwards post your tweet:
 
     write-tweet
