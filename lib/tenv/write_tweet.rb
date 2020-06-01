@@ -1,4 +1,4 @@
-class TwEnv::WriteTweet < TwEnv::Command
+class Tenv::WriteTweet < Tenv::Command
   match 'write-tweet'
   description "Write a tweet"
 
@@ -6,7 +6,7 @@ class TwEnv::WriteTweet < TwEnv::Command
     unless ENV['EDITOR']
       raise Pry::CommandError, "Aborting because $EDITOR was not set."
     end
-    file = Tempfile.new('twenv')
+    file = Tempfile.new('tenv')
     system ENV['EDITOR'], file.path
     twitter_client.update(file.read)
   ensure

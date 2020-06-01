@@ -1,9 +1,9 @@
-class TwEnv
+class Tenv
   require 'pry'
   require 'twitter'
   require 'tempfile'
-  require_relative 'twenv/command'
-  require_relative 'twenv/write_tweet'
+  require_relative 'tenv/command'
+  require_relative 'tenv/write_tweet'
 
   def self.start_repl
     glob = File.join __dir__, '..', 'commands', '*.rb'

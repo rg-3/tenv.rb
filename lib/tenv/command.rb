@@ -1,4 +1,4 @@
-class TwEnv::Command < Pry::ClassCommand
+class Tenv::Command < Pry::ClassCommand
   def self.inherited(klass)
     Pry.commands.add_command(klass)
   end

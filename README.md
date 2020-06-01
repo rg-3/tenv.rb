@@ -1,6 +1,6 @@
 ## Introduction
 
-twenv.rb provides a Twitter environment where you can interact with Twitter through
+tenv.rb provides a Twitter environment where you can interact with Twitter through
 its web APIs from the comfort of an advanced REPL. It use technologies from the
 Ruby programming language. The environment is composed of the [Pry repl](https://github.com/pry/pry)
 and the [Twitter](https://github.com/sferik/twitter) library.
@@ -9,12 +9,12 @@ and the [Twitter](https://github.com/sferik/twitter) library.
 
 __1. Clone__
 
-To get started clone a copy of the twenv repository.
-The installation method for this project is to clone a copy of twenv and
+To get started clone a copy of the tenv repository.
+The installation method for this project is to clone a copy of tenv and
 then adopt it as your own environment.  
 
-	git clone https://github.com/rg-3/twenv.rb
-	cd twenv.rb
+	git clone https://github.com/rg-3/tenv.rb
+	cd tenv.rb
 
 __2. Set keys__
 
@@ -38,20 +38,20 @@ Then, bundle the dependencies to `.bundledgems`:
 
 __3. Update $PATH (Optional)__
 
-To start twenv outside the working directory of the repository, you
+To start tenv outside the working directory of the repository, you
 could update your shell rc files to include the `bin/` directory:
 
-	export PATH=$PATH:/path/to/twenv/repo/bin
+	export PATH=$PATH:/path/to/tenv/repo/bin
 
 __4. Start the repl__
 
 If you updated the $PATH:
 
-	twenv
+	tenv.rb
 
-If you didn't, from the twenv root:
+If you didn't, from the tenv root:
 
-	bin/twenv
+	bin/tenv.rb
 
 __5. The "client" local__
 
@@ -67,9 +67,9 @@ __6. Write a tweet__
 
 You could write a tweet with the following Ruby code:
 
-    client.update "I'm tweeting from twenv"
+    client.update "I'm tweeting from tenv"
 
-Or, rely on a Pry command that's part of twenv. It will open your editor and
+Or, rely on a Pry command that's part of tenv. It will open your editor and
 afterwards post your tweet:
 
     write-tweet
@@ -77,19 +77,18 @@ afterwards post your tweet:
 __7. Write your own commands__
 
 The `commands/` directory is a place where you can add Ruby scripts that will be
-loaded when twenv starts. It's intended as a place you can add your own commands
+loaded when tenv starts. It's intended as a place you can add your own commands
 and scripts.
 
-A twenv command is a class who has inherited from the Pry command class, it
-implements a `twitter_client` method that returns an instance of
-`Twitter::REST::Client`. This gives all twenv commands access to a Twitter
-object.
+The tenv command class is a class who has inherited from the Pry command class,
+it implements a `twitter_client` method that returns an instance of
+`Twitter::REST::Client` and it acts as a super class for all tenv commands.
 
-The following example is a twenv command that prints a random tweet from your
+The following example is a tenv command that prints a random tweet from your
 timeline:
 
 ```ruby
-class RandomTweet < TwEnv::Command
+class RandomTweet < Tenv::Command
   match 'random-tweet'
   description 'Randomly print the contents of a tweet'
 

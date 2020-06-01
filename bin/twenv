@@ -1,4 +1,0 @@
-#!/usr/bin/env ruby
-require 'bundler/setup'
-require_relative '../lib/twenv'
-TwEnv.start_repl
