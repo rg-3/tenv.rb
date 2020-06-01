@@ -1,7 +1,7 @@
 module Tenv::DotEnv
   extend self
 
-  def read_file(path)
+  def read_dot_file(path)
     return [] unless File.exist? path
     File.read(path).each_line.map do |line|
       next unless line =~ /^[\w]+=[\w]+/
@@ -9,7 +9,7 @@ module Tenv::DotEnv
     end.compact
   end
 
-  def set_env_vars(vars)
+  def set_env(vars)
     vars.each do |(key, value)|
       ENV[key] = value.strip
     end

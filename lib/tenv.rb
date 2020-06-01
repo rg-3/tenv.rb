@@ -28,6 +28,7 @@ class Tenv
 
   def initialize
     path = File.join(__dir__, '..', '.env')
-    DotEnv.set_env_vars DotEnv.read_file(path)
+    vars = DotEnv.read_dot_file(path)
+    DotEnv.set_env(vars)
   end
 end
