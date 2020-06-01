@@ -1,5 +1,3 @@
-# twenv.rb
-
 ## Introduction
 
 twenv provides a Twitter environment where you can interact with Twitter while
