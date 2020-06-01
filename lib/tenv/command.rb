@@ -1,3 +1,5 @@
+require 'word_wrap'
+
 class Tenv::Command < Pry::ClassCommand
   def self.inherited(klass)
     Thread.new do
@@ -6,6 +8,10 @@ class Tenv::Command < Pry::ClassCommand
       sleep 0.5
       Pry.commands.add_command(klass)
     end
+  end
+
+  def word_wrap(str, cols: 80, fit: true)
+    WordWrap.ww str, cols, fit
   end
 
   def twitter_client
