@@ -1,10 +1,12 @@
 class Tenv
   require 'pry'
   require 'twitter'
+  require 'cowsay'
   require 'tempfile'
   require_relative 'tenv/dot_env'
   require_relative 'tenv/command'
   require_relative 'tenv/write_tweet'
+  require_relative 'tenv/koala'
 
   def self.start_repl
     glob = File.join __dir__, '..', 'commands', '*.rb'

@@ -8,6 +8,10 @@ class Tenv::Command < Pry::ClassCommand
     end
   end
 
+  def random_timeline_tweet
+    twitter_client.home_timeline(tweet_mode: 'extended').sample
+  end
+
   def twitter_client
     pry_instance.config.extra_sticky_locals[:client]
   end
