@@ -1,7 +1,6 @@
 class Tenv
   require 'pry'
   require 'twitter'
-  require 'cowsay'
   require 'tempfile'
   require_relative 'tenv/dot_env'
   require_relative 'tenv/command'
