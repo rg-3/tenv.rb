@@ -2,6 +2,7 @@ class Tenv
   require 'pry'
   require 'twitter'
   require 'tempfile'
+  require_relative 'tenv/dot_env'
   require_relative 'tenv/command'
   require_relative 'tenv/write_tweet'
 
@@ -26,17 +27,7 @@ class Tenv
   private_class_method :require_command
 
   def initialize
-    read_env_dotfile
-  end
-
-  private
-  def read_env_dotfile
-    env_path = File.join(__dir__, '..', '.env')
-    return unless File.exist? env_path
-    File.read(env_path).each_line do |line|
-      next unless line =~ /^[\w]+=[\w]+/
-      key, value = line.split(/=/, 2)
-      ENV[key] = value.strip
-    end
+    path = File.join(__dir__, '..', '.env')
+    DotEnv.set_vars DotEnv.read_file(path)
   end
 end
