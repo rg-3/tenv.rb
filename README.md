@@ -20,8 +20,7 @@ __2. Set keys__
 
 For the next step, you should copy the sample `.env` file and then update it to
 have the correct consumer keys and access tokens for your Twitter user. If you
-are unfamiliar or don't have access to these yet, head over to
-[https://developer.twitter.com](htps://developer.twitter.com).
+are unfamiliar or don't have access to these yet, head over to https://developer.twitter.com.
 
 	cp .env.sample .env
 
