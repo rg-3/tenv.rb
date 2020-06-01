@@ -2,14 +2,10 @@ class Tenv::Command < Pry::ClassCommand
   def self.inherited(klass)
     Thread.new do
       # After 0.5 seconds a command ought to have called 'match',
-      # but this obviously sucks :) 
+      # but this obviously sucks :)
       sleep 0.5
       Pry.commands.add_command(klass)
     end
-  end
-
-  def random_timeline_tweet
-    twitter_client.home_timeline(tweet_mode: 'extended').sample
   end
 
   def twitter_client
