@@ -80,8 +80,8 @@ The `commands/` directory is a place where you can add Ruby scripts that will be
 loaded when tenv starts. It's intended as a place you can add your own commands
 and scripts.
 
-The tenv command class is a class who has inherited from the Pry command class,
-it implements a `twitter_client` method that returns an instance of
+The tenv command class is a class who has inherited from the Pry command class.
+It implements a `twitter_client` method that returns an instance of
 `Twitter::REST::Client` and it acts as a super class for all tenv commands.
 
 The following example is a tenv command that prints a random tweet from your
