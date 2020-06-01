@@ -67,7 +67,7 @@ __6. Write a tweet__
 
 You could write a tweet with the following Ruby code:
 
-    client.update "I'm tweeting from tenv"
+    client.update "I'm tweeting from tenv.rb"
 
 Or, rely on a Pry command that's part of tenv. It will open an editor and
 afterwards post your tweet:
