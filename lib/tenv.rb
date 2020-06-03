@@ -4,8 +4,7 @@ class Tenv
   require 'tempfile'
   require_relative 'tenv/dot_env'
   require_relative 'tenv/command'
-  require_relative 'tenv/write_tweet'
-  require_relative 'tenv/random_tweet'
+  Dir[File.join(__dir__, "tenv", "commands", "*.rb")].each{|file| require_relative file}
 
   def self.start_repl
     glob = File.join __dir__, '..', 'commands', '*.rb'
