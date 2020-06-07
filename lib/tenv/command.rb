@@ -1,12 +1,11 @@
 require 'word_wrap'
 class Tenv::Command < Pry::ClassCommand
-  group 'tenv'
-
   def self.inherited(klass)
     Thread.new do
       # After 0.5 seconds a command ought to have called 'match',
       # but this obviously sucks :)
       sleep 0.5
+      klass.group 'tenv'
       Pry.commands.add_command(klass)
     end
   end
