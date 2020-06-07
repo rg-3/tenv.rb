@@ -9,8 +9,8 @@ and the [Twitter](https://github.com/sferik/twitter) library.
 
 __1. Clone__
 
-To get started clone a copy of the tenv repository.
-The installation method for this project is to clone a copy of tenv and
+To get started clone a copy of the tenv.rb repository.
+The installation method for this project is to clone a copy of tenv.rb and
 then adopt it as your own environment.  
 
 	git clone https://github.com/rg-3/tenv.rb
@@ -32,13 +32,13 @@ From here, you should install Bundler:
 
 	gem install bundler --no-rdoc --no-ri
 
-Then, bundle the dependencies to `.bundledgems`:
+Then, bundle the dependencies to `.bgems`:
 
-	bundle install --path .bundledgems
+	bundle install --path .bgems
 
 __3. Update $PATH (Optional)__
 
-To start tenv outside the working directory of the repository, you
+To start tenv.rb outside the working directory of the repository, you
 could update your shell rc files to include the `bin/` directory:
 
 	export PATH=$PATH:/path/to/tenv/repo/bin
@@ -77,15 +77,15 @@ afterwards post your tweet:
 __7. Write your own commands__
 
 The `commands/` directory is a place where you can add Ruby scripts that will be
-loaded when tenv starts. It's intended as a place you can add your own commands
+loaded when tenv.rb starts. It's intended as a place you can add your own commands
 and scripts.
 
-The tenv command class is a class who has inherited from the Pry command class.
+The tenv.rb command class is a class who has inherited from the Pry command class.
 It implements a `twitter_client` method that returns an instance of
-`Twitter::REST::Client` and it acts as a super class for all tenv commands.
+`Twitter::REST::Client` and it acts as a super class for all tenv.rb commands.
 
-The following example is a tenv command that prints a random tweet from your
-timeline:
+The following example is a tenv.rb command that prints a random tweet from your
+home timeline:
 
 ```ruby
 class RandomTweet < Tenv::Command
