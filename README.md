@@ -36,14 +36,14 @@ Then, bundle the dependencies to `.bgems`:
 
 	bundle install --path .bgems
 
-__3. Update $PATH (Optional)__
+__4. Update $PATH (Optional)__
 
 To start tenv.rb outside the working directory of the repository, you
 could update your shell rc files to include the `bin/` directory:
 
 	export PATH=$PATH:/path/to/tenv/repo/bin
 
-__4. Start the repl__
+__5. Start the repl__
 
 If you updated the $PATH:
 
@@ -53,7 +53,7 @@ If you didn't, from the tenv root:
 
 	bin/tenv.rb
 
-__5. The "client" local__
+__6. The "client" local__
 
 Once started, you'll have access to a `client` local. It returns an instance
 of `Twitter::REST::Client`, from there you can play around with numerous
@@ -63,7 +63,7 @@ I recommend checking out the
 [documentation for the twitter library](https://www.rubydoc.info/gems/twitter)
 to see what's possible.
 
-__6. Write a tweet__
+__7. Write a tweet__
 
 You could write a tweet with the following Ruby code:
 
@@ -74,7 +74,7 @@ afterwards post your tweet:
 
     write-tweet
 
-__7. Write your own commands__
+__8. Write your own commands__
 
 The `commands/` directory is a place where you can add Ruby scripts that will be
 loaded when tenv.rb starts. It's intended as a place you can add your own commands
