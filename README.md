@@ -81,7 +81,7 @@ loaded when tenv.rb starts. It's intended as a place you can add your own comman
 and scripts.
 
 The tenv.rb command class is a class who has inherited from the Pry command class.
-It implements a `twitter_client` method that returns an instance of
+It implements a `client` method that returns an instance of
 `Twitter::REST::Client` and it acts as a super class for all tenv.rb commands.
 
 The following example is a tenv.rb command that prints a random tweet from your
@@ -95,7 +95,7 @@ class RandomTweet < Tenv::Command
   def process
     # Extended tweet mode provides access to the full tweet text rather
     # than a truncated version.
-    tweet = twitter_client.home_timeline(tweet_mode: 'extended').sample
+    tweet = client.home_timeline(tweet_mode: 'extended').sample
     out = format "%{tweet}\n- %{author}",
           tweet: word_wrap(tweet.full_text),
           author: bold("@#{tweet.user.screen_name}")

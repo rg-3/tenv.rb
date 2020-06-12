@@ -8,7 +8,7 @@ class Tenv::WriteTweet < Tenv::Command
     end
     file = Tempfile.new('tenv')
     system ENV['EDITOR'], file.path
-    twitter_client.update(file.read)
+    client.update(file.read)
   ensure
     file.unlink
     file.close

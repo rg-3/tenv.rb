@@ -14,7 +14,7 @@ class Tenv::Command < Pry::ClassCommand
     WordWrap.ww str, cols, fit
   end
 
-  def twitter_client
+  def client
     pry_instance.config.extra_sticky_locals[:client]
   end
 end

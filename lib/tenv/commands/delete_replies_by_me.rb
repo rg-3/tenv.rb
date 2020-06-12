@@ -5,9 +5,9 @@ class Tenv::DeleteRepliesByMe < Tenv::Command
 
   def process
     replies_by_me = proc do
-      user = twitter_client.user
-      twitter_client.user_timeline(user).select(&:reply?)
+      user = client.user
+      client.user_timeline(user).select(&:reply?)
     end
-    twitter_client.destroy_tweet(replies_by_me.()) until replies_by_me.().empty?
+    client.destroy_tweet(replies_by_me.()) until replies_by_me.().empty?
   end
 end
