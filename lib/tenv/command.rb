@@ -14,6 +14,10 @@ class Tenv::Command < Pry::ClassCommand
     WordWrap.ww str, cols, fit
   end
 
+  def clear_line(width = 1024)
+    print BACKSPACE_CHAR*width
+  end
+
   def client
     pry_instance.config.extra_sticky_locals[:client]
   end
