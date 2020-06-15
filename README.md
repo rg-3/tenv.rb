@@ -72,20 +72,27 @@ You could write a tweet with the following Ruby code:
 Or, rely on a Pry command that's part of tenv. It will open an editor and
 afterwards post your tweet:
 
-    write-tweet
+    [1] pry(#<Tenv>)> write-tweet
 
-__8. Write your own commands__
+__8. Delete your likes__
+
+tenv.rb includes a builtin command that can delete all your likes, regardless
+of how many :) It might just take a while if there's a lot, due to rate limiting.
+
+		[2] pry(#<Tenv>)> delete-my-likes
+
+
+__9. Write your own commands__
 
 The `commands/` directory is a place where you can add Ruby scripts that will be
 loaded when tenv.rb starts. It's intended as a place you can add your own commands
-and scripts.
+and scripts that can be kept outside version control.
 
 The tenv.rb command class is a class who has inherited from the Pry command class.
 It implements a `client` method that returns an instance of
 `Twitter::REST::Client` and it acts as a super class for all tenv.rb commands.
 
-The following example is a tenv.rb command that prints a random tweet from your
-home timeline:
+The following example is an example tenv.rb command:
 
 ```ruby
 class RandomTweet < Tenv::Command
