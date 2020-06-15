@@ -81,6 +81,13 @@ of how many :) It might just take a while if there's a lot, due to rate limiting
 
 		[2] pry(#<Tenv>)> delete-my-likes
 
+__9. Delete your replies__
+
+tenv.rb includes a builtin command that can delete all tweets that are replies
+made by you. It does so by reading your whole timeline; if there's a lot of
+tweets it might take a while.
+
+		[3] pry(#<Tenv>)> delete-my-replies
 
 __9. Write your own commands__
 
