@@ -1,9 +1,8 @@
 ## Introduction
 
-tenv.rb provides a Twitter environment where you can interact with Twitter through
-its web APIs from the comfort of an advanced REPL. It uses technologies from the
-Ruby programming language. The environment is composed of the [Pry repl](https://github.com/pry/pry)
-and the [Twitter](https://github.com/sferik/twitter) library.
+tenv.rb provides a Twitter environment where you can interact with Twitter
+through its web APIs using a REPL. The environment uses the Ruby programming language,
+the [Pry REPL](https://github.com/pry/pry#readme) and the [Twitter library](https://github.com/sferik/twitter).
 
 ## Manual
 
@@ -32,9 +31,9 @@ From here, you should install Bundler:
 
 	gem install bundler --no-rdoc --no-ri
 
-Then, bundle the dependencies to `.bgems`:
+Then, bundle the dependencies:
 
-	bundle install --path .bgems
+	bundle install
 
 __4. Update $PATH (Optional)__
 
@@ -99,7 +98,7 @@ The tenv.rb command class is a class who has inherited from the Pry command clas
 It implements a `client` method that returns an instance of
 `Twitter::REST::Client` and it acts as a super class for all tenv.rb commands.
 
-The following example is an example tenv.rb command:
+The following is an example of a tenv.rb command:
 
 ```ruby
 class RandomTweet < Tenv::Command
