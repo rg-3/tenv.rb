@@ -4,7 +4,7 @@ tenv.rb provides a Twitter environment where you can interact with Twitter
 through its web APIs using a REPL. The environment uses the Ruby programming language,
 the [Pry REPL](https://github.com/pry/pry#readme) and the [Twitter library](https://github.com/sferik/twitter).
 
-## Manual
+## Getting started
 
 __1. Clone__
 
@@ -62,7 +62,9 @@ I recommend checking out the
 [documentation for the twitter library](https://www.rubydoc.info/gems/twitter)
 to see what's possible.
 
-__7. Write a tweet__
+## Commands
+
+__Write a tweet__
 
 You could write a tweet with the following Ruby code:
 
@@ -73,14 +75,14 @@ afterwards post your tweet:
 
     [1] pry(#<Tenv>)> write-tweet
 
-__8. Delete your likes__
+__Delete your likes__
 
 tenv.rb includes a builtin command that can delete all your likes, regardless
 of how many :) It might just take a while if there's a lot, due to rate limiting.
 
 		[2] pry(#<Tenv>)> delete-my-likes
 
-__9. Delete your replies__
+__Delete your replies__
 
 tenv.rb includes a builtin command that can delete all tweets that are replies
 made by you. It does so by reading your whole timeline; if there's a lot of
@@ -88,7 +90,7 @@ tweets it might take a while.
 
 		[3] pry(#<Tenv>)> delete-my-replies
 
-__9. Write your own commands__
+__Write your own commands__
 
 The `commands/` directory is a place where you can add Ruby scripts that will be
 loaded when tenv.rb starts. It's intended as a place you can add your own commands
