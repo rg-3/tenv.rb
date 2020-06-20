@@ -25,7 +25,7 @@ class Tenv::Command < Pry::ClassCommand
   end
 
   def user_timeline(user, max_id=nil)
-    max_id ? client.user_timeline(client.user, max_id: max_id) : client.user_timeline(client.user)
+    max_id ? client.user_timeline(user, max_id: max_id) : client.user_timeline(user)
   end
 
   def perform_action_on_tweets(read_tweets, perform_action, on_action)
