@@ -24,18 +24,22 @@ class Tenv::Command < Pry::ClassCommand
     pry_instance.config.extra_sticky_locals[:client]
   end
 
-  def perform_action_on_tweets(get_tweets, perform_action, on_action)
+  def user_timeline(user, max_id=nil)
+    max_id ? client.user_timeline(client.user, max_id: max_id) : client.user_timeline(client.user)
+  end
+
+  def perform_action_on_tweets(read_tweets, perform_action, on_action)
     total ||= 0
-    tweets = get_tweets.call
+    tweets = read_tweets.call
     until tweets.empty?
       tweets.each do |tweet|
         perform_action.call(tweet)
         total += 1
-        on_action.call(total)
+        on_action.call(tweet, total)
       end
-      tweets = get_tweets.call
+      tweets = read_tweets.call
     end
-    on_action.call(total)
+    on_action.call(nil, total)
     print "\n"
   rescue Twitter::Error::TooManyRequests => e
     clear_line
