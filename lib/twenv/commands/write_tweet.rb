@@ -1,6 +1,7 @@
 class TWEnv::WriteTweet < TWEnv::Command
   match 'write-tweet'
   description "Write a tweet"
+  group 'twenv'
 
   def process
     unless ENV['EDITOR']
@@ -13,4 +14,6 @@ class TWEnv::WriteTweet < TWEnv::Command
     file.unlink
     file.close
   end
+
+  add_command self
 end
