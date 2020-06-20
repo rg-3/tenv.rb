@@ -52,7 +52,7 @@ If you updated the $PATH:
 
 	twenv.rb
 
-If you didn't, from the twenv root:
+If you didn't, from the twenv.rb root:
 
 	bin/twenv.rb
 
@@ -63,7 +63,7 @@ of `Twitter::REST::Client`, from there you can play around with numerous
 Twitter APIs.
 
 I recommend checking out the
-[documentation for the twitter library](https://www.rubydoc.info/gems/twitter)
+[documentation for the Twitter library](https://www.rubydoc.info/gems/twitter)
 to see what's possible.
 
 ## <a id='usage'> Usage </a>
@@ -79,6 +79,47 @@ afterwards post your tweet. By default the `nano` editor is used, this can
 be changed in the `.env` file by setting `$EDITOR`.
 
     [1] pry(#<TWEnv>)> write-tweet
+
+__Archive a timeline__
+
+The `archive-timeline` command lets you archive a user's timeline of tweets. This
+command can be especially useful in enabling data analysis because it lets you
+explore a timeline of tweets as an array of Hash objects. Like other twenv.rb commands,
+this command sleeps and resumes when rate limited by Twitter.
+
+By default a timeline is saved as a JSON file.  
+The following is an example that saves the last 500 tweets made by Yukihiro "Matz" Matsumoto:
+
+		[1] pry(#<TWEnv>)> archive-timeline -m 500 yukihiro_matz
+		500 tweets archived
+		Archive saved to /home/rg/twenv.rb/data/yukihiro_matz.json
+		[2] pry(#<TWEnv>)> tweets = JSON.parse File.read('/home/rg/twenv.rb/data/yukihiro_matz.json');
+		...
+		[3] pry(#<TWEnv>)> most_liked_tweet = tweets.max_by{|t| t['like_count']}
+		=> {"id"=>1251880011948158976,
+         "url" => "https://twitter.com/yukihiro_matz/status/1251880011948158976",
+		 "text"=>
+		  "「動的型言語で地獄を見るぞ」って話はもういいから、「俺の推し言語はこんなに素晴らしいぞ」って話をしてほしい。\n「俺は地獄を見たぞ」って話はだいたい八つ当たりだから。\n「Rubyに滅んでほしい」と言わないで「俺言語の天国においで」とみんなを誘って結果的にRubyを滅ぼしてほしい。",
+		 "is_retweet"=>false,
+		 "retweet_count"=>828,
+		 "like_count"=>2642,
+		 "created_at"=>"2020-04-19T14:27:08Z",
+		 "archived_at"=>"2020-07-04T22:13:17Z",
+		 "urls"=>[],
+		 "user_mentions"=>[],
+		 "author"=>
+		  {"id"=>20104013,
+		   "name"=>"Yukihiro Matsumoto",
+		   "screen_name"=>"yukihiro_matz",
+		   "location"=>"島根県Matz江市",
+		   "description"=>"Matzまたは、まつもとゆきひろ。Rubyのパパ。",
+		   "verified"=>false,
+		   "protected"=>false,
+		   "followers_count"=>75660,
+		   "listed_count"=>2926,
+		   "tweet_count"=>32934,
+		   "like_count"=>17}}
+
 
 __Delete your likes__
 

@@ -19,6 +19,10 @@ class TWEnv
     }
   end
 
+  def self.data_dir
+    File.expand_path File.join(__dir__, '..', 'data')
+  end
+
   def self.require_command(path)
     require path
   rescue
