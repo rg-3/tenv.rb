@@ -5,6 +5,8 @@
 * [Introduction](#introduction)
 * [Installation](#installation)
 * [Usage](#usage)
+* [Customization](#custom)
+
 
 ## <a id='#introduction'> Introduction </a>
 
@@ -98,6 +100,8 @@ made by you. It does so by reading your whole timeline; if there's a lot of
 tweets it might take a while.
 
     [3] pry(#<TWEnv>)> delete-my-replies
+
+## <a id='custom'>Customization</a>
 
 __Write your own commands__
 
