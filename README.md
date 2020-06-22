@@ -1,10 +1,18 @@
-## Introduction
+# tenv.rb
+
+**Table of contents**
+
+* [Introduction](#introduction)
+* [Installation](#installation)
+* [Usage](#usage)
+
+## <a id='#introduction> Introduction </a>
 
 tenv.rb provides a Twitter environment where you can interact with Twitter
 through its web APIs using a REPL. The environment uses the Ruby programming language,
 the [Pry REPL](https://github.com/pry/pry#readme) and the [Twitter library](https://github.com/sferik/twitter).
 
-## Getting started
+## <a id='#installation'> Installation </a>
 
 __1. Clone__
 
@@ -62,7 +70,7 @@ I recommend checking out the
 [documentation for the twitter library](https://www.rubydoc.info/gems/twitter)
 to see what's possible.
 
-## Commands
+## <a id='usage'> Usage </a>
 
 __Write a tweet__
 
