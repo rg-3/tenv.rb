@@ -76,10 +76,11 @@ __Write a tweet__
 
 You could write a tweet with the following Ruby code:
 
-    client.update "I'm tweeting from twenv.rb"
+    [1] pry(#<TWEnv>)> client.update "I'm tweeting from twenv.rb"
 
-Or, rely on a Pry command that's part of twenv. It will open an editor and
-afterwards post your tweet:
+Alternatively, you could use a command that's part of twenv.rb. It will open an editor and
+afterwards post your tweet. By default the `nano` editor is used, this can
+be changed in the `.env` file by setting `$EDITOR`.
 
     [1] pry(#<TWEnv>)> write-tweet
 
@@ -88,7 +89,7 @@ __Delete your likes__
 twenv.rb includes a builtin command that can delete all your likes, regardless
 of how many :) It might just take a while if there's a lot, due to rate limiting.
 
-		[2] pry(#<TWEnv>)> delete-my-likes
+    [2] pry(#<TWEnv>)> delete-my-likes
 
 __Delete your replies__
 
@@ -96,7 +97,7 @@ twenv.rb includes a builtin command that can delete all tweets that are replies
 made by you. It does so by reading your whole timeline; if there's a lot of
 tweets it might take a while.
 
-		[3] pry(#<TWEnv>)> delete-my-replies
+    [3] pry(#<TWEnv>)> delete-my-replies
 
 __Write your own commands__
 
@@ -104,11 +105,9 @@ The `commands/` directory is a place where you can add Ruby scripts that will be
 loaded when twenv.rb starts. It's intended as a place you can add your own commands
 and scripts that can be kept outside version control.
 
-The twenv.rb command class is a class who has inherited from the Pry command class.
-It implements a `client` method that returns an instance of
-`Twitter::REST::Client` and it acts as a super class for all twenv.rb commands.
-
-The following is an example of a twenv.rb command:
+The [twenv.rb command class](https://github.com/rg-3/tenv.rb/blob/master/lib/twenv/command.rb)
+inherits from the Pry command class and implements useful methods such as `client`. The following
+is an example of a twenv.rb command:
 
 ```ruby
 class RandomTweet < TWEnv::Command
@@ -124,5 +123,7 @@ class RandomTweet < TWEnv::Command
           author: bold("@#{tweet.user.screen_name}")
     puts out
   end
+
+  add_command self
 end
 ```
