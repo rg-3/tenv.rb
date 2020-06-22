@@ -1,4 +1,4 @@
-class Tenv::Command < Pry::ClassCommand
+class TWEnv::Command < Pry::ClassCommand
   require 'word_wrap'
   BACKSPACE_CHAR = "\010"
 
@@ -7,7 +7,7 @@ class Tenv::Command < Pry::ClassCommand
       # After 0.5 seconds a command ought to have called 'match',
       # but this obviously sucks :)
       sleep 0.5
-      klass.group 'tenv'
+      klass.group 'twenv'
       Pry.commands.add_command(klass)
     end
   end

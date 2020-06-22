@@ -1,4 +1,4 @@
-class Tenv::DeleteMyLikes < Tenv::Command
+class TWEnv::DeleteMyLikes < TWEnv::Command
   match 'delete-my-likes'
   description 'Delete my likes'
 

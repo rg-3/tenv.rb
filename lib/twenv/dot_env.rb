@@ -1,4 +1,4 @@
-module Tenv::DotEnv
+module TWEnv::DotEnv
   extend self
 
   def read_dot_file(path)

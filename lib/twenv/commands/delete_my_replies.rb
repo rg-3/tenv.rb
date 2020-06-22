@@ -1,4 +1,4 @@
-class Tenv::DeleteMyReplies < Tenv::Command
+class TWEnv::DeleteMyReplies < TWEnv::Command
   match "delete-my-replies"
   description "Delete your replies"
 

@@ -1,4 +1,4 @@
-# tenv.rb
+# twenv.rb
 
 **Table of contents**
 
@@ -8,7 +8,7 @@
 
 ## <a id='#introduction> Introduction </a>
 
-tenv.rb provides a Twitter environment where you can interact with Twitter
+twenv.rb provides a Twitter environment where you can interact with Twitter
 through its web APIs using a REPL. The environment uses the Ruby programming language,
 the [Pry REPL](https://github.com/pry/pry#readme) and the [Twitter library](https://github.com/sferik/twitter).
 
@@ -16,12 +16,12 @@ the [Pry REPL](https://github.com/pry/pry#readme) and the [Twitter library](http
 
 __1. Clone__
 
-To get started clone a copy of the tenv.rb repository.
-The installation method for this project is to clone a copy of tenv.rb and
+To get started clone a copy of the twenv.rb repository.
+The installation method for this project is to clone a copy of twenv.rb and
 then adopt it as your own environment.  
 
-	git clone https://github.com/rg-3/tenv.rb
-	cd tenv.rb
+	git clone https://github.com/rg-3/twenv.rb
+	cd twenv.rb
 
 __2. Configure env__
 
@@ -45,20 +45,20 @@ Then, bundle the dependencies:
 
 __4. Update $PATH (Optional)__
 
-To start tenv.rb outside the working directory of the repository, you
+To start twenv.rb outside the working directory of the repository, you
 could update your shell rc files to include the `bin/` directory:
 
-	export PATH=$PATH:/path/to/tenv/repo/bin
+	export PATH=$PATH:/path/to/twenv/repo/bin
 
 __5. Start the repl__
 
 If you updated the $PATH:
 
-	tenv.rb
+	twenv.rb
 
-If you didn't, from the tenv root:
+If you didn't, from the twenv root:
 
-	bin/tenv.rb
+	bin/twenv.rb
 
 __6. The "client" local__
 
@@ -76,42 +76,42 @@ __Write a tweet__
 
 You could write a tweet with the following Ruby code:
 
-    client.update "I'm tweeting from tenv.rb"
+    client.update "I'm tweeting from twenv.rb"
 
-Or, rely on a Pry command that's part of tenv. It will open an editor and
+Or, rely on a Pry command that's part of twenv. It will open an editor and
 afterwards post your tweet:
 
-    [1] pry(#<Tenv>)> write-tweet
+    [1] pry(#<TWEnv>)> write-tweet
 
 __Delete your likes__
 
-tenv.rb includes a builtin command that can delete all your likes, regardless
+twenv.rb includes a builtin command that can delete all your likes, regardless
 of how many :) It might just take a while if there's a lot, due to rate limiting.
 
-		[2] pry(#<Tenv>)> delete-my-likes
+		[2] pry(#<TWEnv>)> delete-my-likes
 
 __Delete your replies__
 
-tenv.rb includes a builtin command that can delete all tweets that are replies
+twenv.rb includes a builtin command that can delete all tweets that are replies
 made by you. It does so by reading your whole timeline; if there's a lot of
 tweets it might take a while.
 
-		[3] pry(#<Tenv>)> delete-my-replies
+		[3] pry(#<TWEnv>)> delete-my-replies
 
 __Write your own commands__
 
 The `commands/` directory is a place where you can add Ruby scripts that will be
-loaded when tenv.rb starts. It's intended as a place you can add your own commands
+loaded when twenv.rb starts. It's intended as a place you can add your own commands
 and scripts that can be kept outside version control.
 
-The tenv.rb command class is a class who has inherited from the Pry command class.
+The twenv.rb command class is a class who has inherited from the Pry command class.
 It implements a `client` method that returns an instance of
-`Twitter::REST::Client` and it acts as a super class for all tenv.rb commands.
+`Twitter::REST::Client` and it acts as a super class for all twenv.rb commands.
 
-The following is an example of a tenv.rb command:
+The following is an example of a twenv.rb command:
 
 ```ruby
-class RandomTweet < Tenv::Command
+class RandomTweet < TWEnv::Command
   match 'random-tweet'
   description 'A random tweet from your home timeline'
 
