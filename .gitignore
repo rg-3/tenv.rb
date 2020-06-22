@@ -1,4 +1,4 @@
 .env
-Gemfile.lock
+*.lock
 commands/*.rb
 data/

@@ -33,17 +33,11 @@ are unfamiliar or don't have access to these yet, head over to https://developer
 
 	cp .env.sample .env
 
-__3. Bootstrap dependencies__
+__3. Install dependencies__
 
-It's assumed you have a Ruby installation with RubyGems.
+To install the dependencies, run the following from the root of the twenv.rb repository:
 
-From here, you should install Bundler:
-
-	gem install bundler --no-rdoc --no-ri
-
-Then, bundle the dependencies:
-
-	bundle install
+	gem install -g gem.deps.rb
 
 __4. Update $PATH (Optional)__
 
