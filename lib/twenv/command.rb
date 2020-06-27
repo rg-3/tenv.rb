@@ -1,6 +1,5 @@
 class TWEnv::Command < Pry::ClassCommand
   require 'word_wrap'
-  BACKSPACE_CHAR = "\010"
 
   def self.add_command(command)
     Pry.commands.add_command command
@@ -38,8 +37,12 @@ class TWEnv::Command < Pry::ClassCommand
     end
     line.end_line
   rescue Twitter::Error::TooManyRequests => e
-    line.print "Rate limited. Retrying in #{e.retry_after} seconds."
+    line.print "Rate limited. Retrying in #{e.retry_after} seconds"
     sleep e.retry_after
     perform_action_on_tweets(read_tweets, perform_action, total_recver, ids)
+  end
+
+  def line
+    @line ||= TWEnv::Line.new(pry_instance.output)
   end
 end
