@@ -4,6 +4,7 @@ class TWEnv
   require 'tempfile'
   require_relative 'twenv/dot_env'
   require_relative 'twenv/command'
+  require_relative 'twenv/line'
   Dir[File.join(__dir__, "twenv", "commands", "*.rb")].each{|file| require_relative file}
 
   def self.start_repl
