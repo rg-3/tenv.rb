@@ -1,9 +1,9 @@
 class TWEnv::DeleteMyReplies < TWEnv::Command
-  match "delete-my-replies"
-  description "Delete replies made by `client.user`"
+  match "delete-my-tweets"
+  description "Delete tweets made by `client.user`"
   group 'twenv'
   banner <<-BANNER
-  delete-my-replies [OPTIONS]
+  delete-my-tweets [OPTIONS]
 
   #{description}
   BANNER
@@ -13,7 +13,8 @@ class TWEnv::DeleteMyReplies < TWEnv::Command
   end
 
   def options(slop)
-    slop.on :'with-no-likes', "Don't delete tweets with at least one like", as: :boolean, default: false
+    slop.on :'with-no-likes', "Only delete tweets with no likes", as: :boolean, default: false
+    slop.on :'replies-only' , "Only delete tweets that are replies made by `client.user`", as: :boolean, default: false
   end
 
   def process
@@ -24,24 +25,23 @@ class TWEnv::DeleteMyReplies < TWEnv::Command
 
   private
   def read_tweets
-    tweets  = user_timeline(client.user, max_id: @max_id)
-    replies = filter_tweets(tweets)
+    tweets = user_timeline(client.user, max_id: @max_id)
+    filtered = filter_tweets(tweets)
     if tweets.empty? || @max_id == tweets[-1].id
       []
-    elsif replies.empty?
+    elsif filtered.empty?
       @max_id = tweets[-1].id
       read_tweets
     else
       @max_id = tweets[-1].id
-      replies
+      filtered
     end
   end
 
   def filter_tweets(tweets)
-    tweets = tweets.select(&:reply?)
-    if opts['with-no-likes']
-      tweets.reject! {|tweet| tweet.favorite_count > 0}
-    end
+    tweets = tweets.dup
+    tweets.select!(&:reply?) if opts['replies-only']
+    tweets.select! {|tweet| tweet.favorite_count.zero?} if opts['with-no-likes']
     tweets
   end
 

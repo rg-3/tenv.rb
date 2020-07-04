@@ -7,8 +7,8 @@
 * [Commands](#commands)
   * [Write a tweet](#commands-write-a-tweet)
   * [Archive a timeline](#commands-archive-a-timeline)
-  * [Delete likes](#commands-delete-your-likes)
   * [Delete tweets](#commands-delete-your-tweets)
+  * [Delete likes](#commands-delete-your-likes)
 * [Customization](#custom)
 
 
@@ -113,6 +113,28 @@ The following is an example that saves the last 500 tweets made by Yukihiro "Mat
 		   "tweet_count"=>32934,
 		   "like_count"=>17}}
 
+ __<a id='commands-delete-your-tweets'>Delete tweets</a>__
+
+ twenv.rb includes a builtin command that can delete all your tweets, or a subset
+ of your tweets gathered by filtering. It achieves this by reading your entire
+ timeline; if there's a lot of tweets it might take a while. What follows are
+ examples that demonstrate deleting all your tweets or just a subset of them:
+
+ *A) Delete all tweets*
+
+     [1] pry(#<TWEnv>)> delete-my-tweets
+
+ *B) Delete replies*
+
+     [1] pry(#<TWEnv>)> delete-my-tweets --replies-only
+
+ *C) Delete replies with no likes*
+
+     [1] pry(#<TWEnv>)> delete-my-tweets --replies-only --with-no-likes
+
+ *D) Help and other options*
+
+     [1] pry(#<TWEnv>)> delete-my-tweets --help
 
 __<a id='commands-delete-your-likes'>Delete likes</a>__
 
@@ -120,14 +142,6 @@ twenv.rb includes a builtin command that can delete all your likes, regardless
 of how many :) It might just take a while if there's a lot, due to rate limiting.
 
     [2] pry(#<TWEnv>)> delete-my-likes
-
-__<a id='commands-delete-your-tweets'>Delete replies</a>__
-
-twenv.rb includes a builtin command that can delete all tweets that are replies
-made by you. It does so by reading your whole timeline; if there's a lot of
-tweets it might take a while.
-
-    [3] pry(#<TWEnv>)> delete-my-replies
 
 ## <a id='custom'>Customization</a>
 
