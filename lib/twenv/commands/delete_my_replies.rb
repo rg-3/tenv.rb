@@ -2,9 +2,18 @@ class TWEnv::DeleteMyReplies < TWEnv::Command
   match "delete-my-replies"
   description "Delete replies made by `client.user`"
   group 'twenv'
+  banner <<-BANNER
+  delete-my-replies [OPTIONS]
+
+  #{description}
+  BANNER
 
   def setup
     @max_id = nil
+  end
+
+  def options(slop)
+    slop.on :'with-no-likes', "Don't delete tweets with at least one like", as: :boolean, default: false
   end
 
   def process
@@ -16,7 +25,7 @@ class TWEnv::DeleteMyReplies < TWEnv::Command
   private
   def read_tweets
     tweets  = user_timeline(client.user, max_id: @max_id)
-    replies = tweets.select(&:reply?)
+    replies = filter_tweets(tweets)
     if tweets.empty? || @max_id == tweets[-1].id
       []
     elsif replies.empty?
@@ -26,6 +35,14 @@ class TWEnv::DeleteMyReplies < TWEnv::Command
       @max_id = tweets[-1].id
       replies
     end
+  end
+
+  def filter_tweets(tweets)
+    tweets = tweets.select(&:reply?)
+    if opts['with-no-likes']
+      tweets.reject! {|tweet| tweet.favorite_count > 0}
+    end
+    tweets
   end
 
   add_command self
