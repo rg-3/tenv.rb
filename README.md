@@ -115,7 +115,7 @@ The following is an example that saves the last 500 tweets made by Yukihiro "Mat
 
  __<a id='commands-delete-your-tweets'>Delete tweets</a>__
 
- The `delete-my-tweets` command that can delete all your tweets, or a subset
+ The `delete-my-tweets` command can delete all your tweets, or a subset
  of your tweets gathered by filtering. It achieves this by reading your entire
  timeline; if there's a lot of tweets it might take a while. What follows are
  examples that demonstrate deleting all your tweets or just a subset of them:
