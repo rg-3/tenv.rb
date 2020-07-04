@@ -115,7 +115,7 @@ The following is an example that saves the last 500 tweets made by Yukihiro "Mat
 
  __<a id='commands-delete-your-tweets'>Delete tweets</a>__
 
- twenv.rb includes a builtin command that can delete all your tweets, or a subset
+ The `delete-my-tweets` command that can delete all your tweets, or a subset
  of your tweets gathered by filtering. It achieves this by reading your entire
  timeline; if there's a lot of tweets it might take a while. What follows are
  examples that demonstrate deleting all your tweets or just a subset of them:
@@ -138,7 +138,7 @@ The following is an example that saves the last 500 tweets made by Yukihiro "Mat
 
 __<a id='commands-delete-your-likes'>Delete likes</a>__
 
-twenv.rb includes a builtin command that can delete all your likes, regardless
+The `delete-my-likes` command can delete all your likes, regardless
 of how many :) It might just take a while if there's a lot, due to rate limiting.
 
     [2] pry(#<TWEnv>)> delete-my-likes
