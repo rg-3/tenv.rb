@@ -4,7 +4,11 @@
 
 * [Introduction](#introduction)
 * [Installation](#installation)
-* [Usage](#usage)
+* [Commands](#commands)
+  * [Write a tweet](#commands-write-a-tweet)
+  * [Archive a timeline](#commands-archive-a-timeline)
+  * [Delete likes](#commands-delete-your-likes)
+  * [Delete tweets](#commands-delete-your-tweets)
 * [Customization](#custom)
 
 
@@ -39,24 +43,13 @@ To install the dependencies, run the following from the root of the twenv.rb rep
 
 	gem install -g gem.deps.rb
 
-__4. Update $PATH (Optional)__
+__4. Start twenv.rb__
 
-To start twenv.rb outside the working directory of the repository, you
-could update your shell rc files to include the `bin/` directory:
-
-	export PATH=$PATH:/path/to/twenv/repo/bin
-
-__5. Start the repl__
-
-If you updated the $PATH:
-
-	twenv.rb
-
-If you didn't, from the twenv.rb root:
+From the twenv.rb root:
 
 	bin/twenv.rb
 
-__6. The "client" local__
+__5. Meet the "client" local__
 
 Once started, you'll have access to a `client` local. It returns an instance
 of `Twitter::REST::Client`, from there you can play around with numerous
@@ -66,9 +59,9 @@ I recommend checking out the
 [documentation for the Twitter library](https://www.rubydoc.info/gems/twitter)
 to see what's possible.
 
-## <a id='usage'> Usage </a>
+## <a id='commands'> Commands </a>
 
-__Write a tweet__
+**<a id='commands-write-a-tweet'>Write a tweet</a>**
 
 You could write a tweet with the following Ruby code:
 
@@ -80,7 +73,7 @@ be changed in the `.env` file by setting `$EDITOR`.
 
     [1] pry(#<TWEnv>)> write-tweet
 
-__Archive a timeline__
+__<a id='commands-archive-a-timeline'>Archive a timeline</a>__
 
 The `archive-timeline` command lets you archive a user's timeline of tweets. This
 command can be especially useful in enabling data analysis because it lets you
@@ -121,14 +114,14 @@ The following is an example that saves the last 500 tweets made by Yukihiro "Mat
 		   "like_count"=>17}}
 
 
-__Delete your likes__
+__<a id='commands-delete-your-likes'>Delete likes</a>__
 
 twenv.rb includes a builtin command that can delete all your likes, regardless
 of how many :) It might just take a while if there's a lot, due to rate limiting.
 
     [2] pry(#<TWEnv>)> delete-my-likes
 
-__Delete your replies__
+__<a id='commands-delete-your-tweets'>Delete replies</a>__
 
 twenv.rb includes a builtin command that can delete all tweets that are replies
 made by you. It does so by reading your whole timeline; if there's a lot of
