@@ -1,4 +1,4 @@
-class TWEnv::DeleteMyReplies < TWEnv::Command
+class TWEnv::DeleteMyTweets < TWEnv::Command
   match "delete-my-tweets"
   description "Delete tweets made by `client.user`"
   group 'twenv'
