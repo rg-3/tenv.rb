@@ -2,6 +2,10 @@
 
 ## HEAD
 
+* Update `.env.sample` to use `TWENV_*` instead of `TENV_*`.
+
+* Rename `data/` directory to `command_storage/`.
+
 * Decrease the maximum number of tweets archived by the `archive-timeline`
   command from 500 to 50.
 

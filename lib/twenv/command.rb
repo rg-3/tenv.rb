@@ -9,6 +9,14 @@ class TWEnv::Command < Pry::ClassCommand
     WordWrap.ww str, cols, fit
   end
 
+  #
+  # @return [String]
+  #  Returns the path to a directory where commands can store files.
+  #
+  def command_storage_path
+    ENV.fetch 'TWENV_COMMAND_STORAGE_PATH', File.expand_path(File.join(__dir__, '..', '..', 'command_storage'))
+  end
+
   def client
     pry_instance.config.extra_sticky_locals[:client]
   end
