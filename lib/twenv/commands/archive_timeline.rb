@@ -33,7 +33,11 @@ class TWEnv::ArchiveTimeline < TWEnv::Command
     slop.on :f, :format=, 'The format to store the timeline in (eg json, yaml). Default is json', default: 'json', argument_required: true, as: :string
     slop.on :'outbound-links-only', 'Only archive tweets that link to somewhere outside Twitter', default: false, as: :boolean
     slop.on :'no-media', "Only archive tweets that don't include media (eg video, images)", default: false
+    slop.on :'media-only', "Only archive tweets that do include media (eg video, images)", default: false
     slop.on :'no-links', "Only archive tweets that don't include links", default: false
+    slop.on :'links-only', "Only archive tweets that do include links", default: false
+    slop.on :'no-retweets', "Only archive tweets that aren't retweets", default: false
+    slop.on :'retweets-only', "Only archive tweets that are retweets", default: false
   end
 
   private
@@ -83,7 +87,11 @@ class TWEnv::ArchiveTimeline < TWEnv::Command
     tweets = tweets.dup
     tweets.select! {|t| t.urls.any? { |url| url.expanded_url.host != 'twitter.com' } } if opts['outbound-links-only']
     tweets.select! {|t| t.media.empty?} if opts['no-media']
+    tweets.select! {|t| t.media.size > 0} if opts['media-only']
     tweets.select! {|t| t.urls.empty? } if opts['no-links']
+    tweets.select! {|t| t.urls.size >0} if opts['links-only']
+    tweets.reject!(&:retweet?) if opts['no-retweets']
+    tweets.select!(&:retweet?) if opts['retweets-only']
     tweets
   end
 
