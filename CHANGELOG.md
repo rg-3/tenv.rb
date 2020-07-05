@@ -2,6 +2,9 @@
 
 ## HEAD
 
+* Decrease the maximum number of tweets archived by the `archive-timeline`
+  command from 500 to 50.
+
 * Update messages written to stdout by the `delete-my-tweets` and
  `delete-my-likes` commands.
 

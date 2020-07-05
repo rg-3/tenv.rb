@@ -29,7 +29,7 @@ class TWEnv::ArchiveTimeline < TWEnv::Command
   end
 
   def options(slop)
-    slop.on :m, :max=, 'The maximum number of tweets to archive. Default is 500', default: 500, as: :integer
+    slop.on :m, :max=, 'The maximum number of tweets to archive. Default is 50', default: 50, as: :integer
     slop.on :f, :format=, 'The format to store the timeline in (eg json, yaml). Default is json', default: 'json', as: :string
     slop.on :'outbound-links-only', 'Only archive tweets that link to somewhere outside Twitter', default: false, as: :boolean
     slop.on :'no-media', "Only archive tweets that don't include media (eg video, images)", default: false

@@ -85,7 +85,7 @@ are available.
 By default a timeline is saved as a JSON file.  
 The following is an example that saves the last 500 tweets made by Yukihiro "Matz" Matsumoto:
 
-	[1] pry(#<TWEnv>)> archive-timeline -m 500 yukihiro_matz
+	[1] pry(#<TWEnv>)> archive-timeline --max 500 yukihiro_matz
 	500 tweets archived
 	Archive saved to /home/rg/twenv.rb/data/yukihiro_matz.json
 	[2] pry(#<TWEnv>)> tweets = JSON.parse File.read('/home/rg/twenv.rb/data/yukihiro_matz.json');
