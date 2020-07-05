@@ -2,6 +2,9 @@
 
 ## HEAD
 
+* Update `TWEnv.start` to accept option Hashes that are forwarded to the
+  Twitter library, and Pry.
+
 * Rename `TWEnv.start_repl` as `TWEnv.start`.
 
 * Update `.env.sample` to use `TWENV_*` instead of `TENV_*`.

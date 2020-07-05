@@ -8,7 +8,7 @@ class TWEnv
   require_relative 'twenv/version'
   Dir[File.join(__dir__, "twenv", "commands", "*.rb")].each{|file| require_relative file}
 
-  def self.start(pry_options = {})
+  def self.start(twitter_options = {}, pry_options = {})
     glob = File.join __dir__, '..', 'commands', '*.rb'
     Dir[glob].each {|path| require_command(path)}
     Pry.start new, {
@@ -18,6 +18,7 @@ class TWEnv
           config.consumer_secret     = ENV['TWENV_CONSUMER_KEY_SECRET']
           config.access_token        = ENV['TWENV_ACCESS_TOKEN']
           config.access_token_secret = ENV['TWENV_ACCESS_TOKEN_SECRET']
+          twitter_options.each {|k,v| config.send("#{k}=", v)}
         }
       }
     }.merge!(pry_options)
