@@ -42,6 +42,31 @@ class TWEnv::ArchiveTimeline < TWEnv::Command
 
   private
 
+  def read_tweets
+    tweets = user_timeline(@user, tweet_mode: 'extended', max_id: @max_id)
+    filtered = filter_tweets(tweets)
+    if tweets.empty? || @max_id == tweets[-1].id
+      []
+    elsif filtered.empty?
+      @max_id = tweets[-1].id
+      read_tweets
+    else
+      @max_id = tweets[-1].id
+      filtered
+    end
+  end
+
+  def print_total(total)
+    line.print "#{total} tweets archived"
+    throw(:cancel) if total == opts[:max]
+  end
+
+  def archive_tweet(tweet)
+    tweets = parse_file(@path)
+    tweets.push format_tweet(tweet)
+    write_file @path, tweets
+  end
+
   def format_tweet(tweet)
     user = tweet.attrs[:user]
     {
@@ -69,20 +94,6 @@ class TWEnv::ArchiveTimeline < TWEnv::Command
     }
   end
 
-  def read_tweets
-    tweets = user_timeline(@user, tweet_mode: 'extended', max_id: @max_id)
-    filtered = filter_tweets(tweets)
-    if tweets.empty? || @max_id == tweets[-1].id
-      []
-    elsif filtered.empty?
-      @max_id = tweets[-1].id
-      read_tweets
-    else
-      @max_id = tweets[-1].id
-      filtered
-    end
-  end
-
   def filter_tweets(tweets)
     tweets = tweets.dup
     tweets.select! {|t| t.urls.any? { |url| url.expanded_url.host != 'twitter.com' } } if opts['outbound-links-only']
@@ -93,17 +104,6 @@ class TWEnv::ArchiveTimeline < TWEnv::Command
     tweets.reject!(&:retweet?) if opts['no-retweets']
     tweets.select!(&:retweet?) if opts['retweets-only']
     tweets
-  end
-
-  def print_total(total)
-    line.print "#{total} tweets archived"
-    throw(:cancel) if total == opts[:max]
-  end
-
-  def archive_tweet(tweet)
-    tweets = parse_file(@path)
-    tweets.push format_tweet(tweet)
-    write_file @path, tweets
   end
 
   def parse_file(path)
