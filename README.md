@@ -67,9 +67,9 @@ You could write a tweet with the following Ruby code:
 
     [1] pry(#<TWEnv>)> client.update "I'm tweeting from twenv.rb"
 
-Alternatively, you could use a command that's part of twenv.rb. It will open an editor and
-afterwards post your tweet. By default the `nano` editor is used, this can
-be changed in the `.env` file by setting `$EDITOR`.
+Alternatively, you could use a command that's part of twenv.rb. It will open an
+editor and after you exit post your tweet. By default the `nano` editor is used,
+this can be changed in the `.env` file by setting `$EDITOR`.
 
     [1] pry(#<TWEnv>)> write-tweet
 
