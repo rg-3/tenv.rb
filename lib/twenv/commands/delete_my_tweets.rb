@@ -20,7 +20,7 @@ class TWEnv::DeleteMyTweets < TWEnv::Command
   def process
     perform_action_on_tweets method(:read_tweets),
                              lambda {|tweet| client.destroy_tweet(tweet)},
-                             lambda {|total| line.print(total == 0 ? "You have no replies to delete" : "#{total} replies deleted") }
+                             lambda {|total| line.print(total == 0 ? "No tweets to delete" : "#{total} tweets deleted") }
   end
 
   private
