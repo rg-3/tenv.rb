@@ -9,6 +9,7 @@ class TWEnv::DeleteMyTweets < TWEnv::Command
   BANNER
 
   def setup
+    super
     @max_id = nil
   end
 

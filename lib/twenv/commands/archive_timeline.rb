@@ -13,6 +13,7 @@ class TWEnv::ArchiveTimeline < TWEnv::Command
   BANNER
 
   def setup
+    super
     @user = nil
     @path = nil
     @max_id = nil

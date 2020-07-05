@@ -1,5 +1,6 @@
 class TWEnv::Command < Pry::ClassCommand
   require 'word_wrap'
+  require 'fileutils'
 
   def self.add_command(command)
     Pry.commands.add_command command
@@ -9,12 +10,17 @@ class TWEnv::Command < Pry::ClassCommand
     WordWrap.ww str, cols, fit
   end
 
+  def setup
+    FileUtils.mkdir_p command_storage_path
+  end
+
   #
   # @return [String]
-  #  Returns the path to a directory where commands can store files.
+  #  Returns the path to a directory where a command can store files.
   #
   def command_storage_path
-    ENV.fetch 'TWENV_COMMAND_STORAGE_PATH', File.expand_path(File.join(__dir__, '..', '..', 'command_storage'))
+    root = ENV.fetch 'TWENV_COMMAND_STORAGE_PATH', File.expand_path(File.join(__dir__, '..', '..', 'command_storage'))
+    File.join root, self.class.command_name
   end
 
   def client
