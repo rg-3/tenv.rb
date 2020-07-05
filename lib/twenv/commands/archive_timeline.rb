@@ -9,7 +9,7 @@ class TWEnv::ArchiveTimeline < TWEnv::Command
   banner <<-BANNER
   archive-timeline [options] USER
 
-  Archive a timeline of tweets
+  #{description}
   BANNER
 
   def setup
@@ -29,8 +29,8 @@ class TWEnv::ArchiveTimeline < TWEnv::Command
   end
 
   def options(slop)
-    slop.on :m, :max=, 'The maximum number of tweets to archive. Default is 500', default: 500, argument_required: true, as: :integer
-    slop.on :f, :format=, 'The format to store the timeline in (eg json, yaml). Default is json', default: 'json', argument_required: true, as: :string
+    slop.on :m, :max=, 'The maximum number of tweets to archive. Default is 500', default: 500, as: :integer
+    slop.on :f, :format=, 'The format to store the timeline in (eg json, yaml). Default is json', default: 'json', as: :string
     slop.on :'outbound-links-only', 'Only archive tweets that link to somewhere outside Twitter', default: false, as: :boolean
     slop.on :'no-media', "Only archive tweets that don't include media (eg video, images)", default: false
     slop.on :'media-only', "Only archive tweets that do include media (eg video, images)", default: false
