@@ -87,8 +87,8 @@ The following is an example that saves the last 500 tweets made by Yukihiro "Mat
 
 	[1] pry(#<TWEnv>)> archive-timeline --max 500 yukihiro_matz
 	500 tweets archived
-	Archive saved to /home/rg/twenv.rb/data/yukihiro_matz.json
-	[2] pry(#<TWEnv>)> tweets = JSON.parse File.read('/home/rg/twenv.rb/data/yukihiro_matz.json');
+	Archive saved to /home/rg/twenv.rb/command_storage/archive-timeline/yukihiro_matz.json
+	[2] pry(#<TWEnv>)> tweets = JSON.parse File.read('/home/rg/twenv.rb/command_storage/archive-timeline/yukihiro_matz.json');
 	...
 	[3] pry(#<TWEnv>)> most_liked_tweet = tweets.max_by{|t| t['like_count']}
 	=> {"id"=>1251880011948158976,
