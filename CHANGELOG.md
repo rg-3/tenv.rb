@@ -2,6 +2,8 @@
 
 ## HEAD
 
+* Rename `TWEnv.start_repl` as `TWEnv.start`.
+
 * Update `.env.sample` to use `TWENV_*` instead of `TENV_*`.
 
 * Rename `data/` directory to `command_storage/`.

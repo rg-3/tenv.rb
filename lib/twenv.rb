@@ -8,17 +8,19 @@ class TWEnv
   require_relative 'twenv/version'
   Dir[File.join(__dir__, "twenv", "commands", "*.rb")].each{|file| require_relative file}
 
-  def self.start_repl
+  def self.start(pry_options = {})
     glob = File.join __dir__, '..', 'commands', '*.rb'
     Dir[glob].each {|path| require_command(path)}
-    Pry.start new, extra_sticky_locals: {
-      client: Twitter::REST::Client.new { |config|
-        config.consumer_key        = ENV['TWENV_CONSUMER_KEY']
-        config.consumer_secret     = ENV['TWENV_CONSUMER_KEY_SECRET']
-        config.access_token        = ENV['TWENV_ACCESS_TOKEN']
-        config.access_token_secret = ENV['TWENV_ACCESS_TOKEN_SECRET']
+    Pry.start new, {
+      extra_sticky_locals: {
+        client: Twitter::REST::Client.new { |config|
+          config.consumer_key        = ENV['TWENV_CONSUMER_KEY']
+          config.consumer_secret     = ENV['TWENV_CONSUMER_KEY_SECRET']
+          config.access_token        = ENV['TWENV_ACCESS_TOKEN']
+          config.access_token_secret = ENV['TWENV_ACCESS_TOKEN_SECRET']
+        }
       }
-    }
+    }.merge!(pry_options)
   end
 
   def self.require_command(path)
