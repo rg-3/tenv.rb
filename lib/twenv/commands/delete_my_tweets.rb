@@ -14,7 +14,7 @@ class TWEnv::DeleteMyTweets < TWEnv::Command
 
   def options(slop)
     slop.on :'with-no-likes', "Only delete tweets with no likes", as: :boolean, default: false
-    slop.on :'replies-only' , "Only delete tweets that are replies made by `client.user`", as: :boolean, default: false
+    slop.on :'replies-only' , "Only delete tweets that are replies", as: :boolean, default: false
   end
 
   def process
