@@ -78,7 +78,9 @@ __<a id='commands-archive-a-timeline'>Archive a timeline</a>__
 The `archive-timeline` command lets you archive a user's timeline of tweets. This
 command can be especially useful in enabling data analysis because it lets you
 explore a timeline of tweets as an array of Hash objects. Like other twenv.rb commands,
-this command sleeps and resumes when rate limited by Twitter.
+this command sleeps and resumes when rate limited by Twitter. This command supports
+filtering what tweets to archive, try `archive-timeline --help` to see what options
+are available.
 
 By default a timeline is saved as a JSON file.  
 The following is an example that saves the last 500 tweets made by Yukihiro "Matz" Matsumoto:

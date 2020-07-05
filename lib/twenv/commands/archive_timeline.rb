@@ -31,6 +31,7 @@ class TWEnv::ArchiveTimeline < TWEnv::Command
   def options(slop)
     slop.on :m, :max=, 'The maximum number of tweets to archive. Default is 500', default: 500, argument_required: true, as: :integer
     slop.on :f, :format=, 'The format to store the timeline in (eg json, yaml). Default is json', default: 'json', argument_required: true, as: :string
+    slop.on :'outbound-links-only', 'Only archive tweets that link to somewhere outside Twitter', default: false, as: :boolean
   end
 
   private
@@ -64,7 +65,23 @@ class TWEnv::ArchiveTimeline < TWEnv::Command
 
   def read_tweets
     tweets = user_timeline(@user, tweet_mode: 'extended', max_id: @max_id)
-    @max_id = tweets[-1]&.id
+    filtered = filter_tweets(tweets)
+    if tweets.empty? || @max_id == tweets[-1].id
+      []
+    elsif filtered.empty?
+      @max_id = tweets[-1].id
+      read_tweets
+    else
+      @max_id = tweets[-1].id
+      filtered
+    end
+  end
+
+  def filter_tweets(tweets)
+    tweets = tweets.dup
+    tweets.select! do |t|
+      t.urls.any? { |url| url.expanded_url.host != 'twitter.com' }
+    end if opts['outbound-links-only']
     tweets
   end
 
