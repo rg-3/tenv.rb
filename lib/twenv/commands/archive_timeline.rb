@@ -34,10 +34,10 @@ class TWEnv::ArchiveTimeline < TWEnv::Command
     slop.on :'outbound-links-only', 'Only archive tweets that link to somewhere outside Twitter', default: false, as: :boolean
     slop.on :'no-media', "Only archive tweets that don't include media (eg video, images)", default: false
     slop.on :'media-only', "Only archive tweets that do include media (eg video, images)", default: false
-    slop.on :'no-links', "Only archive tweets that don't include links", default: false
-    slop.on :'links-only', "Only archive tweets that do include links", default: false
-    slop.on :'no-retweets', "Only archive tweets that aren't retweets", default: false
-    slop.on :'retweets-only', "Only archive tweets that are retweets", default: false
+    slop.on :'no-links', "Only archive tweets that don't include links", default: false, as: :boolean
+    slop.on :'links-only', "Only archive tweets that do include links", default: false, as: :boolean
+    slop.on :'no-retweets', "Only archive tweets that aren't retweets", default: false, as: :boolean
+    slop.on :'retweets-only', "Only archive tweets that are retweets", default: false, as: :boolean
   end
 
   private
