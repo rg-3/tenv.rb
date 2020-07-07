@@ -45,10 +45,21 @@ class TWEnv::Command < Pry::ClassCommand
 
   #
   # @return [Twitter::REST::Client]
-  #  Returns a configured instance of Twitter::REST::Client.
+  #  Returns a configured instance of {Twitter::REST::Client}.
   #
   def client
-    pry_instance.config.extra_sticky_locals[:client]
+    sticky_locals[:client]
+  end
+
+  #
+  # @example
+  #   pager.page(str)
+  #
+  # @return [Pry::Pager]
+  #   Returns an object that can page output.
+  #
+  def pager
+    pry_instance.pager
   end
 
   #

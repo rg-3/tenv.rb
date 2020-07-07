@@ -2,6 +2,8 @@
 
 ## HEAD
 
+* Add `TWEnv::Command#pager`.
+
 * Rename `./commands` to `./scripts`.
 
 * Add `--has-mentions`, `--no-mentions` to `archive-{timeline,likes}` commands.
