@@ -62,7 +62,7 @@ to see what's possible.
 
 ## <a id='commands'> Commands </a>
 
-**<a id='commands-write-a-tweet'>Write a tweet</a>**
+**<a id='commands-write-a-tweet'>write-tweet</a>**
 
 You could write a tweet with the following Ruby code:
 
@@ -74,7 +74,7 @@ this can be changed in the `.env` file by setting `$EDITOR`.
 
     [1] pry(#<TWEnv>)> write-tweet
 
-__<a id='commands-archive-a-timeline'>Archive a timeline</a>__
+__<a id='commands-archive-a-timeline'>archive-timeline</a>__
 
 The `archive-timeline` command lets you archive a user's timeline of tweets. Like
 other twenv.rb commands, this command sleeps and resumes when rate limited by
@@ -96,7 +96,7 @@ tweets made by Yukihiro "Matz" Matsumoto:
 	[3] pry(#<TWEnv>)> most_liked_tweet = tweets.max_by{|t| t['like_count']}
 	=> {...}
 
-__<a id='commands-archive-likes'>Archive likes</a>__
+__<a id='commands-archive-likes'>archive-likes</a>__
 
 The `archive-likes` command lets you archive tweets liked by a given user. Like
 other twenv.rb commands, this command sleeps and resumes when rate limited by
@@ -115,7 +115,7 @@ happens to have a low number of liked tweets:
     17 likes archived
     Archive saved to /twenv.rb/command_storage/archive-likes/yukihiro_matz.json
 
- __<a id='commands-delete-your-tweets'>Delete tweets</a>__
+ __<a id='commands-delete-your-tweets'>delete-my-tweets</a>__
 
  The `delete-my-tweets` command can delete all your tweets, or a subset
  of your tweets gathered by filtering. This command reads  your entire timeline; if
@@ -134,7 +134,7 @@ happens to have a low number of liked tweets:
     # Show help
     [1] pry(#<TWEnv>)> delete-my-tweets --help
 
-__<a id='commands-delete-your-likes'>Delete likes</a>__
+__<a id='commands-delete-your-likes'>delete-my-likes</a>__
 
 The `delete-my-likes` command deletes all your likes.
 
