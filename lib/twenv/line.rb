@@ -18,7 +18,7 @@ class TWEnv::Line
     self
   end
 
-  def empty_line!
+  def rewind
     @io.print BACKSPACE * @size
     self
   end

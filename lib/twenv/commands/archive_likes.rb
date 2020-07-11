@@ -51,7 +51,7 @@ class TWEnv::ArchiveLikes < TWEnv::Command
   end
 
   def print_total(total)
-    line.empty_line!.print "#{total} likes archived"
+    line.rewind.print "#{total} likes archived"
     throw(:cancel) if total == opts[:max]
   end
 
