@@ -2,6 +2,8 @@
 
 ## HEAD
 
+* Update `write-tweet` to not try post when tweet content is empty.
+
 * Update `TWEnv.start` to accept option Hashes that are forwarded to the
   Twitter library, and Pry.
 
@@ -11,7 +13,7 @@
 
 * Rename `data/` directory to `command_storage/`.
 
-* Decrease the maximum number of tweets archived by the `archive-timeline`
+* Decrease the default maximum number of tweets archived by the `archive-timeline`
   command from 500 to 50.
 
 * Update messages written to stdout by the `delete-my-tweets` and
