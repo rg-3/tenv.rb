@@ -83,7 +83,8 @@ filtering what tweets to archive, try `archive-timeline --help` to see what opti
 are available.
 
 By default a timeline is saved as a JSON file.  
-The following is an example that saves the last 500 tweets made by Yukihiro "Matz" Matsumoto:
+The following is an example that finds the most liked tweet in the last 500
+tweets made by Yukihiro "Matz" Matsumoto:
 
 	[1] pry(#<TWEnv>)> archive-timeline --max 500 yukihiro_matz
 	500 tweets archived
