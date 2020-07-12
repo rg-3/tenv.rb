@@ -51,8 +51,14 @@ class TWEnv::Command < Pry::ClassCommand
     end
     line.end_line
   rescue Twitter::Error::TooManyRequests => e
-    line.print "Rate limited. Retrying in #{e.retry_after} seconds"
-    sleep e.retry_after
+    retry_after = e.rate_limit.retry_after
+    line.empty_line!.print "Rate limited. Retrying in #{retry_after} seconds ..."
+    loop do
+      sleep 1
+      retry_after -= 1
+      line.empty_line!.print "Rate limited. Retrying in #{retry_after} seconds ..."
+      break if retry_after <= 0
+    end
     perform_action_on_tweets(read_tweets, perform_action, total_recver, ids)
   end
 

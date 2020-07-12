@@ -2,6 +2,8 @@
 
 ## HEAD
 
+* Fix error when falling through to `Twitter::Errors::TooManyRequests`.
+
 * Re-imagine `TWEnv::Line` API.
 
 * Update `write-tweet` to not try post when tweet content is empty.
