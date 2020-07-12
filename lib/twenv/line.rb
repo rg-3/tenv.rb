@@ -3,23 +3,29 @@ class TWEnv::Line
 
   def initialize(io)
     @io = io
-    @buffer_size = 0
+    @size = 0
   end
 
   def print(str)
-    clear_line
-    str.gsub!("\n", "")
-    @buffer_size = str.size
+    str = remove_newlines(str)
+    @size = str.size
     @io.print str
+    self
   end
 
   def end_line
     @io.print "\n"
+    self
+  end
+
+  def empty_line!
+    @io.print BACKSPACE * @size
+    self
   end
 
   private
 
-  def clear_line
-    @io.print BACKSPACE * @buffer_size
+  def remove_newlines(str)
+    str.gsub(/[\n]*/, '')
   end
 end

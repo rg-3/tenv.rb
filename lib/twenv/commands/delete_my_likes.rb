@@ -6,7 +6,7 @@ class TWEnv::DeleteMyLikes < TWEnv::Command
   def process
     perform_action_on_tweets lambda { client.favorites },
                              lambda {|tweet| client.unfavorite(tweet) },
-                             lambda {|total| line.print(total == 0 ? "No tweets to unlike" : "#{total} tweets unliked") }
+                             lambda {|total| line.empty_line!.print(total == 0 ? "No tweets to unlike" : "#{total} tweets unliked") }
   end
 
   add_command self

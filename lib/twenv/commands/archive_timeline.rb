@@ -58,7 +58,7 @@ class TWEnv::ArchiveTimeline < TWEnv::Command
   end
 
   def print_total(total)
-    line.print "#{total} tweets archived"
+    line.empty_line!.print "#{total} tweets archived"
     throw(:cancel) if total == opts[:max]
   end
 

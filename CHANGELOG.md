@@ -2,6 +2,8 @@
 
 ## HEAD
 
+* Re-imagine `TWEnv::Line` API.
+
 * Update `write-tweet` to not try post when tweet content is empty.
 
 * Update `TWEnv.start` to accept option Hashes that are forwarded to the
