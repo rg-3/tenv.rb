@@ -8,10 +8,7 @@ class TWEnv::DeleteMyTweets < TWEnv::Command
   #{description}
   BANNER
 
-  def setup
-    super
-    @max_id = nil
-  end
+  attr_accessor :max_id
 
   def options(slop)
     slop.on :'with-no-likes', "Only delete tweets with no likes", as: :boolean, default: false
@@ -25,18 +22,16 @@ class TWEnv::DeleteMyTweets < TWEnv::Command
   end
 
   private
+
   def read_tweets
-    tweets = user_timeline(client.user, max_id: @max_id)
-    filtered = filter_tweets(tweets)
-    if tweets.empty? || @max_id == tweets[-1].id
-      []
-    elsif filtered.empty?
-      @max_id = tweets[-1].id
-      read_tweets
-    else
-      @max_id = tweets[-1].id
-      filtered
-    end
+    read_and_filter method(:tweet_reader),
+                    method(:filter_tweets),
+                    max_id
+  end
+
+  def tweet_reader
+    tweets = user_timeline(client.user, max_id: max_id)
+    tweets.tap { self.max_id = tweets[-1]&.id }
   end
 
   def filter_tweets(tweets)

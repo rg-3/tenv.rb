@@ -4,7 +4,7 @@
 
 * Remove `word_wrap` dependency and method.
 
-* Add `TWEnv::Command::TwitterQuery`.
+* Add `TWEnv::Command::TwitterActions`.
 
 * Add `TWEnv::Command::PerformActionOnTweets`.
 

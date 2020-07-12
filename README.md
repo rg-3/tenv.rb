@@ -7,8 +7,9 @@
 * [Commands](#commands)
   * [Write a tweet](#commands-write-a-tweet)
   * [Archive a timeline](#commands-archive-a-timeline)
+  * [Archive liked tweets](#commands-archive-likes)
   * [Delete tweets](#commands-delete-your-tweets)
-  * [Delete likes](#commands-delete-your-likes)
+  * [Delete liked tweets](#commands-delete-your-likes)
 * [Customization](#custom)
 
 
@@ -88,8 +89,8 @@ tweets made by Yukihiro "Matz" Matsumoto:
 
 	[1] pry(#<TWEnv>)> archive-timeline --max 500 yukihiro_matz
 	500 tweets archived
-	Archive saved to /home/rg/twenv.rb/command_storage/archive-timeline/yukihiro_matz.json
-	[2] pry(#<TWEnv>)> tweets = JSON.parse File.read('/home/rg/twenv.rb/command_storage/archive-timeline/yukihiro_matz.json');
+	Archive saved to /twenv.rb/command_storage/archive-timeline/yukihiro_matz.json
+	[2] pry(#<TWEnv>)> tweets = JSON.parse File.read('/twenv.rb/command_storage/archive-timeline/yukihiro_matz.json');
 	...
 	[3] pry(#<TWEnv>)> most_liked_tweet = tweets.max_by{|t| t['like_count']}
 	=> {"id"=>1251880011948158976,
@@ -115,6 +116,25 @@ tweets made by Yukihiro "Matz" Matsumoto:
 	   "listed_count"=>2926,
 	   "tweet_count"=>32934,
 	   "like_count"=>17}}
+
+__<a id='commands-archive-likes'>Archive likes</a>__
+
+The `archive-likes` command lets you archive tweets liked by a given user. This
+command, like `archive-timeline`, can be especially useful in enabling data
+analysis. Like other twenv.rb commands, this command sleeps and resumes when
+rate limited by Twitter. In my experience, rate limiting occurs frequently on
+this API, more so than other Twitter APIs I have tried.
+
+`archive-likes` supports filtering what tweets to archive, try
+`archive-likes --help` to see what options are available.
+
+The following example archives the likes of Yukihiro "Matz" Matsumoto, who
+happens to have a low number of liked tweets:
+
+    [1] pry(#<TWEnv>)> archive-likes yukihiro_matz
+    17 likes archived
+    Archive saved to /twenv.rb/command_storage/archive-likes/yukihiro_matz.json
+
 
  __<a id='commands-delete-your-tweets'>Delete tweets</a>__
 

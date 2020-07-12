@@ -3,7 +3,10 @@ class TWEnv::Command < Pry::ClassCommand
   Dir.glob(File.join(__dir__, 'command_mixins', '*.rb')) { |f| require_relative(f) }
 
   include PerformActionOnTweets
-  include TwitterQuery
+  include TwitterActions
+  include FormatTweet
+  include TweetFilter
+  include FileHelper
 
   def self.add_command(command)
     Pry.commands.add_command command

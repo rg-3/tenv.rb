@@ -1,13 +1,10 @@
-class TWEnv::ArchiveTimeline < TWEnv::Command
-  require 'json'
-  require 'yaml'
-
-  match 'archive-timeline'
-  description 'Archive a timeline of tweets'
+class TWEnv::ArchiveLikes < TWEnv::Command
+  match 'archive-likes'
+  description 'Archive tweets a user has liked'
   command_options argument_required: true
   group 'twenv'
   banner <<-BANNER
-  archive-timeline [options] USER
+  archive-likes [options] USER
 
   #{description}
   BANNER
@@ -38,8 +35,6 @@ class TWEnv::ArchiveTimeline < TWEnv::Command
     slop.on :'media-only', "Only archive tweets that do include media (eg video, images)", default: false
     slop.on :'no-links', "Only archive tweets that don't include links", default: false, as: :boolean
     slop.on :'links-only', "Only archive tweets that do include links", default: false, as: :boolean
-    slop.on :'no-retweets', "Only archive tweets that aren't retweets", default: false, as: :boolean
-    slop.on :'retweets-only', "Only archive tweets that are retweets", default: false, as: :boolean
   end
 
   private
@@ -51,12 +46,12 @@ class TWEnv::ArchiveTimeline < TWEnv::Command
   end
 
   def tweet_reader
-    tweets = user_timeline(@user, tweet_mode: 'extended', max_id: max_id)
+    tweets = user_likes(@user, tweet_mode: 'extended', max_id: max_id)
     tweets.tap { self.max_id = tweets[-1]&.id }
   end
 
   def print_total(total)
-    line.empty_line!.print "#{total} tweets archived"
+    line.empty_line!.print "#{total} likes archived"
     throw(:cancel) if total == opts[:max]
   end
 
@@ -73,8 +68,6 @@ class TWEnv::ArchiveTimeline < TWEnv::Command
     tweets.select! {|t| t.media.size > 0} if opts['media-only']
     tweets.select! {|t| t.urls.empty? } if opts['no-links']
     tweets.select! {|t| t.urls.size >0} if opts['links-only']
-    tweets.reject!(&:retweet?) if opts['no-retweets']
-    tweets.select!(&:retweet?) if opts['retweets-only']
     tweets
   end
 
