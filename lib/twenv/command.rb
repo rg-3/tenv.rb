@@ -1,5 +1,4 @@
 class TWEnv::Command < Pry::ClassCommand
-  require 'word_wrap'
   require 'fileutils'
   Dir.glob(File.join(__dir__, 'command_mixins', '*.rb')) { |f| require_relative(f) }
 
@@ -8,10 +7,6 @@ class TWEnv::Command < Pry::ClassCommand
 
   def self.add_command(command)
     Pry.commands.add_command command
-  end
-
-  def word_wrap(str, cols: 80, fit: true)
-    WordWrap.ww str, cols, fit
   end
 
   def setup
