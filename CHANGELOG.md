@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## HEAD
+## v0.2.0
 
 * Fix error when falling through to `Twitter::Errors::TooManyRequests`.
 
