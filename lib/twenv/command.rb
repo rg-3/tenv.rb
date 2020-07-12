@@ -1,10 +1,10 @@
 class TWEnv::Command < Pry::ClassCommand
   require 'word_wrap'
   require 'fileutils'
-  Dir.glob(File.join(__dir__, 'command', '*.rb')) { |f| require_relative(f) }
+  Dir.glob(File.join(__dir__, 'command_mixins', '*.rb')) { |f| require_relative(f) }
 
   include PerformActionOnTweets
-  include TwitterQueries
+  include TwitterQuery
 
   def self.add_command(command)
     Pry.commands.add_command command

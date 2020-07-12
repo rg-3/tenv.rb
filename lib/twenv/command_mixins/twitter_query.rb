@@ -1,4 +1,4 @@
-module TWEnv::Command::TwitterQueries
+module TWEnv::Command::TwitterQuery
   #
   # @param [String] user
   #   A twitter username.
