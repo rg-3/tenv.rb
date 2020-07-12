@@ -4,6 +4,7 @@ class TWEnv::Command < Pry::ClassCommand
   Dir.glob(File.join(__dir__, 'command', '*.rb')) { |f| require_relative(f) }
 
   include PerformActionOnTweets
+  include TwitterQueries
 
   def self.add_command(command)
     Pry.commands.add_command command
@@ -26,15 +27,18 @@ class TWEnv::Command < Pry::ClassCommand
     File.join ENV.fetch('TWENV_COMMAND_STORAGE_PATH', default), self.class.command_name
   end
 
+  #
+  # @return [Twitter::REST::Client]
+  #  Returns a configured instance of Twitter::REST::Client.
+  #
   def client
     pry_instance.config.extra_sticky_locals[:client]
   end
 
-  def user_timeline(user, options)
-    options.delete(:max_id) unless options[:max_id]
-    client.user_timeline(user, options)
-  end
-
+  #
+  # @return [TWEnv::Line]
+  #  Returns an instance of {TWEnv::Line}, a reusable line of output.
+  #
   def line
     @line ||= TWEnv::Line.new(pry_instance.output)
   end

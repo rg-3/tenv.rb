@@ -12,6 +12,8 @@ module TWEnv::Command::PerformActionOnTweets
   # @param [Proc, #call]
   #   A Proc that receives the count of tweets read so far.
   #
+  # @return [void]
+  #
   def perform_action_on_tweets(read_tweets, perform_action, total_recver, ids = [])
     catch(:cancel) do
       tweets = read_tweets.call
