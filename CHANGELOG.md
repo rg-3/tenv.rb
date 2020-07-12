@@ -2,6 +2,8 @@
 
 ## HEAD
 
+* Add `TWEnv::Command::TwitterQuery`.
+
 * Add `TWEnv::Command::PerformActionOnTweets`.
 
 ## v0.2.0
