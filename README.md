@@ -6,10 +6,10 @@
 * [Installation](#installation)
 * [Commands](#commands)
   * [Write a tweet](#commands-write-a-tweet)
-  * [Archive a timeline](#commands-archive-a-timeline)
-  * [Archive liked tweets](#commands-archive-likes)
+  * [Archive tweets](#commands-archive-a-timeline)
+  * [Archive likes](#commands-archive-likes)
   * [Delete tweets](#commands-delete-your-tweets)
-  * [Delete liked tweets](#commands-delete-your-likes)
+  * [Delete likes](#commands-delete-your-likes)
 * [Customization](#custom)
 
 
@@ -162,7 +162,7 @@ happens to have a low number of liked tweets:
 __<a id='commands-delete-your-likes'>Delete likes</a>__
 
 The `delete-my-likes` command can delete all your likes, regardless
-of how many :) It might just take a while if there's a lot, due to rate limiting.
+of how many :)
 
     [2] pry(#<TWEnv>)> delete-my-likes
 
