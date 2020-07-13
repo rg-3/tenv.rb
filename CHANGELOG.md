@@ -4,6 +4,14 @@
 
 * Remove `word_wrap` dependency and method.
 
+* Add `archive-likes` command.
+
+* Add `TWEnv::Command::FormatTweet`.
+
+* Add `TWEnv::Command::TweetFilter`.
+
+* Add `TWEnv::Command::FileHelper`.
+
 * Add `TWEnv::Command::TwitterActions`.
 
 * Add `TWEnv::Command::PerformActionOnTweets`.
