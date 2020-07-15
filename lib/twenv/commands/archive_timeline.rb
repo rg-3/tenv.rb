@@ -1,7 +1,4 @@
 class TWEnv::ArchiveTimeline < TWEnv::Command
-  require 'json'
-  require 'yaml'
-
   match 'archive-timeline'
   description 'Archive a timeline of tweets'
   command_options argument_required: true
@@ -23,21 +20,23 @@ class TWEnv::ArchiveTimeline < TWEnv::Command
   def process(user)
     @user = user
     @path = File.join command_storage_path, "#{user}.#{opts[:format].downcase}"
-    write_file @path, [], opts[:format]
+    write_file @path, [], 'json'
     perform_action_on_tweets method(:read_tweets),
                              method(:archive_tweet),
                              method(:print_total)
+  rescue Interrupt
+    line.end_line
+  ensure
     puts "Archive saved to #{@path}"
   end
 
   def options(slop)
-    slop.on :m, :max=, 'The maximum number of tweets to archive. Default is 50', default: 50, as: :integer
-    slop.on :f, :format=, 'The format to store the timeline in (eg json, yaml). Default is json', default: 'json', as: :string
+    slop.on :m, :max=, 'The maximum number of tweets to archive. Default is unlimited', default: 0, as: :integer
     slop.on :'outbound-links-only', 'Only archive tweets that link to somewhere outside Twitter', default: false, as: :boolean
-    slop.on :'no-media', "Only archive tweets that don't include media (eg video, images)", default: false
-    slop.on :'media-only', "Only archive tweets that do include media (eg video, images)", default: false
+    slop.on :'no-media', "Only archive tweets that don't include media (ie: video, images)", default: false
+    slop.on :'media-only', "Only archive tweets that include media (ie: video, images)", default: false
     slop.on :'no-links', "Only archive tweets that don't include links", default: false, as: :boolean
-    slop.on :'links-only', "Only archive tweets that do include links", default: false, as: :boolean
+    slop.on :'links-only', "Only archive tweets that include links", default: false, as: :boolean
     slop.on :'no-retweets', "Only archive tweets that aren't retweets", default: false, as: :boolean
     slop.on :'retweets-only', "Only archive tweets that are retweets", default: false, as: :boolean
     slop.on :'replies-only', "Only archive tweets that are replies", default: false, as: :boolean
@@ -59,13 +58,13 @@ class TWEnv::ArchiveTimeline < TWEnv::Command
 
   def print_total(total)
     line.rewind.print "#{total} tweets archived"
-    throw(:cancel) if total == opts[:max]
+    throw(:cancel) if opts[:max].nonzero? && total == opts[:max]
   end
 
   def archive_tweet(tweet)
-    tweets = parse_file @path, opts[:format]
+    tweets = parse_file @path, 'json'
     tweets.push format_tweet(tweet)
-    write_file @path, tweets, opts[:format]
+    write_file @path, tweets, 'json'
   end
 
   def filter_tweets(tweets)

@@ -2,6 +2,17 @@
 
 ## HEAD
 
+* Remove `--format` option from `archive-{likes,timeline}` commands.
+
+* By default read all available tweets or likes in the `archive-{likes,timeline}`
+  commands. The `--max` option can set the maximum number of tweets or likes
+  to archive.
+
+* Gracefully stop when `^C` is received while the `archive-{likes,timeline}`
+  commands are running.
+
+* Switch to a destructive backspace in `TWEnv::Line`.
+
 * Add `is_reply` attribute in `format_tweet`.
 
 * Add `--replies-only`, `--no-replies` options to `archive-timeline`.

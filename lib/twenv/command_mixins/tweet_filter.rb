@@ -3,7 +3,7 @@ module TWEnv::Command::TweetFilter
     tweets = reader.call
     filtered = filter.call(tweets)
     if tweets.empty? || max_id == tweets[-1].id
-      filtered
+      []
     elsif filtered.empty?
       read_and_filter(reader, filter, tweets[-1].id)
     else

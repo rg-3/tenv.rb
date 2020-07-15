@@ -40,7 +40,7 @@ module TWEnv::Command::PerformActionOnTweets
   private
 
   def rate_limit_sleep(seconds)
-    line.rewind.print "Rate limited by Twitter for #{seconds} seconds. "
+    line.rewind.print("Rate limited by Twitter for #{seconds} seconds. ")
     sleep 1
     seconds -= 1
     seconds > 0 ? rate_limit_sleep(seconds) : line.rewind

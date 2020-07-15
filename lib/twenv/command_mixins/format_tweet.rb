@@ -4,7 +4,7 @@ module TWEnv::Command::FormatTweet
   #   A tweet object.
   #
   # @return [Hash]
-  #   Returns a representation of a tweet as a Hash.
+  #   Returns a Tweet as a Hash object.
   #
   def format_tweet(tweet)
     user = tweet.attrs[:user]
@@ -12,14 +12,14 @@ module TWEnv::Command::FormatTweet
       id: tweet.id,
       url: tweet.url.to_s,
       text: tweet.full_text,
+      urls: tweet.urls.map{|u| u.attrs.slice(:url, :expanded_url, :display_url)},
+      user_mentions: tweet.user_mentions.map{|u| u.attrs.slice(:id, :screen_name, :name) },
       is_reply: tweet.reply?,
       is_retweet: tweet.retweet?,
       retweet_count: tweet.retweet_count,
       like_count: tweet.favorite_count,
       created_at: tweet.created_at.iso8601,
       archived_at: Time.now.utc.iso8601,
-      urls: tweet.urls.map{|u| u.attrs.slice(:url, :expanded_url, :display_url)},
-      user_mentions: tweet.user_mentions.map{|u| u.attrs.slice(:id, :screen_name, :name) },
       author: user.slice(
         :id,
         :name,

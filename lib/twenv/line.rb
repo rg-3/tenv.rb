@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class TWEnv::Line
-  BACKSPACE = "\010"
+  DESTRUCTIVE_BACKSPACE = "\b \b"
 
   def initialize(io)
     @io = io
@@ -7,7 +9,7 @@ class TWEnv::Line
   end
 
   def print(str)
-    str = remove_newlines(str)
+    str   = str.gsub(/[\n]*/, '')
     @size = str.size
     @io.print str
     self
@@ -19,13 +21,7 @@ class TWEnv::Line
   end
 
   def rewind
-    @io.print BACKSPACE * @size
+    @io.print Array.new(@size) { DESTRUCTIVE_BACKSPACE }.join
     self
-  end
-
-  private
-
-  def remove_newlines(str)
-    str.gsub(/[\n]*/, '')
   end
 end

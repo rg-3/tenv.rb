@@ -50,9 +50,9 @@ From the twenv.rb root:
 
 	bin/twenv.rb
 
-__5. Meet the "client" local__
+__5. Introducing the "client" local__
 
-Once started, you'll have access to a `client` local. It returns an instance
+Once twenv.rb starts you'll have access to a `client` local. It returns an instance
 of `Twitter::REST::Client`, from there you can play around with numerous
 Twitter APIs.
 
@@ -80,9 +80,10 @@ The `archive-timeline` command lets you archive a user's timeline of tweets. Lik
 other twenv.rb commands, this command sleeps and resumes when rate limited by
 Twitter.
 
-`archive-timeline` supports filtering what tweets to archive, try
+`archive-timeline` supports filtering what and how many tweets to archive, run
 `archive-timeline --help` to see what options are available. By default a
-timeline is saved as a JSON file.
+timeline is read from start to finish, unless the `--max` option is passed or
+an interrupt is received(`^C`) while the command runs.
 
 The following is an example that finds the most liked tweet in the last 500
 tweets made by Yukihiro "Matz" Matsumoto:
@@ -97,6 +98,7 @@ tweets made by Yukihiro "Matz" Matsumoto:
 	 "url" => "https://twitter.com/yukihiro_matz/status/1251880011948158976",
 	 "text"=>
 	  "「動的型言語で地獄を見るぞ」って話はもういいから、「俺の推し言語はこんなに素晴らしいぞ」って話をしてほしい。\n「俺は地獄を見たぞ」って話はだいたい八つ当たりだから。\n「Rubyに滅んでほしい」と言わないで「俺言語の天国においで」とみんなを誘って結果的にRubyを滅ぼしてほしい。",
+      "is_reply"=>false,
 	 "is_retweet"=>false,
 	 "retweet_count"=>828,
 	 "like_count"=>2642,
@@ -124,8 +126,10 @@ other twenv.rb commands, this command sleeps and resumes when rate limited by
 Twitter. In my experience, rate limiting occurs frequently on this API, more so
 than other Twitter APIs I have tried.
 
-`archive-likes` supports filtering what tweets to archive, try
-`archive-likes --help` to see what options are available.
+`archive-likes` supports filtering what and how many tweets to archive, run
+`archive-likes --help` to see what options are available. By default a users
+likes are read from start to finish, unless the `--max` option is passed
+or an interrupt is received(`^C`) while the command runs.
 
 The following example archives the likes of Yukihiro "Matz" Matsumoto, who
 happens to have a low number of liked tweets:
@@ -134,11 +138,10 @@ happens to have a low number of liked tweets:
     17 likes archived
     Archive saved to /twenv.rb/command_storage/archive-likes/yukihiro_matz.json
 
-
  __<a id='commands-delete-your-tweets'>Delete tweets</a>__
 
  The `delete-my-tweets` command can delete all your tweets, or a subset
- of your tweets gathered by filtering. It achieves this by reading your entire
+ of your tweets gathered by filtering. It does this by reading your entire
  timeline; if there's a lot of tweets it might take a while. What follows are
  examples that demonstrate deleting all your tweets or just a subset of them:
 
@@ -160,8 +163,7 @@ happens to have a low number of liked tweets:
 
 __<a id='commands-delete-your-likes'>Delete likes</a>__
 
-The `delete-my-likes` command can delete all your likes, regardless
-of how many :)
+The `delete-my-likes` command can delete all your likes.
 
     [2] pry(#<TWEnv>)> delete-my-likes
 
