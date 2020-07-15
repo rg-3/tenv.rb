@@ -2,6 +2,10 @@
 
 ## HEAD
 
+* Add `is_reply` attribute in `format_tweet`.
+
+* Add `--replies-only`, `--no-replies` options to `archive-timeline`.
+
 * Remove `word_wrap` dependency and method.
 
 * Add `archive-likes` command.

@@ -12,6 +12,7 @@ module TWEnv::Command::FormatTweet
       id: tweet.id,
       url: tweet.url.to_s,
       text: tweet.full_text,
+      is_reply: tweet.reply?,
       is_retweet: tweet.retweet?,
       retweet_count: tweet.retweet_count,
       like_count: tweet.favorite_count,

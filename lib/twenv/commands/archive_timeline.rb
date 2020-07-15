@@ -40,6 +40,8 @@ class TWEnv::ArchiveTimeline < TWEnv::Command
     slop.on :'links-only', "Only archive tweets that do include links", default: false, as: :boolean
     slop.on :'no-retweets', "Only archive tweets that aren't retweets", default: false, as: :boolean
     slop.on :'retweets-only', "Only archive tweets that are retweets", default: false, as: :boolean
+    slop.on :'replies-only', "Only archive tweets that are replies", default: false, as: :boolean
+    slop.on :'no-replies', "Only archive tweets that aren't replies", default: false, as: :boolean
   end
 
   private
@@ -75,6 +77,8 @@ class TWEnv::ArchiveTimeline < TWEnv::Command
     tweets.select! {|t| t.urls.size >0} if opts['links-only']
     tweets.reject!(&:retweet?) if opts['no-retweets']
     tweets.select!(&:retweet?) if opts['retweets-only']
+    tweets.select!(&:reply?) if opts['replies-only']
+    tweets.reject!(&:reply?) if opts['no-replies']
     tweets
   end
 
