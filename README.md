@@ -126,7 +126,7 @@ other twenv.rb commands, this command sleeps and resumes when rate limited by
 Twitter. In my experience, rate limiting occurs frequently on this API, more so
 than other Twitter APIs I have tried.
 
-`archive-likes` supports filtering what and how many tweets to archive, run
+`archive-likes` supports filtering what and how many likes to archive, run
 `archive-likes --help` to see what options are available. By default a users
 likes are read from start to finish, unless the `--max` option is passed
 or an interrupt is received(`^C`) while the command runs.
@@ -165,7 +165,7 @@ __<a id='commands-delete-your-likes'>Delete likes</a>__
 
 The `delete-my-likes` command can delete all your likes.
 
-    [2] pry(#<TWEnv>)> delete-my-likes
+    [1s] pry(#<TWEnv>)> delete-my-likes
 
 ## <a id='custom'>Customization</a>
 
