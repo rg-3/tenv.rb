@@ -19,7 +19,7 @@ class TWEnv::ArchiveTimeline < TWEnv::Command
 
   def process(user)
     @user = user
-    @path = File.join command_storage_path, "#{user}.#{opts[:format].downcase}"
+    @path = File.join command_storage_path, "#{user}.json"
     write_file @path, [], 'json'
     perform_action_on_tweets method(:read_tweets),
                              method(:archive_tweet),

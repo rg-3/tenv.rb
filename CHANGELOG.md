@@ -4,6 +4,10 @@
 
 * ...
 
+## v0.3.1
+
+* Fix NoMethodError when running `archive-{timeline,likes}` commands.
+
 ## v0.3.0
 
 * Remove `--format` option from `archive-{likes,timeline}` commands.
