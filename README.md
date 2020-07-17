@@ -81,8 +81,8 @@ other twenv.rb commands, this command sleeps and resumes when rate limited by
 Twitter.
 
 `archive-timeline` supports filtering what and how many tweets to archive, run
-`archive-timeline --help` to see what options are available. By default a
-all tweets in a users timeline are archived, unless the `--max` option is passed or
+`archive-timeline --help` to see what options are available. By default all tweets
+in a users timeline are archived, unless the `--max` option is passed or
 an interrupt is received(`^C`) while the command runs.
 
 The following is an example that finds the most liked tweet in the last 500
