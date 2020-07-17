@@ -2,6 +2,10 @@
 
 ## HEAD
 
+* ...
+
+## v0.3.0
+
 * Remove `--format` option from `archive-{likes,timeline}` commands.
 
 * By default read all available tweets or likes in the `archive-{likes,timeline}`
