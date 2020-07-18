@@ -5,11 +5,11 @@
 * [Introduction](#introduction)
 * [Installation](#installation)
 * [Commands](#commands)
-  * [Write a tweet](#commands-write-a-tweet)
-  * [Archive tweets](#commands-archive-a-timeline)
-  * [Archive likes](#commands-archive-likes)
-  * [Delete tweets](#commands-delete-your-tweets)
-  * [Delete likes](#commands-delete-your-likes)
+  * [write-tweet](#commands-write-a-tweet)
+  * [archive-timeline](#commands-archive-a-timeline)
+  * [archive-likes](#commands-archive-likes)
+  * [delete-my-tweets](#commands-delete-your-tweets)
+  * [delete-my-likes](#commands-delete-your-likes)
 * [Customization](#custom)
 
 
