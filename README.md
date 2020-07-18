@@ -136,7 +136,7 @@ happens to have a low number of liked tweets:
 
 __<a id='commands-delete-your-likes'>Delete likes</a>__
 
-The `delete-my-likes` command can delete all your likes.
+The `delete-my-likes` command deletes all your likes.
 
     [1s] pry(#<TWEnv>)> delete-my-likes
 
