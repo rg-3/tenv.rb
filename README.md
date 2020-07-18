@@ -82,7 +82,7 @@ Twitter.
 
 `archive-timeline` supports filtering what and how many tweets to archive, run
 `archive-timeline --help` to see what options are available. By default all tweets
-in a users timeline are archived, unless the `--max` option is passed or
+on a users timeline are archived, unless the `--max` option is passed or
 an interrupt is received(`^C`) while the command runs.
 
 The following is an example that finds the most liked tweet in the last 500
@@ -105,8 +105,8 @@ than other Twitter APIs I have tried.
 
 `archive-likes` supports filtering what and how many likes to archive, run
 `archive-likes --help` to see what options are available. By default all likes
-a user has are archived, unless the `--max` option is passed or an interrupt is
-received(`^C`) while the command runs.
+belonging to a user are archived, unless the `--max` option is passed or an
+interrupt is received(`^C`) while the command runs.
 
 The following example archives the likes of Yukihiro "Matz" Matsumoto, who
 happens to have a low number of liked tweets:
@@ -118,25 +118,21 @@ happens to have a low number of liked tweets:
  __<a id='commands-delete-your-tweets'>Delete tweets</a>__
 
  The `delete-my-tweets` command can delete all your tweets, or a subset
- of your tweets gathered by filtering. It does this by reading your entire
- timeline; if there's a lot of tweets it might take a while. What follows are
- examples that demonstrate deleting all your tweets or just a subset of them:
+ of your tweets gathered by filtering. This command reads  your entire timeline; if
+ there's a lot of tweets it might take a while. What follows are examples that
+ demonstrate deleting all your tweets or just a subset of them:
 
- *A) Delete all tweets*
+    # Delete all tweets
+    [1] pry(#<TWEnv>)> delete-my-tweets
 
-     [1] pry(#<TWEnv>)> delete-my-tweets
+    # Only delete tweets that are replies
+    [1] pry(#<TWEnv>)> delete-my-tweets --replies-only
 
- *B) Delete replies*
+    # Only delete tweets that are replies with no likes
+    [1] pry(#<TWEnv>)> delete-my-tweets --replies-only --with-no-likes
 
-     [1] pry(#<TWEnv>)> delete-my-tweets --replies-only
-
- *C) Delete replies with no likes*
-
-     [1] pry(#<TWEnv>)> delete-my-tweets --replies-only --with-no-likes
-
- *D) Help and other options*
-
-     [1] pry(#<TWEnv>)> delete-my-tweets --help
+    # Show help
+    [1] pry(#<TWEnv>)> delete-my-tweets --help
 
 __<a id='commands-delete-your-likes'>Delete likes</a>__
 
