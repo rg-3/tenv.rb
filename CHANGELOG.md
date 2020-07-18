@@ -2,7 +2,8 @@
 
 ## HEAD
 
-* ...
+* Create `command_storage_path` in `Command#setup` only when
+`command_options[:setup_storage]` has been set to true.
 
 ## v0.3.1
 
