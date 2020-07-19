@@ -98,10 +98,8 @@ tweets made by Yukihiro "Matz" Matsumoto:
 
 __<a id='commands-archive-likes'> 3) archive-likes</a>__
 
-The `archive-likes` command lets you archive tweets liked by a given user. Like
-other twenv.rb commands, this command sleeps and resumes when rate limited by
-Twitter. In my experience, rate limiting occurs frequently on this API, more so
-than other Twitter APIs I have tried.
+The `archive-likes` command lets you archive a user's likes. Like other twenv.rb 
+commands, this command sleeps and resumes when rate limited by Twitter. 
 
 `archive-likes` supports filtering what and how many likes to archive, run
 `archive-likes --help` to see what options are available. By default all likes
