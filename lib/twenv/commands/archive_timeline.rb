@@ -41,6 +41,8 @@ class TWEnv::ArchiveTimeline < TWEnv::Command
     slop.on :'retweets-only', "Only archive tweets that are retweets", default: false, as: :boolean
     slop.on :'replies-only', "Only archive tweets that are replies", default: false, as: :boolean
     slop.on :'no-replies', "Only archive tweets that aren't replies", default: false, as: :boolean
+    slop.on :'video-only', "Only archive tweets that include video", default: false, as: :boolean
+    slop.on :'no-video', "Only archive tweets that don't include video", default: false, as: :boolean
   end
 
   private
@@ -78,6 +80,8 @@ class TWEnv::ArchiveTimeline < TWEnv::Command
     tweets.select!(&:retweet?) if opts['retweets-only']
     tweets.select!(&:reply?) if opts['replies-only']
     tweets.reject!(&:reply?) if opts['no-replies']
+    tweets.select!{|t| t.media.any?{|m| m.instance_of?(Twitter::Media::Video) } } if opts['video-only']
+    tweets.reject!{|t| t.media.any?{|m| m.instance_of?(Twitter::Media::Video) } } if opts['no-video']
     tweets
   end
 

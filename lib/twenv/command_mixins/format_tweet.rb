@@ -13,6 +13,7 @@ module TWEnv::Command::FormatTweet
       url: tweet.url.to_s,
       text: tweet.full_text,
       urls: tweet.urls.map{|u| u.attrs.slice(:url, :expanded_url, :display_url)},
+      video_urls: tweet.media.select{|m| m.instance_of?(Twitter::Media::Video) }.map{|v| v.expanded_url.to_s},
       user_mentions: tweet.user_mentions.map{|u| u.attrs.slice(:id, :screen_name, :name) },
       is_reply: tweet.reply?,
       is_retweet: tweet.retweet?,

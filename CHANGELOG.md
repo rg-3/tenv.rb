@@ -2,6 +2,10 @@
 
 ## HEAD
 
+* Add `video_urls` attribute in `format_tweet`.
+
+* Add `--no-video`, `--only-video` options to `archive-timeline`.
+
 * Create `command_storage_path` in `Command#setup` only when
 `command_options[:setup_storage]` has been set to true.
 
