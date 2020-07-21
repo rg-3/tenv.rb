@@ -10,6 +10,7 @@ class TWEnv::ArchiveTimeline < TWEnv::Command
   BANNER
 
   attr_accessor :max_id
+  include TWEnv::Command::Archiveable
 
   def setup
     super
@@ -31,12 +32,7 @@ class TWEnv::ArchiveTimeline < TWEnv::Command
   end
 
   def options(slop)
-    slop.on :m, :max=, 'The maximum number of tweets to archive. Default is unlimited', default: 0, as: :integer
-    slop.on :'outbound-links-only', 'Only archive tweets that link to somewhere outside Twitter', default: false, as: :boolean
-    slop.on :'no-media', "Only archive tweets that don't include media (ie: video, images)", default: false
-    slop.on :'media-only', "Only archive tweets that include media (ie: video, images)", default: false
-    slop.on :'no-links', "Only archive tweets that don't include links", default: false, as: :boolean
-    slop.on :'links-only', "Only archive tweets that include links", default: false, as: :boolean
+    share_archive_options slop, "tweets"
     slop.on :'no-retweets', "Only archive tweets that aren't retweets", default: false, as: :boolean
     slop.on :'retweets-only', "Only archive tweets that are retweets", default: false, as: :boolean
     slop.on :'replies-only', "Only archive tweets that are replies", default: false, as: :boolean
@@ -70,12 +66,7 @@ class TWEnv::ArchiveTimeline < TWEnv::Command
   end
 
   def filter_tweets(tweets)
-    tweets = tweets.dup
-    tweets.select! {|t| t.urls.any? { |url| url.expanded_url.host != 'twitter.com' } } if opts['outbound-links-only']
-    tweets.select! {|t| t.media.empty?} if opts['no-media']
-    tweets.select! {|t| t.media.size > 0} if opts['media-only']
-    tweets.select! {|t| t.urls.empty? } if opts['no-links']
-    tweets.select! {|t| t.urls.size >0} if opts['links-only']
+    tweets = filter_archive_tweets(tweets)
     tweets.reject!(&:retweet?) if opts['no-retweets']
     tweets.select!(&:retweet?) if opts['retweets-only']
     tweets.select!(&:reply?) if opts['replies-only']
