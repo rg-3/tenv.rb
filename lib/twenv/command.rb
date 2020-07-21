@@ -14,15 +14,15 @@ class TWEnv::Command < Pry::ClassCommand
 
   def setup
     command_options = self.class.command_options
-    FileUtils.mkdir_p(command_storage_path) if command_options[:setup_storage]
+    FileUtils.mkdir_p(storage_path) if command_options[:setup_storage]
   end
 
   #
   # @return [String]
   #  Returns the path to a directory where a command can store files.
   #
-  def command_storage_path
-    default = File.expand_path(File.join(__dir__, '..', '..', 'command_storage'))
+  def storage_path
+    default = File.expand_path(File.join(__dir__, '..', '..', 'storage'))
     File.join ENV.fetch('TWENV_COMMAND_STORAGE_PATH', default), self.class.command_name
   end
 

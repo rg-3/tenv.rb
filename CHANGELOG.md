@@ -2,6 +2,10 @@
 
 ## HEAD
 
+* Rename `command_storage_path` to just `storage_path`.
+
+* Rename directory `command_storage/` to just `storage/`.
+
 * Rename options across all commands.
 
 * Add `TWEnv::Archiveable`.

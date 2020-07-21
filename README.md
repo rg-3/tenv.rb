@@ -90,7 +90,7 @@ the creator of [Pry](https://github.com/pry/pry).
 
 	[1] pry(#<TWEnv>)> archive-timeline banisterfiend --max 50 --is-retweet
 	50 tweets archived
-	Archive saved to /twenv.rb/command_storage/archive-timeline/banisterfiend.json
+	Archive saved to /twenv.rb/storage/archive-timeline/banisterfiend.json
 
 __<a id='commands-archive-likes'> 3) archive-likes</a>__
 
@@ -107,7 +107,7 @@ creator, who happens to have a low number of liked tweets:
 
     [1] pry(#<TWEnv>)> archive-likes yukihiro_matz
     17 likes archived
-    Archive saved to /twenv.rb/command_storage/archive-likes/yukihiro_matz.json
+    Archive saved to /twenv.rb/storage/archive-likes/yukihiro_matz.json
 
  __<a id='commands-delete-your-tweets'> 4) delete-my-tweets</a>__
 

@@ -1,4 +1,4 @@
 .env
 *.lock
 commands/*.rb
-command_storage/
+storage/
