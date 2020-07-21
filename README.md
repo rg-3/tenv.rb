@@ -85,29 +85,25 @@ Twitter.
 on a users timeline are archived, unless the `--max` option is passed or
 an interrupt is received(`^C`) while the command runs.
 
-The following is an example that finds the most liked tweet in the last 500
-tweets made by Yukihiro "Matz" Matsumoto:
+The following is an example that archives the last 50 retweets from [@banisterfiend](https://twitter.com/banisterfiend),
+the creator of [Pry](https://github.com/pry/pry).
 
-	[1] pry(#<TWEnv>)> archive-timeline --max 500 yukihiro_matz
-	500 tweets archived
-	Archive saved to /twenv.rb/command_storage/archive-timeline/yukihiro_matz.json
-	[2] pry(#<TWEnv>)> tweets = JSON.parse File.read('/twenv.rb/command_storage/archive-timeline/yukihiro_matz.json');
-	...
-	[3] pry(#<TWEnv>)> most_liked_tweet = tweets.max_by{|t| t['like_count']}
-	=> {...}
+	[1] pry(#<TWEnv>)> archive-timeline banisterfiend --max 50 --is-retweet
+	50 tweets archived
+	Archive saved to /twenv.rb/command_storage/archive-timeline/banisterfiend.json
 
 __<a id='commands-archive-likes'> 3) archive-likes</a>__
 
-The `archive-likes` command lets you archive a user's likes. Like other twenv.rb 
-commands, this command sleeps and resumes when rate limited by Twitter. 
+The `archive-likes` command lets you archive a user's likes. Like other twenv.rb
+commands, this command sleeps and resumes when rate limited by Twitter.
 
 `archive-likes` supports filtering what and how many likes to archive, run
 `archive-likes --help` to see what options are available. By default all likes
 belonging to a user are archived, unless the `--max` option is passed or an
 interrupt is received(`^C`) while the command runs.
 
-The following example archives the likes of Yukihiro "Matz" Matsumoto, who
-happens to have a low number of liked tweets:
+The following example archives the likes of Yukihiro "Matz" Matsumoto, Ruby's
+creator, who happens to have a low number of liked tweets:
 
     [1] pry(#<TWEnv>)> archive-likes yukihiro_matz
     17 likes archived
