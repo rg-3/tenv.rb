@@ -102,8 +102,8 @@ commands, this command sleeps and resumes when rate limited by Twitter.
 belonging to a user are archived, unless the `--max` option is passed or an
 interrupt is received(`^C`) while the command runs.
 
-The following example archives the likes of Yukihiro "Matz" Matsumoto, Ruby's
-creator, who happens to have a low number of liked tweets:
+The following example archives the likes of [@yukihiro_matz](https://twitter.com/yukihiro_matz), 
+Ruby's creator, who happens to have a low number of liked tweets:
 
     [1] pry(#<TWEnv>)> archive-likes yukihiro_matz
     17 likes archived
