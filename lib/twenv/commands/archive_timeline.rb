@@ -33,12 +33,12 @@ class TWEnv::ArchiveTimeline < TWEnv::Command
 
   def options(slop)
     share_archive_options slop, "tweets"
-    slop.on :'no-retweets', "Only archive tweets that aren't retweets", default: false, as: :boolean
-    slop.on :'retweets-only', "Only archive tweets that are retweets", default: false, as: :boolean
-    slop.on :'replies-only', "Only archive tweets that are replies", default: false, as: :boolean
-    slop.on :'no-replies', "Only archive tweets that aren't replies", default: false, as: :boolean
-    slop.on :'video-only', "Only archive tweets that include video", default: false, as: :boolean
-    slop.on :'no-video', "Only archive tweets that don't include video", default: false, as: :boolean
+    slop.on 'is-retweet'   , "Only archive tweets that are retweets", default: false, as: :boolean
+    slop.on 'no-retweets'  , "Only archive tweets that aren't retweets", default: false, as: :boolean
+    slop.on 'is-reply'     , "Only archive tweets that are replies", default: false, as: :boolean
+    slop.on 'no-replies'   , "Only archive tweets that aren't replies", default: false, as: :boolean
+    slop.on 'has-video'    , "Only archive tweets that have video", default: false, as: :boolean
+    slop.on 'no-video'     , "Only archive tweets that don't have video", default: false, as: :boolean
   end
 
   private
@@ -68,10 +68,10 @@ class TWEnv::ArchiveTimeline < TWEnv::Command
   def filter_tweets(tweets)
     tweets = filter_archive_tweets(tweets)
     tweets.reject!(&:retweet?) if opts['no-retweets']
-    tweets.select!(&:retweet?) if opts['retweets-only']
-    tweets.select!(&:reply?) if opts['replies-only']
+    tweets.select!(&:retweet?) if opts['is-retweet']
+    tweets.select!(&:reply?) if opts['is-reply']
     tweets.reject!(&:reply?) if opts['no-replies']
-    tweets.select!{|t| t.media.any?{|m| m.instance_of?(Twitter::Media::Video) } } if opts['video-only']
+    tweets.select!{|t| t.media.any?{|m| m.instance_of?(Twitter::Media::Video) } } if opts['has-video']
     tweets.reject!{|t| t.media.any?{|m| m.instance_of?(Twitter::Media::Video) } } if opts['no-video']
     tweets
   end

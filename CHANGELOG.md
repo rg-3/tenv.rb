@@ -2,6 +2,10 @@
 
 ## HEAD
 
+* Rename options across all commands.
+
+* Add `TWEnv::Archiveable`.
+
 * Add `video_urls` attribute in `format_tweet`.
 
 * Add `--no-video`, `--only-video` options to `archive-timeline`.

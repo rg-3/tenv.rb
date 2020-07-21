@@ -124,10 +124,10 @@ happens to have a low number of liked tweets:
     [1] pry(#<TWEnv>)> delete-my-tweets
 
     # Only delete tweets that are replies
-    [1] pry(#<TWEnv>)> delete-my-tweets --replies-only
+    [1] pry(#<TWEnv>)> delete-my-tweets --is-reply
 
     # Only delete tweets that are replies with no likes
-    [1] pry(#<TWEnv>)> delete-my-tweets --replies-only --with-no-likes
+    [1] pry(#<TWEnv>)> delete-my-tweets --is-reply --has-no-likes
 
     # Show help
     [1] pry(#<TWEnv>)> delete-my-tweets --help
