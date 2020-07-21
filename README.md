@@ -88,9 +88,12 @@ an interrupt is received(`^C`) while the command runs.
 The following is an example that archives the last 50 retweets from [@banisterfiend](https://twitter.com/banisterfiend),
 the creator of [Pry](https://github.com/pry/pry).
 
-	[1] pry(#<TWEnv>)> archive-timeline banisterfiend --max 50 --is-retweet
-	50 tweets archived
-	Archive saved to /twenv.rb/storage/archive-timeline/banisterfiend.json
+    [1] pry(#<TWEnv>)> archive-timeline banisterfiend --max 50 --is-retweet
+    50 tweets archived
+    Archive saved to /twenv.rb/storage/archive-timeline/banisterfiend.json
+    Archive assigned to local variable `archived_timeline`
+    [2] pry(#<TWEnv>)> archived_timeline.size
+    => 50
 
 __<a id='commands-archive-likes'> 3) archive-likes</a>__
 
@@ -102,12 +105,15 @@ commands, this command sleeps and resumes when rate limited by Twitter.
 belonging to a user are archived, unless the `--max` option is passed or an
 interrupt is received(`^C`) while the command runs.
 
-The following example archives the likes of [@yukihiro_matz](https://twitter.com/yukihiro_matz), 
+The following example archives the likes of [@yukihiro_matz](https://twitter.com/yukihiro_matz),
 Ruby's creator, who happens to have a low number of liked tweets:
 
     [1] pry(#<TWEnv>)> archive-likes yukihiro_matz
     17 likes archived
     Archive saved to /twenv.rb/storage/archive-likes/yukihiro_matz.json
+    Archive assigned to local variable `archived_likes`
+    [2] pry(#<TWEnv>)> archived_likes.size
+    => 17
 
  __<a id='commands-delete-your-tweets'> 4) delete-my-tweets</a>__
 

@@ -2,6 +2,12 @@
 
 ## HEAD
 
+* `archive-timeline` now assigns a local variable, `archived_timeline`, after
+  the command completes to allow quick access to the archived timeline.
+
+* `archive-likes` now assigns a local variable, `archived_likes`, after the
+  command completes to allow quick access to the archived likes.
+
 * Rename `command_storage_path` to just `storage_path`.
 
 * Rename directory `command_storage/` to just `storage/`.
