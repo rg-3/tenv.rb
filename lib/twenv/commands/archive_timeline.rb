@@ -30,8 +30,8 @@ class TWEnv::ArchiveTimeline < TWEnv::Command
   ensure
     locals = pry_instance.config.extra_sticky_locals
     locals.merge!(archived_timeline: JSON.parse(File.read(@path)))
-    line.print "Archive saved to #{@path}"
-    line.end_line.print("Archive assigned to local variable `archived_timeline`").end_line
+    line.print("Archive saved to #{@path}").end_line
+    line.print("Archive assigned to local variable `archived_timeline`").end_line
   end
 
   def options(slop)
