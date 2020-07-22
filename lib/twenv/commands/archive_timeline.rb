@@ -9,33 +9,27 @@ class TWEnv::ArchiveTimeline < TWEnv::Command
   #{description}
   BANNER
 
-  attr_accessor :max_id
-  include TWEnv::Command::Archiveable
-
-  def setup
-    super
-    @user = nil
-    @path = nil
-  end
+  attr_accessor :user, :path, :max_id
+  include TWEnv::Command::ArchiveMixin
 
   def process(user)
-    @user = user
-    @path = File.join storage_path, "#{user}.json"
-    write_file @path, [], 'json'
+    self.user = user
+    self.path = File.join storage_path, "#{user}.json"
+    opts['continue'] ? self.max_id = read_tweets_array(path).dig(-1, "id") : write_tweets_array(path, [])
     perform_action_on_tweets method(:read_tweets),
                              method(:archive_tweet),
-                             method(:print_total)
+                             method(:print_total),
+                             read_tweets_array(path).map(&:id)
   rescue Interrupt
     line.end_line
   ensure
-    locals = pry_instance.config.extra_sticky_locals
-    locals.merge!(archived_timeline: JSON.parse(File.read(@path)))
-    line.print("Archive saved to #{@path}").end_line
-    line.print("Archive assigned to local variable `archived_timeline`").end_line
+    sticky_locals.merge!(archived_timeline: read_tweets_array(path))
+    line.puts "Archive saved to #{path}"
+    line.puts "Archive assigned to local variable `archived_timeline`"
   end
 
   def options(slop)
-    share_archive_options slop, "tweets"
+    share_archive_options slop, :tweet
     slop.on 'is-retweet'   , "Only archive tweets that are retweets", default: false, as: :boolean
     slop.on 'no-retweets'  , "Only archive tweets that aren't retweets", default: false, as: :boolean
     slop.on 'is-reply'     , "Only archive tweets that are replies", default: false, as: :boolean
@@ -53,19 +47,13 @@ class TWEnv::ArchiveTimeline < TWEnv::Command
   end
 
   def tweet_reader
-    tweets = user_timeline(@user, tweet_mode: 'extended', max_id: max_id)
+    tweets = user_timeline(user, tweet_mode: 'extended', max_id: max_id)
     tweets.tap { self.max_id = tweets[-1]&.id }
   end
 
   def print_total(total)
     line.rewind.print "#{total} tweets archived"
     throw(:cancel) if opts[:max].nonzero? && total == opts[:max]
-  end
-
-  def archive_tweet(tweet)
-    tweets = parse_file @path, 'json'
-    tweets.push format_tweet(tweet)
-    write_file @path, tweets, 'json'
   end
 
   def filter_tweets(tweets)

@@ -9,61 +9,46 @@ class TWEnv::ArchiveLikes < TWEnv::Command
   #{description}
   BANNER
 
-  attr_accessor :max_id
-  include TWEnv::Command::Archiveable
+  attr_accessor :user, :path, :max_id
 
-  def setup
-    super
-    @user = nil
-    @path = nil
-  end
+  include TWEnv::Command::ArchiveMixin
 
   def process(user)
-    @user = user
-    @path = File.join storage_path, "#{user}.json"
-    write_file @path, [], 'json'
+    self.user = user
+    self.path = File.join storage_path, "#{user}.json"
+    opts['continue'] ? self.max_id = read_tweets_array(path).dig(-1, "id") : write_tweets_array(path, [])
     perform_action_on_tweets method(:read_tweets),
                              method(:archive_tweet),
-                             method(:print_total)
+                             method(:print_total),
+                             read_tweets_array(path).map(&:id)
   rescue Interrupt
     line.end_line
   ensure
-    locals = pry_instance.config.extra_sticky_locals
-    locals.merge!(archived_likes: JSON.parse(File.read(@path)))
-    line.print("Archive saved to #{@path}").end_line
-    line.print("Archive assigned to local variable `archived_likes`").end_line
+    sticky_locals.merge!(archived_likes: read_tweets_array(path))
+    line.puts "Archive saved to #{path}"
+    line.puts "Archive assigned to local variable `archived_likes`"
   end
 
   def options(slop)
-    share_archive_options slop, "likes"
+    share_archive_options slop, :like
   end
 
   private
 
   def read_tweets
     read_and_filter method(:tweet_reader),
-                    method(:filter_tweets),
+                    method(:filter_archive_tweets),
                     max_id
   end
 
   def tweet_reader
-    tweets = user_likes(@user, tweet_mode: 'extended', max_id: max_id)
+    tweets = user_likes(user, tweet_mode: 'extended', max_id: max_id)
     tweets.tap { self.max_id = tweets[-1]&.id }
   end
 
   def print_total(total)
     line.rewind.print "#{total} likes archived"
     throw(:cancel) if opts[:max].nonzero? && total == opts[:max]
-  end
-
-  def archive_tweet(tweet)
-    tweets = parse_file @path, 'json'
-    tweets.push format_tweet(tweet)
-    write_file @path, tweets, 'json'
-  end
-
-  def filter_tweets(tweets)
-    filter_archive_tweets(tweets)
   end
 
   add_command self

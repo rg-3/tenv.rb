@@ -14,19 +14,20 @@ module TWEnv::Command::PerformActionOnTweets
   #
   # @return [void]
   #
-  def perform_action_on_tweets(read_tweets, perform_action, total_recver, ids = [])
+  def perform_action_on_tweets(read_tweets, perform_action, total_recver, ids = [], count = 0)
     catch(:cancel) do
       tweets = read_tweets.call
       if tweets.empty?
-        total_recver.call(ids.size)
+        total_recver.call(count)
         throw(:cancel)
       end
       until tweets.empty?
         tweets.each do |tweet|
           next if ids.include?(tweet.id)
+          count += 1
           ids.push(tweet.id)
           perform_action.call(tweet)
-          total_recver.call(ids.size)
+          total_recver.call(count)
         end
         tweets = read_tweets.call
       end
@@ -34,7 +35,7 @@ module TWEnv::Command::PerformActionOnTweets
     line.end_line
   rescue Twitter::Error::TooManyRequests => e
     rate_limit_sleep(e.rate_limit.retry_after)
-    perform_action_on_tweets(read_tweets, perform_action, total_recver, ids)
+    perform_action_on_tweets(read_tweets, perform_action, total_recver, ids, count)
   end
 
   private

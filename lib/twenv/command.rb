@@ -6,7 +6,7 @@ class TWEnv::Command < Pry::ClassCommand
   include TwitterActions
   include FormatTweet
   include TweetFilter
-  include FileHelper
+  include TweetIO
 
   def self.add_command(command)
     Pry.commands.add_command command
@@ -15,6 +15,16 @@ class TWEnv::Command < Pry::ClassCommand
   def setup
     command_options = self.class.command_options
     FileUtils.mkdir_p(storage_path) if command_options[:setup_storage]
+  end
+
+  #
+  # @return [Hash]
+  #  Returns a Hash of local variables that persist throughout the repl
+  #  session. Mutation of the Hash adds or removes local variables from
+  #  the repl session.
+  #
+  def sticky_locals
+    pry_instance.config.extra_sticky_locals
   end
 
   #

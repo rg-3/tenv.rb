@@ -8,6 +8,10 @@ class TWEnv::Line
     @size = 0
   end
 
+  def puts(str)
+    print(str).end_line
+  end
+
   def print(str)
     str   = str.gsub(/[\n]*/, '')
     @size = str.size

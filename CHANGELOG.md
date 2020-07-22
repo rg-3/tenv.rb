@@ -2,6 +2,21 @@
 
 ## HEAD
 
+* Rename `write_file` as `write_tweets_array`.
+
+* Rename `parse_file` as `read_tweets_array`.
+
+* Rename module `FileHelper` as `TweetIO`.
+
+* Rename command option `setup_storage` to just `storage`, eg
+ `command_options storage: true`
+
+* Add `-c`, `--continue` option to `archive-{timeline,likes}` commands.
+
+* Add `TWEnv::Command#sticky_locals`.
+
+* Add `TWEnv::Line#puts`.
+
 * `archive-timeline` now assigns a local variable, `archived_timeline`, after
   the command completes to allow quick access to the archived timeline.
 
