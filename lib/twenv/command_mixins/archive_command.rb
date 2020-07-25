@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module TWEnv::Command::ArchiveMixin
+module TWEnv::Command::ArchiveCommand
   def share_archive_options(slop, object_name = :tweet)
     slop.on :m, :max=            , "The max number of #{object_name}s to archive. Default is unlimited", default: 0, as: :integer
     slop.on "has-media"          , "Only archive #{object_name}s that have media (either video or image)", default: false
@@ -22,12 +22,21 @@ module TWEnv::Command::ArchiveMixin
   end
 
   def archive_tweet(tweet)
-    write_tweets_array path, read_tweets_array(path).tap {|tweets| tweets.push(format_tweet(tweet)) }
+    write_archive path, read_archive(path).tap {|tweets| tweets.push(format_tweet(tweet)) }
   end
 
   def resume_from_previous_archive(path)
-    tweet = read_tweets_array(path)[-1]
+    tweet = read_archive(path)[-1]
     self.max_id = tweet.id
     line.puts "Continue from #{tweet.url} (#{tweet.created_at})"
+  end
+
+  def read_archive(path)
+    tweets = JSON.parse File.read(path)
+    tweets.map {|tweet| TWEnv::Struct.from_hash(tweet)}
+  end
+
+  def write_archive(path, tweets)
+    File.write path, JSON.dump(tweets)
   end
 end

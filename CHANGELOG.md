@@ -2,15 +2,13 @@
 
 ## HEAD
 
-* Return an array of `TWENV::Struct` objects from `read_tweets_array`.
+* Return an array of `TWENV::Struct` objects from `read_archive`.
 
 * Add `TWEnv::Struct`.
 
-* Rename `write_file` as `write_tweets_array`.
+* Rename `write_file` as `write_archive`.
 
-* Rename `parse_file` as `read_tweets_array`.
-
-* Rename module `FileHelper` as `JSONDumper`.
+* Rename `parse_file` as `read_archive`.
 
 * Rename command option `setup_storage` to just `storage`, eg
  `command_options storage: true`

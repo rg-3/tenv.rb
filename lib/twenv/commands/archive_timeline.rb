@@ -10,20 +10,20 @@ class TWEnv::ArchiveTimeline < TWEnv::Command
   BANNER
 
   attr_accessor :user, :path, :max_id
-  include TWEnv::Command::ArchiveMixin
+  include TWEnv::Command::ArchiveCommand
 
   def process(user)
     self.user = user
     self.path = File.join storage_path, "#{user}.json"
-    opts['continue'] ? resume_from_previous_archive(path) : write_tweets_array(path, [])
+    opts['continue'] ? resume_from_previous_archive(path) : write_archive(path, [])
     perform_action_on_tweets method(:read_tweets),
                              method(:archive_tweet),
                              method(:print_total),
-                             read_tweets_array(path).map(&:id)
+                             read_archive(path).map(&:id)
   rescue Interrupt
     line.end_line
   ensure
-    sticky_locals.merge!(archived_timeline: read_tweets_array(path))
+    sticky_locals.merge!(archived_timeline: read_archive(path))
     line.puts "Archive saved to #{path}"
     line.puts "Archive assigned to local variable `archived_timeline`"
   end
