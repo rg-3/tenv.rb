@@ -2,7 +2,7 @@
 
 ## HEAD
 
-* Nothing yet.
+* Update install instructions.
 
 ## v0.4.0
 

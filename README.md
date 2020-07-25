@@ -25,10 +25,15 @@ __1. Clone__
 
 To get started clone a copy of the twenv.rb repository.
 The installation method for this project is to clone a copy of twenv.rb and
-then adopt it as your own environment.  
+then adopt it as your own environment.
 
-	git clone https://github.com/rg-3/twenv.rb
-	cd twenv.rb
+    # Clone and change directory
+    git clone https://github.com/rg-3/twenv.rb
+    cd twenv.rb
+
+    # Fork a branch from the latest version of twenv.rb.
+    git checkout v0.4.0
+    git checkout -b my-twenv.rb
 
 __2. Configure env__
 
