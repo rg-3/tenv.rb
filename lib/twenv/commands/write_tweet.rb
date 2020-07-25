@@ -2,7 +2,7 @@ class TWEnv::WriteTweet < TWEnv::Command
   match 'write-tweet'
   description "Write a tweet"
   group 'twenv'
-  command_options setup_storage: true
+  command_options storage: true
 
   def process
     raise Pry::CommandError, "$EDITOR is not set" if empty?(ENV['EDITOR'])

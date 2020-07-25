@@ -14,7 +14,7 @@ class TWEnv::Command < Pry::ClassCommand
 
   def setup
     command_options = self.class.command_options
-    FileUtils.mkdir_p(storage_path) if command_options[:setup_storage]
+    FileUtils.mkdir_p(storage_path) if command_options[:storage]
   end
 
   #
