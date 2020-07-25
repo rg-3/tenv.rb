@@ -2,13 +2,16 @@
 
 ## HEAD
 
+* Add `--is-reply-to`, `--is-reply`, and `--no-replies` options to the
+  `delete-my-likes` command.
+  
 * Return an array of `TWENV::Struct` objects from `read_archive`.
 
 * Add `TWEnv::Struct`.
 
-* Rename `write_file` as `write_archive`.
+* Rename `write_file` to `write_archive`.
 
-* Rename `parse_file` as `read_archive`.
+* Rename `parse_file` to `read_archive`.
 
 * Rename command option `setup_storage` to just `storage`, eg
  `command_options storage: true`

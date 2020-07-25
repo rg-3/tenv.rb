@@ -140,7 +140,7 @@ the `--continue` option:
  __<a id='commands-delete-your-tweets'> 4) delete-my-tweets</a>__
 
  The `delete-my-tweets` command can delete all your tweets, or a subset
- of your tweets gathered by filtering. This command reads  your entire timeline; if
+ of them gathered by filtering. This command reads  your entire timeline; if
  there's a lot of tweets it might take a while. What follows are examples that
  demonstrate deleting all your tweets or just a subset of them:
 
@@ -158,9 +158,18 @@ the `--continue` option:
 
 __<a id='commands-delete-your-likes'> 5) delete-my-likes</a>__
 
-The `delete-my-likes` command deletes all your likes.
+The `delete-my-likes` command deletes all your likes, or subset of them gathered
+by filtering . Run `delete-my-likes --help` to discover what options are
+available. The following example demonstrates a few different scenarios:
 
-    [1s] pry(#<TWEnv>)> delete-my-likes
+    # Delete all your likes
+    [1] pry(#<TWEnv>)> delete-my-likes
+
+    # Delete all your likes that are replies
+    [1] pry(#<TWEnv>)> delete-my-likes --is-reply
+
+    # Delete all your likes that are replies to a given username.
+    [1] pry(#<TWEnv>)> delete-my-likes --is-reply-to=username
 
 ## <a id='custom'>Customization</a>
 
