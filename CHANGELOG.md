@@ -10,7 +10,7 @@
 
 * Rename `parse_file` as `read_tweets_array`.
 
-* Rename module `FileHelper` as `TweetIO`.
+* Rename module `FileHelper` as `JSONDumper`.
 
 * Rename command option `setup_storage` to just `storage`, eg
  `command_options storage: true`

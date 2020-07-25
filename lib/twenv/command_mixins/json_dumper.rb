@@ -1,6 +1,6 @@
-module TWEnv::Command::TweetIO
-  require 'json'
+require 'json'
 
+module TWEnv::Command::JSONDumper
   def read_tweets_array(path)
     tweets = JSON.parse File.read(path)
     tweets.map {|tweet| TWEnv::Struct.from_hash(tweet)}

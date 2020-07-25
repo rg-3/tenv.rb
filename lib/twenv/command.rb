@@ -6,7 +6,7 @@ class TWEnv::Command < Pry::ClassCommand
   include TwitterActions
   include FormatTweet
   include TweetFilter
-  include TweetIO
+  include JSONDumper
 
   def self.add_command(command)
     Pry.commands.add_command command
