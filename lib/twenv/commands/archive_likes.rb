@@ -10,7 +10,6 @@ class TWEnv::ArchiveLikes < TWEnv::Command
   BANNER
 
   attr_accessor :user, :path, :max_id
-
   include TWEnv::Command::ArchiveMixin
 
   def process(user)
