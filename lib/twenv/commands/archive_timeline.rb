@@ -15,7 +15,7 @@ class TWEnv::ArchiveTimeline < TWEnv::Command
   def process(user)
     self.user = user
     self.path = File.join storage_path, "#{user}.json"
-    opts['continue'] ? self.max_id = read_tweets_array(path).dig(-1, "id") : write_tweets_array(path, [])
+    opts['continue'] ? resume_from_previous_archive(path) : write_tweets_array(path, [])
     perform_action_on_tweets method(:read_tweets),
                              method(:archive_tweet),
                              method(:print_total),

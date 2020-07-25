@@ -24,4 +24,10 @@ module TWEnv::Command::ArchiveMixin
   def archive_tweet(tweet)
     write_tweets_array path, read_tweets_array(path).tap {|tweets| tweets.push(format_tweet(tweet)) }
   end
+
+  def resume_from_previous_archive(path)
+    tweet = read_tweets_array(path)[-1]
+    self.max_id = tweet.id
+    line.puts "Continue from #{tweet.url} (#{tweet.created_at})"
+  end
 end
