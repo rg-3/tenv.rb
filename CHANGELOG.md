@@ -2,6 +2,10 @@
 
 ## HEAD
 
+* Return an array of `TWENV::Struct` objects from `read_tweets_array`.
+
+* Add `TWEnv::Struct`.
+
 * Rename `write_file` as `write_tweets_array`.
 
 * Rename `parse_file` as `read_tweets_array`.

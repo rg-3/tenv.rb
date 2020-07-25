@@ -6,6 +6,7 @@ class TWEnv
   require_relative 'twenv/command'
   require_relative 'twenv/line'
   require_relative 'twenv/version'
+  require_relative 'twenv/struct'
   Dir[File.join(__dir__, "twenv", "commands", "*.rb")].each{|file| require_relative file}
 
   def self.start(twitter_options = {}, pry_options = {})
