@@ -71,13 +71,13 @@ to see what's possible.
 
 You could write a tweet with the following Ruby code:
 
-    [1] pry(#<TWEnv>)> client.update "I'm tweeting from twenv.rb"
+    [1] twenv.rb (main)> client.update "I'm tweeting from twenv.rb"
 
 Alternatively, you could use a command that's part of twenv.rb. It will open an
 editor and after you exit post your tweet. By default the `nano` editor is used,
 this can be changed in the `.env` file by setting `$EDITOR`.
 
-    [1] pry(#<TWEnv>)> write-tweet
+    [1] twenv.rb (main)> write-tweet
 
 __<a id='commands-archive-a-timeline'> 2) archive-timeline</a>__
 
@@ -93,22 +93,22 @@ an interrupt is received(`^C`) while the command runs.
 The following is an example that archives recent retweets from [@banisterfiend](https://twitter.com/banisterfiend),
 the creator of [Pry](https://github.com/pry/pry):
 
-    [1] pry(#<TWEnv>)> archive-timeline banisterfiend --max 10 --is-retweet
+    [1] twenv.rb (main)> archive-timeline banisterfiend --max 10 --is-retweet
     10 tweets archived
     Archive saved to storage/archive-timeline/banisterfiend.json
     Archive assigned to local variable `archived_timeline`
-    [2] pry(#<TWEnv>)> archived_timeline.size
+    [2] twenv.rb (main)> archived_timeline.size
     => 10
 
 It's possible to continue from where the `archive-timeline` command last stopped with
 the `--continue` option:
 
-    [3] pry(#<TWEnv>)> archive-timeline banisterfiend --max 10 --is-retweet --continue
+    [3] twenv.rb (main)> archive-timeline banisterfiend --max 10 --is-retweet --continue
     Continue from https://twitter.com/banisterfiend/status/1284254845504036870 (2020-07-17T22:33:10Z)
     10 tweets archived
     Archive saved to storage/archive-timeline/banisterfiend.json
     Archive assigned to local variable `archived_timeline`
-    [4] pry(#<TWEnv>)> archived_timeline.size
+    [4] twenv.rb (main)> archived_timeline.size
     => 20
 
 __<a id='commands-archive-likes'> 3) archive-likes</a>__
@@ -124,22 +124,22 @@ interrupt is received(`^C`) while the command runs.
 The following example archives the likes of [@yukihiro_matz](https://twitter.com/yukihiro_matz),
 Ruby's creator, who had 17 likes at time of writing:
 
-    [1] pry(#<TWEnv>)> archive-likes yukihiro_matz -m 10
+    [1] twenv.rb (main)> archive-likes yukihiro_matz -m 10
     10 likes archived
     Archive saved to storage/archive-likes/yukihiro_matz.json
     Archive assigned to local variable `archived_likes`
-    [2] pry(#<TWEnv>)> archived_likes.size
+    [2] twenv.rb (main)> archived_likes.size
     => 10
 
 It's possible to continue from where the `archive-likes` command last stopped with
 the `--continue` option:
 
-    [3] pry(#<TWEnv>)> archive-likes yukihiro_matz -m 10 --continue
+    [3] twenv.rb (main)> archive-likes yukihiro_matz -m 10 --continue
     Continue from https://twitter.com/tsuchinao83/status/1107267964821106688 (2019-03-17T13:10:29Z)
     7 likes archived
     Archive saved to storage/archive-likes/yukihiro_matz.json
     Archive assigned to local variable `archived_likes`
-    [4] pry(#<TWEnv>)> archived_likes.size
+    [4] twenv.rb (main)> archived_likes.size
     17
 
  __<a id='commands-delete-your-tweets'> 4) delete-my-tweets</a>__
@@ -150,16 +150,16 @@ the `--continue` option:
  demonstrate deleting all your tweets or just a subset of them:
 
     # Delete all tweets
-    [1] pry(#<TWEnv>)> delete-my-tweets
+    [1] twenv.rb (main)> delete-my-tweets
 
     # Only delete tweets that are replies
-    [1] pry(#<TWEnv>)> delete-my-tweets --is-reply
+    [1] twenv.rb (main)> delete-my-tweets --is-reply
 
     # Only delete tweets that are replies with no likes
-    [1] pry(#<TWEnv>)> delete-my-tweets --is-reply --has-no-likes
+    [1] twenv.rb (main)> delete-my-tweets --is-reply --has-no-likes
 
     # Show help
-    [1] pry(#<TWEnv>)> delete-my-tweets --help
+    [1] twenv.rb (main)> delete-my-tweets --help
 
 __<a id='commands-delete-your-likes'> 5) delete-my-likes</a>__
 
@@ -168,13 +168,13 @@ by filtering . Run `delete-my-likes --help` to discover what options are
 available. The following example demonstrates a few different scenarios:
 
     # Delete all your likes
-    [1] pry(#<TWEnv>)> delete-my-likes
+    [1] twenv.rb (main)> delete-my-likes
 
     # Delete all your likes that are replies
-    [1] pry(#<TWEnv>)> delete-my-likes --is-reply
+    [1] twenv.rb (main)> delete-my-likes --is-reply
 
     # Delete all your likes that are replies to a given username.
-    [1] pry(#<TWEnv>)> delete-my-likes --is-reply-to=username
+    [1] twenv.rb (main)> delete-my-likes --is-reply-to=username
 
 ## <a id='custom'>Customization</a>
 

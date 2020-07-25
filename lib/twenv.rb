@@ -12,7 +12,7 @@ class TWEnv
   def self.start(twitter_options = {}, pry_options = {})
     glob = File.join __dir__, '..', 'commands', '*.rb'
     Dir[glob].each {|path| require_command(path)}
-    Pry.start new, {
+    Pry.start TOPLEVEL_BINDING, {
       extra_sticky_locals: {
         client: Twitter::REST::Client.new { |config|
           config.consumer_key        = ENV['TWENV_CONSUMER_KEY']
@@ -45,4 +45,8 @@ class TWEnv
     vars = DotEnv.read_dot_file(path)
     DotEnv.set_env(vars)
   end
+end
+
+Pry.configure do |config|
+  config.prompt_name = "twenv.rb "
 end
