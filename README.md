@@ -94,9 +94,9 @@ The following is an example that archives recent retweets from [@banisterfiend](
 the creator of [Pry](https://github.com/pry/pry):
 
     [1] twenv.rb (main)> archive-timeline banisterfiend --max 10 --is-retweet
-    10 tweets archived
-    Archive saved to storage/archive-timeline/banisterfiend.json
-    Archive assigned to local variable `archived_timeline`
+    OK 10 tweets archived
+    OK Archive saved to storage/archive-timeline/banisterfiend.json
+    OK Archive assigned to local variable `archived_timeline`
     [2] twenv.rb (main)> archived_timeline.size
     => 10
 
@@ -104,10 +104,10 @@ It's possible to continue from where the `archive-timeline` command last stopped
 the `--continue` option:
 
     [3] twenv.rb (main)> archive-timeline banisterfiend --max 10 --is-retweet --continue
-    Continue from https://twitter.com/banisterfiend/status/1284254845504036870 (2020-07-17T22:33:10Z)
-    10 tweets archived
-    Archive saved to storage/archive-timeline/banisterfiend.json
-    Archive assigned to local variable `archived_timeline`
+    OK Continue from https://twitter.com/banisterfiend/status/1284254845504036870 (2020-07-17T22:33:10Z)
+    OK 10 tweets archived
+    OK Archive saved to storage/archive-timeline/banisterfiend.json
+    OK Archive assigned to local variable `archived_timeline`
     [4] twenv.rb (main)> archived_timeline.size
     => 20
 
@@ -125,9 +125,9 @@ The following example archives the likes of [@yukihiro_matz](https://twitter.com
 Ruby's creator, who had 17 likes at time of writing:
 
     [1] twenv.rb (main)> archive-likes yukihiro_matz -m 10
-    10 likes archived
-    Archive saved to storage/archive-likes/yukihiro_matz.json
-    Archive assigned to local variable `archived_likes`
+    OK 10 likes archived
+    OK Archive saved to storage/archive-likes/yukihiro_matz.json
+    OK Archive assigned to local variable `archived_likes`
     [2] twenv.rb (main)> archived_likes.size
     => 10
 
@@ -135,10 +135,10 @@ It's possible to continue from where the `archive-likes` command last stopped wi
 the `--continue` option:
 
     [3] twenv.rb (main)> archive-likes yukihiro_matz -m 10 --continue
-    Continue from https://twitter.com/tsuchinao83/status/1107267964821106688 (2019-03-17T13:10:29Z)
-    7 likes archived
-    Archive saved to storage/archive-likes/yukihiro_matz.json
-    Archive assigned to local variable `archived_likes`
+    OK Continue from https://twitter.com/tsuchinao83/status/1107267964821106688 (2019-03-17T13:10:29Z)
+    OK 7 likes archived
+    OK Archive saved to storage/archive-likes/yukihiro_matz.json
+    OK Archive assigned to local variable `archived_likes`
     [4] twenv.rb (main)> archived_likes.size
     17
 

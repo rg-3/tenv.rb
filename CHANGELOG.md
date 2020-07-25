@@ -2,7 +2,16 @@
 
 ## HEAD
 
-* Nothing yet.
+* Log Interrupt errors to `Command#line`.
+
+* Add `Line#{ok,warn,error}`.
+
+* Rename `Line#end_line` to `Line#end`.
+
+* Fix bug where `.env` variables were not initialized.
+
+* Improve upon `archive-{timeline-likes}` to be aware of and handle more
+  edge case scenarios.
 
 ## v0.4.1
 

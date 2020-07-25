@@ -18,7 +18,11 @@ class TWEnv::DeleteMyTweets < TWEnv::Command
   def process
     perform_action_on_tweets method(:read_tweets),
                              lambda {|tweet| client.destroy_tweet(tweet)},
-                             lambda {|total| line.rewind.print(total == 0 ? "No tweets to delete" : "#{total} tweets deleted") }
+                             lambda {|total| line.rewind.ok("#{total} tweets deleted") }
+    line.end
+  rescue Interrupt
+    line.end
+    line.warn("Interrupt received").end
   end
 
   private

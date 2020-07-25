@@ -12,7 +12,7 @@ class TWEnv::WriteTweet < TWEnv::Command
     raise Pry::CommandError, "tweet content is empty" if empty?(tweet)
     line.print "Posting tweet ... "
     client.update(tweet)
-    line.print("Done.").end_line
+    line.print("Done.").end
   ensure
     file.unlink
     file.close

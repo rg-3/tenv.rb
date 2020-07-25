@@ -19,7 +19,11 @@ class TWEnv::DeleteMyLikes < TWEnv::Command
   def process
     perform_action_on_tweets method(:read_tweets),
                              lambda {|tweet| client.unfavorite(tweet) },
-                             lambda {|total| line.rewind.print(total == 0 ? "No tweets to unlike" : "#{total} tweets unliked") }
+                             lambda {|total| line.rewind.ok("#{total} tweets unliked") }
+    line.end
+  rescue Interrupt
+    line.end
+    line.warn("Interrupt received").end
   end
 
   private

@@ -32,7 +32,6 @@ module TWEnv::Command::PerformActionOnTweets
         tweets = read_tweets.call
       end
     end
-    line.end_line
   rescue Twitter::Error::TooManyRequests => e
     rate_limit_sleep(e.rate_limit.retry_after)
     perform_action_on_tweets(read_tweets, perform_action, total_recver, ids, count)

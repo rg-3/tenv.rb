@@ -2,16 +2,19 @@ class TWEnv
   require 'pry'
   require 'twitter'
   require 'tempfile'
+  require 'paint'
   require_relative 'twenv/dot_env'
   require_relative 'twenv/command'
   require_relative 'twenv/line'
   require_relative 'twenv/version'
   require_relative 'twenv/struct'
+  require_relative 'twenv/error'
   Dir[File.join(__dir__, "twenv", "commands", "*.rb")].each{|file| require_relative file}
 
   def self.start(twitter_options = {}, pry_options = {})
     glob = File.join __dir__, '..', 'commands', '*.rb'
     Dir[glob].each {|path| require_command(path)}
+    DotEnv.set_env DotEnv.read_dot_file(File.join(TWEnv.root_path, '.env'))
     Pry.start TOPLEVEL_BINDING, {
       extra_sticky_locals: {
         client: Twitter::REST::Client.new { |config|
@@ -40,11 +43,6 @@ class TWEnv
   end
   private_class_method :require_command
 
-  def initialize
-    path = File.join(__dir__, '..', '.env')
-    vars = DotEnv.read_dot_file(path)
-    DotEnv.set_env(vars)
-  end
 end
 
 Pry.configure do |config|
