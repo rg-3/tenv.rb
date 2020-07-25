@@ -2,6 +2,10 @@
 
 ## HEAD
 
+* Nothing yet.
+
+## v0.4.0
+
 * Remove `TWENV_COMMAND_STORAGE_PATH` as a `.env` file variable.
 
 * Update `archive-{timeline,likes}` to print paths that don't include
