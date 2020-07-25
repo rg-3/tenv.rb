@@ -12,7 +12,7 @@ class TWEnv::Struct < OpenStruct
     hash.each do |k,v|
       case v
       when Array
-        result[k] = v.map{|e| Array === e || Hash === e ? from_hash(e) : v}
+        result[k] = v.map{|e| Array === e || Hash === e ? from_hash(e) : e}
       when Hash
         v.each {|k,v2| v[k] = Array === v2 || Hash === v2 ? from_hash(v2) : v2}
         result[k] = new(v)
