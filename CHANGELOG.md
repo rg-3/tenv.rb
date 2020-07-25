@@ -2,6 +2,10 @@
 
 ## HEAD
 
+* Nothing yet.
+
+## v0.4.1
+
 * Start repl session in `TOPLEVEL_BINDING`.
 
 * Update the prompt name to be `twenv.rb `.

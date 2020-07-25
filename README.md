@@ -32,7 +32,7 @@ then adopt it as your own environment.
     cd twenv.rb
 
     # Fork a branch from the latest version of twenv.rb.
-    git checkout v0.4.0
+    git checkout v0.4.1
     git checkout -b my-twenv.rb
 
 __2. Configure env__
