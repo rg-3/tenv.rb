@@ -2,9 +2,18 @@
 
 ## HEAD
 
+* Remove `TWENV_COMMAND_STORAGE_PATH` as a `.env` file variable.
+
+* Update `archive-{timeline,likes}` to print paths that don't include
+ `TWEnv.root_path`
+
+* Add `TWEnv.root_path`.
+
+* Add `Command#relative_to_root`.
+
 * Add `--is-reply-to`, `--is-reply`, and `--no-replies` options to the
   `delete-my-likes` command.
-  
+
 * Return an array of `TWENV::Struct` objects from `read_archive`.
 
 * Add `TWEnv::Struct`.

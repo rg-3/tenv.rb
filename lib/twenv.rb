@@ -25,6 +25,14 @@ class TWEnv
     }.merge!(pry_options)
   end
 
+  #
+  # @return [String]
+  #   The path to the root of the twenv.rb repository
+  #
+  def self.root_path
+    @root_path ||= File.expand_path File.join(__dir__, "..")
+  end
+
   def self.require_command(path)
     require path
   rescue

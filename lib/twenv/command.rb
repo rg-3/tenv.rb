@@ -17,6 +17,15 @@ class TWEnv::Command < Pry::ClassCommand
   end
 
   #
+  # @return [String]
+  #   Returns a path without {TWEnv.root_path} included in it.
+  #
+  def relative_to_root(path)
+    path = File.expand_path(path)
+    path.sub(%r(^#{Regexp.escape TWEnv.root_path}/), '')
+  end
+
+  #
   # @return [Hash]
   #  Returns a Hash of local variables that persist throughout the repl
   #  session. Mutation of the Hash adds or removes local variables from
@@ -31,8 +40,7 @@ class TWEnv::Command < Pry::ClassCommand
   #  Returns the path to a directory where a command can store files.
   #
   def storage_path
-    default = File.expand_path(File.join(__dir__, '..', '..', 'storage'))
-    File.join ENV.fetch('TWENV_COMMAND_STORAGE_PATH', default), self.class.command_name
+    File.join TWEnv.root_path, 'storage', self.class.command_name
   end
 
   #

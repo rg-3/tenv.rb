@@ -24,7 +24,7 @@ class TWEnv::ArchiveTimeline < TWEnv::Command
     line.end_line
   ensure
     sticky_locals.merge!(archived_timeline: read_archive(path))
-    line.puts "Archive saved to #{path}"
+    line.puts "Archive saved to #{relative_to_root(path)}"
     line.puts "Archive assigned to local variable `archived_timeline`"
   end
 
