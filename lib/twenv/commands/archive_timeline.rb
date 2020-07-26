@@ -26,7 +26,7 @@ class TWEnv::ArchiveTimeline < TWEnv::Command
   rescue TWEnv::Error::NoSuchArchiveError
     line.error("Can't continue because an archive for #{user} doesn't exist").end
   rescue Twitter::Error => ex
-    line.error("#{ex.message} (#{ex.class})").end
+    line.end.error("#{ex.message} (#{ex.class})").end
   rescue Interrupt
     line.end
     line.warn("Interrupt received").end

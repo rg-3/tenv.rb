@@ -39,10 +39,7 @@ class TWEnv::DeleteMyLikes < TWEnv::Command
     max_id = tweets[-1]&.id
     tweets.select!(&:reply?) if opts['is-reply'] || opts['is-reply-to']
     tweets.reject!(&:reply?) if opts['no-replies']
-    tweets.select! do |t|
-      user = client.user(t.in_reply_to_user_id)
-      user.screen_name == opts['is-reply-to']
-    end if opts['is-reply-to']
+    is_reply_to_filter!(tweets)
     tweets.tap{ self.max_id = max_id }
   end
 

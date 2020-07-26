@@ -8,6 +8,7 @@ module TWEnv::Command::ArchiveCommand
     slop.on "has-links"          , "Only archive #{object_name}s that have links", default: false, as: :boolean
     slop.on "no-links"           , "Only archive #{object_name}s that don't have links", default: false, as: :boolean
     slop.on "has-outbound-links" , "Only archive #{object_name}s that link to somewhere outside Twitter", default: false, as: :boolean
+    slop.on "is-reply-to="       , "Only archive #{object_name}s that are a reply to the given username", default: nil, as: :string
     slop.on "c", "continue"      , "Continue from the last #{object_name} in a saved archive", default: false, as: :boolean
   end
 
@@ -18,6 +19,7 @@ module TWEnv::Command::ArchiveCommand
     tweets.select! {|t| t.media.size > 0 } if opts['has-media']
     tweets.select! {|t| t.urls.empty? }    if opts['no-links']
     tweets.select! {|t| t.urls.size > 0 }  if opts['has-links']
+    is_reply_to_filter!(tweets)
     tweets
   end
 
