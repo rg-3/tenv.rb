@@ -20,13 +20,13 @@
 * [Demo video](#screencast)
 
 
-## <a id='#introduction'> Introduction </a>
+## <a id='introduction'> Introduction </a>
 
 twenv.rb provides a Twitter environment where you can interact with Twitter
 through its web APIs using a REPL. The environment uses the Ruby programming language,
 [Pry](https://github.com/pry/pry#readme) and the [Twitter library](https://github.com/sferik/twitter).
 
-## <a id='#installation'> Installation </a>
+## <a id='installation'> Installation </a>
 
 **<a id='install-clone'> 1) Clone repository </a>**
 
