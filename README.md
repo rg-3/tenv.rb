@@ -142,8 +142,9 @@ commands, this command sleeps and resumes when rate limited by Twitter.
 belonging to a user are archived, unless the `--max` option is passed or an
 interrupt is received(`^C`) while the command runs.
 
-The following example archives the likes of [@yukihiro_matz](https://twitter.com/yukihiro_matz),
-Ruby's creator, who had 17 likes at time of writing:
+The following example archives the 10 most recent likes from
+[@yukihiro_matz](https://twitter.com/yukihiro_matz), Ruby's creator,
+who had 17 likes at time of writing:
 
     [1] twenv.rb (main)> archive-likes yukihiro_matz -m 10
     OK 10 likes archived
