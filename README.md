@@ -4,7 +4,6 @@
 
 * [Introduction](#introduction)
 * [Installation](#installation)
-* [Demo video](#screencast)
 * [Commands](#commands)
   * [write-tweet](#commands-write-a-tweet)
   * [archive-timeline](#commands-archive-a-timeline)
@@ -12,6 +11,8 @@
   * [delete-my-tweets](#commands-delete-your-tweets)
   * [delete-my-likes](#commands-delete-your-likes)
 * [Customization](#custom)
+  * [Write your own commands](#custom-write-your-own-commands)
+* [Demo video](#screencast)
 
 
 ## <a id='#introduction'> Introduction </a>
@@ -65,16 +66,6 @@ Twitter APIs.
 I recommend checking out the
 [documentation for the Twitter library](https://www.rubydoc.info/gems/twitter)
 to see what's possible.
-
-
-## <a id='screencast'>Demo video</a>
-
-I recorded a video that demos the `archive-timeline` command, I recommend
-watching it to get a feel twenv.rb and its built-in commands.
-
-<a href="https://asciinema.org/a/vPN5pnaPDX5185tQisxagsLWN" target='_blank'>
-  <img src="https://asciinema.org/a/vPN5pnaPDX5185tQisxagsLWN.svg">
-</a>
 
 ## <a id='commands'> Commands </a>
 
@@ -189,7 +180,7 @@ available. The following example demonstrates a few different scenarios:
 
 ## <a id='custom'>Customization</a>
 
-__Write your own commands__
+**1) <a id='custom-write-your-own-commands'>Write your own commands</a>**
 
 The `commands/` directory is a place where you can add Ruby scripts that will be
 loaded when twenv.rb starts. It's intended as a place you can add your own commands
@@ -217,3 +208,12 @@ class RandomTweet < TWEnv::Command
   add_command self
 end
 ```
+
+## <a id='screencast'>Demo video</a>
+
+I recorded a video that demos the `archive-timeline` command, I recommend
+watching it to get a feel twenv.rb and its built-in commands.
+
+<a href="https://asciinema.org/a/vPN5pnaPDX5185tQisxagsLWN" target='_blank'>
+  <img src="https://asciinema.org/a/vPN5pnaPDX5185tQisxagsLWN.svg">
+</a>
