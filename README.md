@@ -18,7 +18,7 @@
 * [Customization](#custom)
   * [Write your own commands](#custom-write-your-own-commands)
 * [Demo video](#screencast)
-
+* [License](#license)
 
 ## <a id='introduction'> Introduction </a>
 
@@ -222,3 +222,7 @@ watching it to get a feel for twenv.rb and its built-in commands.
 <a href="https://asciinema.org/a/vPN5pnaPDX5185tQisxagsLWN" target='_blank'>
   <img src="https://asciinema.org/a/vPN5pnaPDX5185tQisxagsLWN.svg">
 </a>
+
+## <a id='license'>License</a>
+
+MIT, see [./LICENSE.txt](./LICENSE.txt) for details.

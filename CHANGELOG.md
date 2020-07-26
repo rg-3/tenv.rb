@@ -2,7 +2,7 @@
 
 ## HEAD
 
-* Nothing yet.
+* Add `LICENSE.txt`.
 
 ## v0.5.0
 
