@@ -9,7 +9,7 @@
   * [Install dependencies](#install-deps)
   * [Start twenv.rb](#install-start-twenv.rb)
 * [The "client" local](#the-client-local)
-* [Commands](#commands)
+* [Built-in Commands](#commands)
   * [write-tweet](#commands-write-a-tweet)
   * [archive-timeline](#commands-archive-a-timeline)
   * [archive-likes](#commands-archive-likes)
@@ -72,7 +72,7 @@ I recommend checking out the
 [documentation for the Twitter library](https://www.rubydoc.info/gems/twitter)
 to see what's possible.
 
-## <a id='commands'> Commands </a>
+## <a id='commands'> Built-in Commands </a>
 
 **<a id='commands-write-a-tweet'> 1) write-tweet</a>**
 
