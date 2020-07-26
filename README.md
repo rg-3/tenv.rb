@@ -3,7 +3,12 @@
 **Table of contents**
 
 * [Introduction](#introduction)
-* [Installation](#installation)
+* [Installation](#install)
+  * [Clone repository](#install-clone)
+  * [Setup .env file](#install-env)
+  * [Install dependencies](#install-deps)
+  * [Start twenv.rb](#install-start-twenv.rb)
+* [The "client" local](#the-client-local)
 * [Commands](#commands)
   * [write-tweet](#commands-write-a-tweet)
   * [archive-timeline](#commands-archive-a-timeline)
@@ -23,7 +28,7 @@ through its web APIs using a REPL. The environment uses the Ruby programming lan
 
 ## <a id='#installation'> Installation </a>
 
-__1. Clone__
+**<a id='install-clone'> 1) Clone repository </a>**
 
 To get started clone a copy of the twenv.rb repository.
 The installation method for this project is to clone a copy of twenv.rb and
@@ -37,7 +42,7 @@ then adopt it as your own environment.
     git checkout v0.5.0
     git checkout -b my-twenv.rb
 
-__2. Configure env__
+**2) <a id='install-env'>Setup .env file</a>**
 
 For the next step, you should copy the sample `.env` file and then update it to
 have the correct consumer keys and access tokens for your Twitter user. If you
@@ -45,19 +50,19 @@ are unfamiliar or don't have access to these yet, head over to https://developer
 
 	cp .env.sample .env
 
-__3. Install dependencies__
+**3) <a id='install-deps'>Install dependencies</a>**
 
 To install the dependencies, run the following from the root of the twenv.rb repository:
 
 	gem install -g gem.deps.rb
 
-__4. Start twenv.rb__
+**4) <a id='install-start-twenv.rb'>Start twenv.rb</a>**
 
 From the twenv.rb root:
 
 	bin/twenv.rb
 
-__5. Introducing the "client" local__
+## <a id='the-client-local'>The "client" local</a>
 
 Once twenv.rb starts you'll have access to a `client` local. It returns an instance
 of `Twitter::REST::Client`, from there you can play around with numerous
