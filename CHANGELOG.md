@@ -2,6 +2,10 @@
 
 ## HEAD
 
+* Nothing yet.
+
+## v0.5.0
+
 * Log Interrupt errors to `Command#line`.
 
 * Add `Line#{ok,warn,error}`.
