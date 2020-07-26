@@ -1,6 +1,6 @@
 # twenv.rb
 
-**Table of contents**
+**<a id='toc'>Table of contents</a>**
 
 * [Introduction](#introduction)
 * [Installation](#install)
@@ -25,9 +25,9 @@
 
 twenv.rb provides a Twitter environment where you can interact with Twitter
 through its web APIs using a REPL. The environment uses the Ruby programming language,
-[Pry](https://github.com/pry/pry#readme) and the [Twitter library](https://github.com/sferik/twitter).
+[Pry](https://github.com/pry/pry#toc) and the [Twitter library](https://github.com/sferik/twitter).
 
-[Back to top](#readme)
+[Back to top](#toc)
 
 ## <a id='installation'> Installation </a>
 
@@ -45,7 +45,7 @@ then adopt it as your own environment.
     git checkout v0.5.0
     git checkout -b my-twenv.rb
 
-[Back to top](#readme)
+[Back to top](#toc)
 
 **2) <a id='install-env'>Setup .env file</a>**
 
@@ -55,7 +55,7 @@ are unfamiliar or don't have access to these yet, head over to https://developer
 
 	cp .env.sample .env
 
-[Back to top](#readme)
+[Back to top](#toc)
 
 **3) <a id='install-deps'>Install dependencies</a>**
 
@@ -63,7 +63,7 @@ To install the dependencies, run the following from the root of the twenv.rb rep
 
 	gem install -g gem.deps.rb
 
-[Back to top](#readme)
+[Back to top](#toc)
 
 **4) <a id='install-start-twenv.rb'>Start twenv.rb</a>**
 
@@ -71,7 +71,7 @@ From the twenv.rb root:
 
 	bin/twenv.rb
 
-[Back to top](#readme)
+[Back to top](#toc)
 
 ## <a id='the-client-local'>The "client" local</a>
 
@@ -80,7 +80,7 @@ of `Twitter::REST::Client`, from there you can play around with numerous
 Twitter APIs. I recommend checking out the [documentation for the Twitter library](https://www.rubydoc.info/gems/twitter)
 to see what's possible.
 
-[Back to top](#readme)
+[Back to top](#toc)
 
 ## <a id='commands'> Built-in Commands </a>
 
@@ -96,7 +96,7 @@ this can be changed in the `.env` file by setting `$EDITOR`.
 
     [1] twenv.rb (main)> write-tweet
 
-[Back to top](#readme)
+[Back to top](#toc)
 
 __<a id='commands-archive-a-timeline'> 2) archive-timeline</a>__
 
@@ -130,7 +130,7 @@ the `--continue` option:
     [4] twenv.rb (main)> archived_timeline.size
     => 20
 
-[Back to top](#readme)
+[Back to top](#toc)
 
 __<a id='commands-archive-likes'> 3) archive-likes</a>__
 
@@ -163,7 +163,7 @@ the `--continue` option:
     [4] twenv.rb (main)> archived_likes.size
     17
 
-[Back to top](#readme)
+[Back to top](#toc)
 
  __<a id='commands-delete-your-tweets'> 4) delete-my-tweets</a>__
 
@@ -184,7 +184,7 @@ the `--continue` option:
     # Show help
     [1] twenv.rb (main)> delete-my-tweets --help
 
-[Back to top](#readme)
+[Back to top](#toc)
 
 __<a id='commands-delete-your-likes'> 5) delete-my-likes</a>__
 
@@ -201,7 +201,7 @@ available. The following example demonstrates a few different scenarios:
     # Delete all your likes that are replies to a given username.
     [1] twenv.rb (main)> delete-my-likes --is-reply-to=username
 
-[Back to top](#readme)
+[Back to top](#toc)
 
 ## <a id='custom'>Customization</a>
 
@@ -234,7 +234,7 @@ class RandomTweet < TWEnv::Command
 end
 ```
 
-[Back to top](#readme)
+[Back to top](#toc)
 
 ## <a id='screencast'>Demo video</a>
 
@@ -247,10 +247,10 @@ watching it to get a feel for twenv.rb and its built-in commands.
 <br>
 <br>
 
-[Back to top](#readme)
+[Back to top](#toc)
 
 ## <a id='license'>License</a>
 
 MIT, see [./LICENSE.txt](./LICENSE.txt) for details.
 
-[Back to top](#readme)
+[Back to top](#toc)
