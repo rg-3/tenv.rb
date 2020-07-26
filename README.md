@@ -22,9 +22,12 @@
 
 ## <a id='introduction'> Introduction </a>
 
+
 twenv.rb provides a Twitter environment where you can interact with Twitter
 through its web APIs using a REPL. The environment uses the Ruby programming language,
 [Pry](https://github.com/pry/pry#readme) and the [Twitter library](https://github.com/sferik/twitter).
+
+[Back to top](#readme)
 
 ## <a id='installation'> Installation </a>
 
@@ -42,6 +45,8 @@ then adopt it as your own environment.
     git checkout v0.5.0
     git checkout -b my-twenv.rb
 
+[Back to top](#readme)
+
 **2) <a id='install-env'>Setup .env file</a>**
 
 For the next step, you should copy the sample `.env` file and then update it to
@@ -50,11 +55,15 @@ are unfamiliar or don't have access to these yet, head over to https://developer
 
 	cp .env.sample .env
 
+[Back to top](#readme)
+
 **3) <a id='install-deps'>Install dependencies</a>**
 
 To install the dependencies, run the following from the root of the twenv.rb repository:
 
 	gem install -g gem.deps.rb
+
+[Back to top](#readme)
 
 **4) <a id='install-start-twenv.rb'>Start twenv.rb</a>**
 
@@ -62,15 +71,16 @@ From the twenv.rb root:
 
 	bin/twenv.rb
 
+[Back to top](#readme)
+
 ## <a id='the-client-local'>The "client" local</a>
 
 Once twenv.rb starts you'll have access to a `client` local. It returns an instance
 of `Twitter::REST::Client`, from there you can play around with numerous
-Twitter APIs.
-
-I recommend checking out the
-[documentation for the Twitter library](https://www.rubydoc.info/gems/twitter)
+Twitter APIs. I recommend checking out the [documentation for the Twitter library](https://www.rubydoc.info/gems/twitter)
 to see what's possible.
+
+[Back to top](#readme)
 
 ## <a id='commands'> Built-in Commands </a>
 
@@ -85,6 +95,8 @@ editor and after you exit post your tweet. By default the `nano` editor is used,
 this can be changed in the `.env` file by setting `$EDITOR`.
 
     [1] twenv.rb (main)> write-tweet
+
+[Back to top](#readme)
 
 __<a id='commands-archive-a-timeline'> 2) archive-timeline</a>__
 
@@ -118,6 +130,8 @@ the `--continue` option:
     [4] twenv.rb (main)> archived_timeline.size
     => 20
 
+[Back to top](#readme)
+
 __<a id='commands-archive-likes'> 3) archive-likes</a>__
 
 The `archive-likes` command lets you archive a user's likes. Like other twenv.rb
@@ -149,6 +163,8 @@ the `--continue` option:
     [4] twenv.rb (main)> archived_likes.size
     17
 
+[Back to top](#readme)
+
  __<a id='commands-delete-your-tweets'> 4) delete-my-tweets</a>__
 
  The `delete-my-tweets` command can delete all your tweets, or a subset
@@ -168,6 +184,8 @@ the `--continue` option:
     # Show help
     [1] twenv.rb (main)> delete-my-tweets --help
 
+[Back to top](#readme)
+
 __<a id='commands-delete-your-likes'> 5) delete-my-likes</a>__
 
 The `delete-my-likes` command deletes all your likes, or subset of them gathered
@@ -182,6 +200,8 @@ available. The following example demonstrates a few different scenarios:
 
     # Delete all your likes that are replies to a given username.
     [1] twenv.rb (main)> delete-my-likes --is-reply-to=username
+
+[Back to top](#readme)
 
 ## <a id='custom'>Customization</a>
 
@@ -214,6 +234,8 @@ class RandomTweet < TWEnv::Command
 end
 ```
 
+[Back to top](#readme)
+
 ## <a id='screencast'>Demo video</a>
 
 I recorded a video that demos the `archive-timeline` command, I recommend
@@ -222,7 +244,13 @@ watching it to get a feel for twenv.rb and its built-in commands.
 <a href="https://asciinema.org/a/vPN5pnaPDX5185tQisxagsLWN" target='_blank'>
   <img src="https://asciinema.org/a/vPN5pnaPDX5185tQisxagsLWN.svg">
 </a>
+<br>
+<br>
+
+[Back to top](#readme)
 
 ## <a id='license'>License</a>
 
 MIT, see [./LICENSE.txt](./LICENSE.txt) for details.
+
+[Back to top](#readme)

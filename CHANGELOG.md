@@ -2,6 +2,8 @@
 
 ## HEAD
 
+* Add `Back to top` links to the README.
+
 * Add `LICENSE.txt`.
 
 ## v0.5.0
