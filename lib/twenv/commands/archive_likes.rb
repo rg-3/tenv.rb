@@ -40,14 +40,19 @@ class TWEnv::ArchiveLikes < TWEnv::Command
   private
 
   def read_tweets
-    read_and_filter method(:tweet_reader),
-                    method(:filter_archive_tweets),
+    read_and_filter method(:liked_tweets),
+                    method(:filter_likes),
                     max_id
   end
 
-  def tweet_reader
-    tweets = user_likes(user, tweet_mode: 'extended', max_id: max_id)
-    tweets.tap { self.max_id = tweets[-1]&.id }
+  def filter_likes(likes)
+    max_id = likes[-1]&.id
+    likes = filter_archive_tweets(likes)
+    likes.tap { self.max_id = max_id }
+  end
+
+  def liked_tweets
+    user_likes(user, tweet_mode: 'extended', max_id: max_id)
   end
 
   def print_total(total)

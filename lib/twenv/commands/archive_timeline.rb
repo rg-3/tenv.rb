@@ -46,22 +46,17 @@ class TWEnv::ArchiveTimeline < TWEnv::Command
   private
 
   def read_tweets
-    read_and_filter method(:tweet_reader),
+    read_and_filter method(:timeline_tweets),
                     method(:filter_tweets),
                     max_id
   end
 
-  def tweet_reader
-    tweets = user_timeline(user, tweet_mode: 'extended', max_id: max_id)
-    tweets.tap { self.max_id = tweets[-1]&.id }
-  end
-
-  def print_total(total)
-    line.rewind.ok "#{total} tweets archived"
-    throw(:cancel) if opts[:max].nonzero? && total == opts[:max]
+  def timeline_tweets
+    user_timeline(user, tweet_mode: 'extended', max_id: max_id)
   end
 
   def filter_tweets(tweets)
+    max_id = tweets[-1]&.id
     tweets = filter_archive_tweets(tweets)
     tweets.reject!(&:retweet?) if opts['no-retweets']
     tweets.select!(&:retweet?) if opts['is-retweet']
@@ -69,7 +64,12 @@ class TWEnv::ArchiveTimeline < TWEnv::Command
     tweets.reject!(&:reply?) if opts['no-replies']
     tweets.select!{|t| t.media.any?{|m| m.instance_of?(Twitter::Media::Video) } } if opts['has-video']
     tweets.reject!{|t| t.media.any?{|m| m.instance_of?(Twitter::Media::Video) } } if opts['no-video']
-    tweets
+    tweets.tap { self.max_id = max_id }
+  end
+
+  def print_total(total)
+    line.rewind.ok "#{total} tweets archived"
+    throw(:cancel) if opts[:max].nonzero? && total == opts[:max]
   end
 
   add_command self
