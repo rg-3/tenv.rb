@@ -29,7 +29,7 @@ through its web APIs using a REPL. The environment uses the Ruby programming lan
 
 [Back to top](#top)
 
-## <a id='installation'> Installation </a>
+## <a id='install'> Installation </a>
 
 **<a id='install-clone'> 1) Clone repository </a>**
 
