@@ -22,7 +22,7 @@ class TWEnv::ArchiveTimeline < TWEnv::Command
                              method(:print_total),
                              archive.map(&:id)
     line.end
-    finish_archive(path, archive, local_name: "archived_timeline")
+    complete_archive(path, archive, local_name: "archived_timeline")
   rescue TWEnv::Error::NoSuchArchiveError
     line.error("Can't continue because an archive for #{user} doesn't exist").end
   rescue Twitter::Error => ex
@@ -30,7 +30,7 @@ class TWEnv::ArchiveTimeline < TWEnv::Command
   rescue Interrupt
     line.end
     line.warn("Interrupt received").end
-    finish_archive(path, archive, local_name: "archived_timeline")
+    complete_archive(path, archive, local_name: "archived_timeline")
   end
 
   def options(slop)

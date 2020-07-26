@@ -22,7 +22,7 @@ class TWEnv::ArchiveLikes < TWEnv::Command
                              method(:print_total),
                              archive.map(&:id)
     line.end
-    finish_archive(path, archive, local_name: "archived_likes")
+    complete_archive(path, archive, local_name: "archived_likes")
   rescue TWEnv::Error::NoSuchArchiveError
     line.error("Can't continue because an archive for #{user} doesn't exist").end
   rescue Twitter::Error => ex
@@ -30,7 +30,7 @@ class TWEnv::ArchiveLikes < TWEnv::Command
   rescue Interrupt
     line.end
     line.warn("Interrupt received").end
-    finish_archive(path, archive, local_name: "archived_likes")
+    complete_archive(path, archive, local_name: "archived_likes")
   end
 
   def options(slop)

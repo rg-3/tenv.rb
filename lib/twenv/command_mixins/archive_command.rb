@@ -46,7 +46,7 @@ module TWEnv::Command::ArchiveCommand
     end
   end
 
-  def finish_archive(path, old_archive, local_name:)
+  def complete_archive(path, old_archive, local_name:)
     archive = read_archive(path)
     return if old_archive == archive
     sticky_locals.merge!(local_name => archive)
