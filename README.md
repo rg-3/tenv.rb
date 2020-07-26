@@ -212,7 +212,7 @@ end
 ## <a id='screencast'>Demo video</a>
 
 I recorded a video that demos the `archive-timeline` command, I recommend
-watching it to get a feel twenv.rb and its built-in commands.
+watching it to get a feel for twenv.rb and its built-in commands.
 
 <a href="https://asciinema.org/a/vPN5pnaPDX5185tQisxagsLWN" target='_blank'>
   <img src="https://asciinema.org/a/vPN5pnaPDX5185tQisxagsLWN.svg">
