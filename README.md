@@ -4,6 +4,7 @@
 
 * [Introduction](#introduction)
 * [Installation](#installation)
+* [Demo video](#screencast)
 * [Commands](#commands)
   * [write-tweet](#commands-write-a-tweet)
   * [archive-timeline](#commands-archive-a-timeline)
@@ -64,6 +65,16 @@ Twitter APIs.
 I recommend checking out the
 [documentation for the Twitter library](https://www.rubydoc.info/gems/twitter)
 to see what's possible.
+
+
+## <a id='screencast'>Demo video</a>
+
+I recorded a video that demos the `archive-timeline` command, I recommend
+watching it to get a feel twenv.rb and its built-in commands.
+
+<a href="https://asciinema.org/a/vPN5pnaPDX5185tQisxagsLWN" target='_blank'>
+  <img src="https://asciinema.org/a/vPN5pnaPDX5185tQisxagsLWN.svg">
+</a>
 
 ## <a id='commands'> Commands </a>
 
