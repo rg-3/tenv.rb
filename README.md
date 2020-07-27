@@ -17,7 +17,6 @@
   * [delete-my-likes](#commands-delete-your-likes)
 * [Customization](#custom)
   * [Write your own commands](#custom-write-your-own-commands)
-* [Demo video](#screencast)
 * [License](#license)
 
 ## <a id='introduction'> Introduction </a>
@@ -50,7 +49,6 @@ then adopt it as your own environment.
     git fetch --tags
     git checkout tags/v0.5.0 -b my-twenv.rb
 
-[Back to top](#top)
 
 **2) <a id='install-env'>Setup .env file</a>**
 
@@ -60,7 +58,6 @@ are unfamiliar or don't have access to these yet, head over to https://developer
 
 	cp .env.sample .env
 
-[Back to top](#top)
 
 **3) <a id='install-deps'>Install dependencies</a>**
 
@@ -68,7 +65,6 @@ To install the dependencies, run the following from the root of the twenv.rb rep
 
 	gem install -g gem.deps.rb
 
-[Back to top](#top)
 
 **4) <a id='install-start-twenv.rb'>Start twenv.rb</a>**
 
@@ -101,7 +97,6 @@ this can be changed in the `.env` file by setting `$EDITOR`.
 
     [1] twenv.rb (main)> write-tweet
 
-[Back to top](#top)
 
 __<a id='commands-archive-a-timeline'> 2) archive-timeline</a>__
 
@@ -135,8 +130,6 @@ the `--continue` option:
     [4] twenv.rb (main)> archived_timeline.size
     => 20
 
-[Back to top](#top)
-
 __<a id='commands-archive-likes'> 3) archive-likes</a>__
 
 The `archive-likes` command lets you archive a user's likes. Like other twenv.rb
@@ -169,8 +162,6 @@ the `--continue` option:
     [4] twenv.rb (main)> archived_likes.size
     17
 
-[Back to top](#top)
-
  __<a id='commands-delete-your-tweets'> 4) delete-my-tweets</a>__
 
  The `delete-my-tweets` command can delete all your tweets, or a subset
@@ -189,8 +180,6 @@ the `--continue` option:
 
     # Show help
     [1] twenv.rb (main)> delete-my-tweets --help
-
-[Back to top](#top)
 
 __<a id='commands-delete-your-likes'> 5) delete-my-likes</a>__
 
@@ -242,18 +231,6 @@ end
 
 [Back to top](#top)
 
-## <a id='screencast'>Demo video</a>
-
-I recorded a video that demos the `archive-timeline` command, I recommend
-watching it to get a feel for twenv.rb and its built-in commands.
-
-<a href="https://asciinema.org/a/vPN5pnaPDX5185tQisxagsLWN" target='_blank'>
-  <img src="https://asciinema.org/a/vPN5pnaPDX5185tQisxagsLWN.svg">
-</a>
-<br>
-<br>
-
-[Back to top](#top)
 
 ## <a id='license'>License</a>
 
