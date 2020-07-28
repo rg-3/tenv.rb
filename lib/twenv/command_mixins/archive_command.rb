@@ -3,6 +3,8 @@
 module TWEnv::Command::ArchiveCommand
   def share_archive_options(slop, object_name = :tweet)
     slop.on :m, :max=            , "The max number of #{object_name}s to archive. Default is unlimited", default: 0, as: :integer
+    slop.on "has-mentions"       , "Only archive #{object_name}s that @mention other users", default: false, as: :boolean
+    slop.on "no-mentions"        , "Only archive #{object_name}s that don't @mention other users", default: false, as: :boolean
     slop.on "has-media"          , "Only archive #{object_name}s that have media (either video or image)", default: false
     slop.on "no-media"           , "Only archive #{object_name}s that don't have media (either video or image)", default: false
     slop.on "has-links"          , "Only archive #{object_name}s that have links", default: false, as: :boolean
@@ -19,6 +21,8 @@ module TWEnv::Command::ArchiveCommand
     tweets.select! {|t| t.media.size > 0 } if opts['has-media']
     tweets.select! {|t| t.urls.empty? }    if opts['no-links']
     tweets.select! {|t| t.urls.size > 0 }  if opts['has-links']
+    tweets.select! {|t| t.user_mentions.size > 0} if opts['has-mentions']
+    tweets.select! {|t| t.user_mentions.empty?} if opts['no-mentions']
     is_reply_to_filter!(tweets)
     tweets
   end

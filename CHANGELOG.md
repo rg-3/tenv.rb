@@ -2,8 +2,10 @@
 
 ## HEAD
 
+* Add `--has-mentions`, `--no-mentions` to `archive-{timeline,likes}` commands.
+
 * Add `--is-reply-to=` option to `archive-{timeline,likes}`.
-`
+
 * Add `Back to top` links to the README.
 
 * Add `LICENSE.txt`.
