@@ -12,8 +12,8 @@ class TWEnv
   Dir[File.join(__dir__, "twenv", "commands", "*.rb")].each{|file| require_relative file}
 
   def self.start(twitter_options = {}, pry_options = {})
-    glob = File.join __dir__, '..', 'commands', '*.rb'
-    Dir[glob].each {|path| require_command(path)}
+    glob = File.join __dir__, '..', 'scripts', '*.rb'
+    Dir[glob].each {|path| require_script(path)}
     DotEnv.set_env DotEnv.read_dot_file(File.join(TWEnv.root_path, '.env'))
     Pry.start TOPLEVEL_BINDING, {
       extra_sticky_locals: {
@@ -36,13 +36,12 @@ class TWEnv
     @root_path ||= File.expand_path File.join(__dir__, "..")
   end
 
-  def self.require_command(path)
+  def self.require_script(path)
     require path
   rescue
     warn "Error while loading #{path}"
   end
-  private_class_method :require_command
-
+  private_class_method :require_script
 end
 
 Pry.configure do |config|

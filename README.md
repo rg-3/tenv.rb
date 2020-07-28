@@ -97,7 +97,6 @@ this can be changed in the `.env` file by setting `$EDITOR`.
 
     [1] twenv.rb (main)> write-tweet
 
-
 __<a id='commands-archive-a-timeline'> 2) archive-timeline</a>__
 
 The `archive-timeline` command lets you archive a user's timeline of tweets. Like
@@ -202,9 +201,9 @@ available. The following example demonstrates a few different scenarios:
 
 **1) <a id='custom-write-your-own-commands'>Write your own commands</a>**
 
-The `commands/` directory is a place where you can add Ruby scripts that will be
-loaded when twenv.rb starts. It's intended as a place you can add your own commands
-and scripts that can be kept outside version control.
+The `scripts/` directory is a place where you can add Ruby scripts that will be
+loaded when twenv.rb starts. It's intended as a place you can add your own
+commands and scripts that can be kept outside version control.
 
 The [twenv.rb command class](https://github.com/rg-3/tenv.rb/blob/master/lib/twenv/command.rb)
 inherits from the Pry command class and implements useful methods such as `client`. The following

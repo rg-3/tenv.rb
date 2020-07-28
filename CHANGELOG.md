@@ -2,6 +2,8 @@
 
 ## HEAD
 
+* Rename `./commands` to `./scripts`.
+
 * Add `--has-mentions`, `--no-mentions` to `archive-{timeline,likes}` commands.
 
 * Add `--is-reply-to=` option to `archive-{timeline,likes}`.
