@@ -3,6 +3,15 @@ class TWEnv::WriteTweet < TWEnv::Command
   description "Write a tweet"
   group 'twenv'
   command_options storage: true
+  banner <<-BANNER
+  write-tweet [OPTIONS]
+
+  #{description}
+  BANNER
+
+  def options(slop)
+    slop.on :d, :delay=, 'Delay sending a tweet by a number of seconds', as: :integer, default: 0
+  end
 
   def options(slop)
     slop.on :d, :delay=, 'Delay sending a tweet by X seconds', as: :integer, default: 0
@@ -23,7 +32,9 @@ class TWEnv::WriteTweet < TWEnv::Command
   end
 
   def delay_tweet(tweet)
-    line.ok("tweet will be published in #{delay} seconds").end
+    time = Time.now + delay
+    line.ok("tweet will be published at around #{bold(time.iso8601)}, " \
+            "as long as this twenv.rb process does not exit").end
     Thread.new do
       sleep delay
       post_tweet(tweet, false)
