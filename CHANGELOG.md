@@ -2,6 +2,8 @@
 
 ## HEAD
 
+* Add `--delay` option to `write-tweet`.
+
 * Add `TWEnv::Command#pager`.
 
 * Rename `./commands` to `./scripts`.
