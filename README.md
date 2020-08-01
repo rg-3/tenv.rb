@@ -167,7 +167,7 @@ __4) <a id='commands-read-links'>read-links</a>__
 The `read-links` command lets you page through the external links being
 shared on your home timeline or the timeline of a user. The hope is that
 this command can reduce noise and enable you to discover new content to read
-instead of idling on Twitter. There's a [demo video](https://asciinema.org/a/bLqkauXuAch91HKopq7Fl0Lph)
+instead of idling on Twitter. There's a [demo video](https://asciinema.org/a/oD6nZ0830FVeQ7X10uUAHCa3Z)
 to watch for this command.
 
 The following example demonstrates the help menu:
@@ -175,10 +175,21 @@ The following example demonstrates the help menu:
     [1] twenv.rb (main)> read-links --help
     read-links [OPTIONS] [user]
 
-    Read external links from your home timeline or the timeline of a user
+    Read external links from your home timeline or the timeline of a user.
 
-        -m, --max       The max number of links to find. Default is 10
+    Examples
+
+    # Read links from the timeline of `client.user`
+    twenv.rb (main)> read-links
+
+    # Read links from @rubyinside
+    twenv.rb (main)> read-links rubyinside --max 75
+
+    Options
+
+        -m, --max       The max number of links to find. Default is 25
         -h, --help      Show this message.
+
 
 __<a id='commands-delete-your-tweets'> 5) delete-my-tweets</a>__
 

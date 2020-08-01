@@ -2,7 +2,9 @@
 
 ## HEAD
 
-* Nothing yet.
+* Change `read-links` max default from 10 tweets to 25.
+
+* Improve `read-links -h`.
 
 ## v0.6.0
 

@@ -1,11 +1,21 @@
-class TWEnv::LinksFromTimeline < TWEnv::Command
+class TWEnv::ReadLinks < TWEnv::Command
   match 'read-links'
-  description 'Read external links from your home timeline or the timeline of a user'
+  description 'Read external links from your home timeline or the timeline of a user.'
   group 'twenv'
   banner <<-BANNER
   read-links [OPTIONS] [user]
 
   #{description}
+
+  #{Paint['Examples', :bold]}
+
+  #{Paint['# Read links from the timeline of `client.user`', :italic]}
+  twenv.rb (main)> read-links
+
+  #{Paint['# Read links from @rubyinside', :italic]}
+  twenv.rb (main)> read-links rubyinside --max 75
+
+  #{Paint['Options', :bold]}
   BANNER
 
   MAX_WIDTH = 45
@@ -13,7 +23,7 @@ class TWEnv::LinksFromTimeline < TWEnv::Command
   attr_accessor :max_id, :user
 
   def options(slop)
-    slop.on :m, :max=, "The max number of links to find. Default is 10", as: :integer, default: 10
+    slop.on :m, :max=, "The max number of links to find. Default is 25", as: :integer, default: 25
   end
 
   def process(user)
