@@ -2,6 +2,10 @@
 
 ## HEAD
 
+* Nothing yet.
+
+## v0.6.0
+
 * Capitalize in the `Line#{ok,error,warn}` methods.
 
 * Add `--delay` option to `write-tweet`.

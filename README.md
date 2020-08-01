@@ -48,7 +48,7 @@ then adopt it as your own environment.
 
     # Fork a branch from the latest version of twenv.rb.
     git fetch --tags
-    git checkout tags/v0.5.0 -b my-twenv.rb
+    git checkout tags/v0.6.0 -b my-twenv.rb
 
 
 **2) <a id='install-env'>Setup .env file</a>**
