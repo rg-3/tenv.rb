@@ -14,6 +14,11 @@ module TWEnv::Command::TwitterActions
     client.user_timeline(user, options)
   end
 
+  def home_timeline(options = {})
+    options.delete(:max_id) unless options[:max_id]
+    client.home_timeline(options)
+  end
+
   #
   # @param [String] user
   #   A twitter username.

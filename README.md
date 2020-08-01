@@ -13,6 +13,7 @@
   * [write-tweet](#commands-write-a-tweet)
   * [archive-timeline](#commands-archive-a-timeline)
   * [archive-likes](#commands-archive-likes)
+  * [read-links](#commands-read-links)
   * [delete-my-tweets](#commands-delete-your-tweets)
   * [delete-my-likes](#commands-delete-your-likes)
 * [Customization](#custom)
@@ -161,12 +162,30 @@ the `--continue` option:
     [4] twenv.rb (main)> archived_likes.size
     17
 
- __<a id='commands-delete-your-tweets'> 4) delete-my-tweets</a>__
+__4) <a id='commands-read-links'>read-links</a>__
 
- The `delete-my-tweets` command can delete all your tweets, or a subset
- of them gathered by filtering. This command reads  your entire timeline; if
- there's a lot of tweets it might take a while. What follows are examples that
- demonstrate deleting all your tweets or just a subset of them:
+The `read-links` command lets you page through the external links being
+shared on your home timeline or the timeline of a user. The hope is that
+this command can reduce noise and enable you to discover new content to read
+instead of idling on Twitter. There's a [demo video](https://asciinema.org/a/bLqkauXuAch91HKopq7Fl0Lph)
+to watch for this command.
+
+The following example demonstrates the help menu:
+
+    [1] twenv.rb (main)> read-links --help
+    read-links [OPTIONS] [user]
+
+    Read external links from your home timeline or the timeline of a user
+
+        -m, --max       The max number of links to find. Default is 10
+        -h, --help      Show this message.
+
+__<a id='commands-delete-your-tweets'> 5) delete-my-tweets</a>__
+
+The `delete-my-tweets` command can delete all your tweets, or a subset
+of them gathered by filtering. This command reads  your entire timeline; if
+there's a lot of tweets it might take a while. What follows are examples that
+demonstrate deleting all your tweets or just a subset of them:
 
     # Delete all tweets
     [1] twenv.rb (main)> delete-my-tweets
@@ -180,7 +199,7 @@ the `--continue` option:
     # Show help
     [1] twenv.rb (main)> delete-my-tweets --help
 
-__<a id='commands-delete-your-likes'> 5) delete-my-likes</a>__
+__<a id='commands-delete-your-likes'> 6) delete-my-likes</a>__
 
 The `delete-my-likes` command deletes all your likes, or subset of them gathered
 by filtering . Run `delete-my-likes --help` to discover what options are
