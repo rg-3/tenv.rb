@@ -2,6 +2,8 @@
 
 ## HEAD
 
+* Capitalize in the `Line#{ok,error,warn}` methods.
+
 * Add `--delay` option to `write-tweet`.
 
 * Add `TWEnv::Command#pager`.
