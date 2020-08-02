@@ -1,6 +1,6 @@
 class TWEnv::ReadLinks < TWEnv::Command
   match 'read-links'
-  description 'Read external links from your home timeline or the timeline of a user.'
+  description 'Read tweets that include external links'
   group 'twenv'
   banner <<-BANNER
   read-links [OPTIONS] [user]

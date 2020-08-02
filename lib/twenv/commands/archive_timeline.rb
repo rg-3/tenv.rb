@@ -1,6 +1,6 @@
 class TWEnv::ArchiveTimeline < TWEnv::Command
   match 'archive-timeline'
-  description 'Archive a timeline of tweets'
+  description 'Archive tweets on a user\'s timeline'
   command_options argument_required: true, storage: true
   group 'twenv'
   banner <<-BANNER

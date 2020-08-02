@@ -175,7 +175,7 @@ The following example demonstrates the help menu:
     [1] twenv.rb (main)> read-links --help
     read-links [OPTIONS] [user]
 
-    Read external links from your home timeline or the timeline of a user.
+    Read tweets that include external links
 
     Examples
 
