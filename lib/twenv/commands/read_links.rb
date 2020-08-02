@@ -75,16 +75,12 @@ class TWEnv::ReadLinks < TWEnv::Command
       tweet.urls.each{|url| content = content.gsub(url.url.to_s, '').gsub(/\s*[-:]\s*$/, '')}
       content = "#{content[0..MAX_WIDTH-1]}..." if content.size >= MAX_WIDTH
       [
-        Paint[present_time(tweet.created_at), :bold],
+        Paint[format_time(tweet.created_at, :upcase), :bold],
         content,
         tweet.urls.map {|url| url.expanded_url.to_s }.join("\n")
       ].join("\n")
     end.join("\n\n")
     pager.page out
-  end
-
-  def present_time(time)
-    time.strftime('%d %^B %Y, %H:%M:%S (%Z)')
   end
 
   def max

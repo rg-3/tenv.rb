@@ -5,6 +5,7 @@ class TWEnv::Command < Pry::ClassCommand
   include PerformActionOnTweets
   include TwitterActions
   include FormatTweet
+  include FormatTime
   include TweetFilter
 
   def self.add_command(command)

@@ -2,6 +2,15 @@
 
 ## HEAD
 
+* TWEnv::Line: avoid `String#capitalize` because it causes a
+  mid-sentence "ALLCAPS" to be downcased.
+
+* write-tweet: show publish time in human friendly format.
+
+* Add `TWEnv::Command::FormatTime`.
+
+* read-links: show tweet time in human friendly format.
+
 * Update command descriptions.
 
 * Change `read-links` max default from 10 tweets to 25.

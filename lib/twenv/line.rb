@@ -23,15 +23,15 @@ class TWEnv::Line
   end
 
   def error(message)
-    print "#{RED_ERROR_TEXT} #{message.capitalize}"
+    print "#{RED_ERROR_TEXT} #{message[0].upcase}#{message[1..-1]}"
   end
 
   def ok(message)
-    print "#{GREEN_OK_TEXT} #{message.capitalize}"
+    print "#{GREEN_OK_TEXT} #{message[0].upcase}#{message[1..-1]}"
   end
 
   def warn(message)
-    print "#{ORANGE_WARNING_TEXT} #{message.capitalize}"
+    print "#{ORANGE_WARNING_TEXT} #{message[0].upcase}#{message[1..-1]}"
   end
 
   def end
