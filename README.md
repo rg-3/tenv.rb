@@ -167,7 +167,7 @@ __4) <a id='commands-read-links'>read-links</a>__
 The `read-links` command lets you page through the external links being
 shared on your home timeline or the timeline of a user. The hope is that
 this command can reduce noise and enable you to discover new content to read
-instead of idling on Twitter. There's a [demo video](https://asciinema.org/a/oD6nZ0830FVeQ7X10uUAHCa3Z)
+instead of idling on Twitter. There's a [demo video](https://asciinema.org/a/jEpd7pACpvH9LSYuRrs8Yqnh1)
 to watch for this command.
 
 The following example demonstrates the help menu:
@@ -179,7 +179,7 @@ The following example demonstrates the help menu:
 
     Examples
 
-    # Read links from the timeline of `client.user`
+    # Read links from the home timeline of `client.user`
     twenv.rb (main)> read-links
 
     # Read links from @rubyinside

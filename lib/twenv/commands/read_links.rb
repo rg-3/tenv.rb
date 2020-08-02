@@ -9,7 +9,7 @@ class TWEnv::ReadLinks < TWEnv::Command
 
   #{Paint['Examples', :bold]}
 
-  #{Paint['# Read links from the timeline of `client.user`', :italic]}
+  #{Paint['# Read links from the home timeline of `client.user`', :italic]}
   twenv.rb (main)> read-links
 
   #{Paint['# Read links from @rubyinside', :italic]}
@@ -18,7 +18,7 @@ class TWEnv::ReadLinks < TWEnv::Command
   #{Paint['Options', :bold]}
   BANNER
 
-  MAX_WIDTH = 45
+  MAX_WIDTH = 80
 
   attr_accessor :max_id, :user
 
@@ -71,16 +71,20 @@ class TWEnv::ReadLinks < TWEnv::Command
 
   def show_tweets(tweets)
     out = tweets.map do |tweet,index|
-      content = tweet.text.each_line.to_a[0].chomp
-      tweet.urls.each{|url| content.gsub!(url.url.to_s, url.expanded_url.to_s)}
+      content = tweet.text.each_line.to_a[0].strip
+      tweet.urls.each{|url| content = content.gsub(url.url.to_s, '').gsub(/\s*[-:]\s*$/, '')}
       content = "#{content[0..MAX_WIDTH-1]}..." if content.size >= MAX_WIDTH
       [
-        bold(tweet.created_at.iso8601),
+        Paint[present_time(tweet.created_at), :bold],
         content,
         tweet.urls.map {|url| url.expanded_url.to_s }.join("\n")
       ].join("\n")
     end.join("\n\n")
     pager.page out
+  end
+
+  def present_time(time)
+    time.strftime('%d %^B %Y, %H:%M:%S (%Z)')
   end
 
   def max
