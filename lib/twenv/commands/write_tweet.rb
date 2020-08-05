@@ -33,8 +33,8 @@ class TWEnv::WriteTweet < TWEnv::Command
 
   def delay_tweet(tweet)
     time = Time.now + delay
-    line.ok("tweet will be published at around #{bold(format_time(time, :upcase))}, " \
-            "as long as this twenv.rb process does not exit.").end
+    line.ok("tweet will be published at around #{bold(format_time(time, :upcase))}. " \
+            "If this twenv.rb process exits before then the tweet won't be published.").end
     Thread.new do
       sleep delay
       post_tweet(tweet, false)
