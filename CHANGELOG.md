@@ -2,6 +2,8 @@
 
 ## HEAD
 
+* Add bookmarking functionality to the `read-links` command.
+
 * TWEnv::Line: avoid `String#capitalize` because it causes a
   mid-sentence "ALLCAPS" to be downcased.
 

@@ -103,12 +103,12 @@ __2) <a id='commands-read-links'>read-links</a>__
 The `read-links` command lets you page through the external links being
 shared on your home timeline or the timeline of a user. The hope is that
 this command can reduce noise and enable you to discover new content to read
-instead of idling on Twitter. There's a [demo video](https://asciinema.org/a/jEpd7pACpvH9LSYuRrs8Yqnh1)
+instead of idling on Twitter. There's a [demo video](https://asciinema.org/a/YpxJ8N7AoOmlqUbzcehMBTfhk)
 to watch for this command.
 
 The following example demonstrates the help menu:
 
-    [1] twenv.rb (main)> read-links --help
+    [1] twenv.rb (main)> read-links -h
     read-links [OPTIONS] [user]
 
     Read tweets that include external links
@@ -123,8 +123,13 @@ The following example demonstrates the help menu:
 
     Options
 
-        -m, --max       The max number of links to find. Default is 25
-        -h, --help      Show this message.
+        -m, --max                  The max number of links to find. Default is 25.
+        -l, --list-bookmarks       List saved bookmarks.
+        -s, --save-bookmark        Bookmark an account to read another time.
+        -b, --bookmark             Read a bookmark by its index number.
+        -d, --delete-bookmark      Delete a bookmark by its index number.
+        -h, --help                 Show this message.
+
 
 __<a id='commands-archive-a-timeline'> 3) archive-timeline</a>__
 
