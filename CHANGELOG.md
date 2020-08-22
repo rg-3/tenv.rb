@@ -2,6 +2,10 @@
 
 ## HEAD
 
+* Nothing yet.
+
+## v0.6.1
+
 * Add bookmarking functionality to the `read-links` command.
 
 * TWEnv::Line: avoid `String#capitalize` because it causes a
