@@ -2,7 +2,7 @@
 
 ## HEAD
 
-* Nothing yet.
+* Expand `write-tweet --delay` to understand more duration syntax.
 
 ## v0.6.1
 

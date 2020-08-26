@@ -7,20 +7,35 @@ class TWEnv::WriteTweet < TWEnv::Command
   write-tweet [OPTIONS]
 
   #{description}
+
+  #{Paint['Examples', :bold]}
+
+  # Opens an editor and instantly publishes a tweet
+  write-tweet
+
+  # Delay for 60 seconds
+  write-tweet --delay 60
+
+  # Delay for 1 day
+  write-tweet --delay 1.day
+
+  # Delay for 2 days
+  write-tweet --delay 2.days
+
+  # Delay until 1:00am next occurs
+  write-tweet --delay 1:00am
   BANNER
 
-  def options(slop)
-    slop.on :d, :delay=, 'Delay sending a tweet by a number of seconds', as: :integer, default: 0
-  end
+  ONE_DAY = 3600 * 24
 
   def options(slop)
-    slop.on :d, :delay=, 'Delay sending a tweet by X seconds', as: :integer, default: 0
+    slop.on :d, :delay=, 'Delay sending a tweet', as: :string, default: '0'
   end
 
   def process
     raise Pry::CommandError, "set $EDITOR and try again" if empty?(ENV['EDITOR'])
     tweet = read_tweet
-    delay.zero? ? post_tweet(tweet) : delay_tweet(tweet)
+    opts[:delay] == "0" ? post_tweet(tweet) : delay_tweet(tweet)
   end
 
   private
@@ -32,11 +47,10 @@ class TWEnv::WriteTweet < TWEnv::Command
   end
 
   def delay_tweet(tweet)
-    time = Time.now + delay
-    line.ok("tweet will be published at around #{bold(format_time(time, :upcase))}. " \
+    line.ok("tweet will be published at around #{bold(format_time(delay_until, :upcase))}. " \
             "If this twenv.rb process exits before then the tweet won't be published.").end
     Thread.new do
-      sleep delay
+      sleep delay_until.to_i - Time.now.to_i
       post_tweet(tweet, false)
     end
   end
@@ -52,8 +66,29 @@ class TWEnv::WriteTweet < TWEnv::Command
     file.close
   end
 
-  def delay
-    opts[:delay]
+  def parse_to_time(delay)
+    if delay =~ /^\s*(\d+)\s*$/
+      Time.now + Regexp.last_match[1].to_i
+    elsif delay =~ /^\s*(\d+)\.days?\s*$/
+      days = Regexp.last_match[1].to_i
+      Time.now + (days * ONE_DAY)
+    elsif delay =~ /^\s*(\d+):(\d+)(am|pm)$/i
+      hour, minute, median = Regexp.last_match[1], Regexp.last_match[2], Regexp.last_match[3]
+      format = '%H:%M'
+      time = "#{hour}:#{minute}"
+      if median
+        time += " #{median.downcase}"
+        format += ' %p'
+      end
+      time = Time.strptime(time, format)
+      time < Time.now ? time + ONE_DAY : time
+    else
+      raise Pry::CommandError, "'#{delay}' was not understood"
+    end
+  end
+
+  def delay_until
+    parse_to_time opts[:delay]
   end
 
   def empty?(o)
