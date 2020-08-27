@@ -73,22 +73,26 @@ class TWEnv::WriteTweet < TWEnv::Command
       days = Regexp.last_match[1].to_i
       Time.now + (days * ONE_DAY)
     elsif delay =~ /^\s*(\d+):(\d+)(am|pm)$/i
-      hour, minute, median = Regexp.last_match[1], Regexp.last_match[2], Regexp.last_match[3]
-      format = '%H:%M'
-      time = "#{hour}:#{minute}"
-      if median
-        time += " #{median.downcase}"
-        format += ' %p'
-      end
-      time = Time.strptime(time, format)
-      time < Time.now ? time + ONE_DAY : time
+      parse_timestamp(Regexp.last_match[1], Regexp.last_match[2], Regexp.last_match[3])
     else
       raise Pry::CommandError, "'#{delay}' was not understood"
     end
   end
 
+  def parse_timestamp(hour, minute, median)
+    format = '%H:%M'
+    time = "#{hour}:#{minute}"
+    if median
+      time += " #{median.downcase}"
+      format += ' %p'
+    end
+    time = Time.strptime(time, format)
+    time < Time.now ? time + ONE_DAY : time
+  end
+
+
   def delay_until
-    parse_to_time opts[:delay]
+    @delay_until ||= parse_to_time(opts[:delay])
   end
 
   def empty?(o)
