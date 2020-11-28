@@ -3,7 +3,6 @@ class TWEnv
   require 'twitter'
   require 'tempfile'
   require 'paint'
-  require_relative 'twenv/dot_env'
   require_relative 'twenv/command'
   require_relative 'twenv/line'
   require_relative 'twenv/version'
@@ -14,7 +13,7 @@ class TWEnv
   def self.start(twitter_options = {}, pry_options = {})
     glob = File.join __dir__, '..', 'scripts', '*.rb'
     Dir[glob].each {|path| require_script(path)}
-    DotEnv.set_env DotEnv.read_dot_file(File.join(TWEnv.root_path, '.env'))
+    ENV.update parse_dot_file(dot_env_path)
     Pry.start TOPLEVEL_BINDING, {
       extra_sticky_locals: {
         client: Twitter::REST::Client.new { |config|
@@ -36,12 +35,29 @@ class TWEnv
     @root_path ||= File.expand_path File.join(__dir__, "..")
   end
 
-  def self.require_script(path)
-    require path
-  rescue
-    warn "Error while loading #{path}"
+  #
+  # @return [String]
+  #   Returns the path to the `.env` file.
+  #
+  def self.dot_env_path
+    File.join TWEnv.root_path, '.env'
   end
-  private_class_method :require_script
+
+  private_class_method def self.parse_dot_file(path)
+    return [] unless File.exist? path
+    Hash[
+      File.read(path).each_line.map do |line|
+        next unless line =~ /^[\w]+=[\w]+/
+        line.split(/=/, 2)
+      end.compact
+    ]
+  end
+
+  private_class_method def self.require_script(path)
+    require(path)
+  rescue => ex
+    warn "The script '#{path}' could not be loaded (#{ex.class})"
+  end
 end
 
 Pry.configure do |config|

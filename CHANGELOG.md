@@ -2,6 +2,8 @@
 
 ## HEAD
 
+* Replace `DotEnv` module with a private class method on `TWEnv`.
+
 * Rename `NoSuchArciveError` to `ArchiveNotFoundError`.
 
 * Simplify `FormatTime` module.
