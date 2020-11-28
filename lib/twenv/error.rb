@@ -1,3 +1,3 @@
 class TWEnv::Error < RuntimeError
-  NoSuchArchiveError = Class.new(self)
+  ArchiveNotFoundError = Class.new(self)
 end

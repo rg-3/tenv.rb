@@ -23,7 +23,7 @@ class TWEnv::ArchiveLikes < TWEnv::Command
                              archive.map(&:id)
     line.end
     complete_archive(path, archive, local_name: "archived_likes")
-  rescue TWEnv::Error::NoSuchArchiveError
+  rescue TWEnv::Error::ArchiveNotFoundError
     line.error("Can't continue because an archive for #{user} doesn't exist").end
   rescue Twitter::Error => ex
     line.error("#{ex.message} (#{ex.class})").end

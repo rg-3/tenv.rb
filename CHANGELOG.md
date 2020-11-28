@@ -2,6 +2,8 @@
 
 ## HEAD
 
+* Rename `NoSuchArciveError` to `ArchiveNotFoundError`.
+
 * Simplify `FormatTime` module.
 
 * Add the `--files` option to `write-tweet`. The option allows you 

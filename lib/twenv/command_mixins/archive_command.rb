@@ -35,7 +35,7 @@ module TWEnv::Command::ArchiveCommand
     tweets = JSON.parse File.read(path)
     tweets.map {|tweet| TWEnv::Struct.from_hash(tweet)}
   rescue Errno::ENOENT => ex
-    raise TWEnv::Error::NoSuchArchiveError, ex.message
+    raise TWEnv::Error::ArchiveNotFoundError, ex.message
   end
 
   def write_archive(path, tweets)
