@@ -8,10 +8,8 @@ module TWEnv::Command::FormatTime
   def format_time(time, format)
     format_string = TIME_FORMATS[format]
     if format_string.nil?
-      raise FormatNotFoundError,
-            "No time format by the name '#{format}' found"
-    end
-    if String === time
+      raise FormatNotFoundError, "No time format by the name '#{format}' was found"
+    elsif String === time
       time = Time.parse(time)
     end
     time.strftime(format_string)

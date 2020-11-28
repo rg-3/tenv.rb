@@ -2,6 +2,8 @@
 
 ## HEAD
 
+* Simplify `FormatTime` module.
+
 * Add the `--files` option to `write-tweet`. The option allows you 
   to attach files(media) to a tweet.
   
