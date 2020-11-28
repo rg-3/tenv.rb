@@ -44,7 +44,7 @@ class TWEnv
   end
 
   private_class_method def self.parse_dot_file(path)
-    return [] unless File.exist? path
+    return {} unless File.exist? path
     Hash[
       File.read(path).each_line.map do |line|
         next unless line =~ /^[\w]+=[\w]+/
