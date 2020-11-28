@@ -31,7 +31,6 @@ twenv.rb is a useful environment for learning, not only about Twitter, but
 also about Ruby and Pry. Pry allows a high degree of customization and twenv.rb
 follows that path as well.
 
-
 [Back to top](#top)
 
 ## <a id='install'> Installation </a>
@@ -97,6 +96,12 @@ editor and after you exit post your tweet. By default the `nano` editor is used,
 this can be changed in the `.env` file by setting `$EDITOR`.
 
     [1] twenv.rb (main)> write-tweet
+
+This command also supports delayed tweets via the `--delay` option, and it supports
+attaching media to a tweet with the `--files` option. For example, to delay a tweet
+by 15 minutes and attach an image, you could do this:
+
+    [1] twenv.rb (main)> write-tweet --delay #{60*15} --files ~/images/foobar.png
 
 __2) <a id='commands-read-links'>read-links</a>__
 

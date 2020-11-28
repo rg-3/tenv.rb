@@ -30,28 +30,35 @@ class TWEnv::WriteTweet < TWEnv::Command
 
   def options(slop)
     slop.on :d, :delay=, 'Delay sending a tweet', as: :string, default: '0'
+    slop.on :f, :files=, 'List of files to post with the tweet', as: :array, default: []
   end
 
   def process
     raise Pry::CommandError, "set $EDITOR and try again" if empty?(ENV['EDITOR'])
+    files = opts[:files].map{|path| File.new(File.expand_path(path), 'r')}
     tweet = read_tweet
-    opts[:delay] == "0" ? post_tweet(tweet) : delay_tweet(tweet)
+    opts[:delay] == "0" ? post_tweet(tweet, files) : delay_tweet(tweet, files)
   end
 
   private
 
-  def post_tweet(tweet, print_progress=true)
+  def post_tweet(tweet, files = [], print_progress=true)
     line.print "Posting tweet ... " if print_progress
-    client.update(tweet)
+    if files.empty?
+      client.update(tweet)
+    else
+      client.update_with_media(tweet, files)
+      files.each(&:close)
+    end
     line.print("Done.").end if print_progress
   end
 
-  def delay_tweet(tweet)
+  def delay_tweet(tweet, files)
     line.ok("tweet will be published at around #{bold(format_time(delay_until, :upcase))}. " \
             "If this twenv.rb process exits before then the tweet won't be published.").end
     Thread.new do
       sleep delay_until.to_i - Time.now.to_i
-      post_tweet(tweet, false)
+      post_tweet(tweet, files, false)
     end
   end
 

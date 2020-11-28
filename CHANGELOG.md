@@ -2,6 +2,9 @@
 
 ## HEAD
 
+* Add the `--files` option to `write-tweet`. The option allows you 
+  to attach files(media) to a tweet.
+  
 * Expand `write-tweet --delay` to understand more duration syntax.
 
 ## v0.6.1
