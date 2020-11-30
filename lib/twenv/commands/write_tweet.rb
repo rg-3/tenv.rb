@@ -65,6 +65,7 @@ class TWEnv::WriteTweet < TWEnv::Command
   def read_tweet
     file = Tempfile.new 'twenv', storage_path
     system ENV['EDITOR'], file.path
+    raise Pry::CommandError, "editor failed with exit code #{$?.exitstatus}" if !$?.success?
     tweet = file.read
     raise Pry::CommandError, "tweet content is empty" if empty?(tweet)
     tweet

@@ -2,6 +2,8 @@
 
 ## HEAD
 
+* Catch editor failure and report it as an error.
+
 * Replace `DotEnv` module with a private class method on `TWEnv`.
 
 * Rename `NoSuchArciveError` to `ArchiveNotFoundError`.

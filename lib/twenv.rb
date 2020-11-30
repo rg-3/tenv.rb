@@ -48,7 +48,7 @@ class TWEnv
     Hash[
       File.read(path).each_line.map do |line|
         next unless line =~ /^[\w]+=[\w]+/
-        line.split(/=/, 2)
+        line.strip.split(/=/, 2)
       end.compact
     ]
   end
