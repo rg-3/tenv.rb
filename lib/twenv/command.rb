@@ -8,6 +8,8 @@ class TWEnv::Command < Pry::ClassCommand
   include FormatTime
   include TweetFilter
 
+  slop_options strict: true
+
   def self.add_command(command)
     Pry.commands.add_command command
   end

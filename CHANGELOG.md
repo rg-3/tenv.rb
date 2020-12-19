@@ -2,6 +2,13 @@
 
 ## HEAD
 
+* Implement strict option parsing within Pry. This means unknown 
+  option switches will raise an error when passed to a twenv.rb
+  command.  
+
+* Monkey-patch `Pry::ClassCommand` to support receiving Slop options
+  via `Pry::ClassCommand.slop_options`.
+
 * Catch editor failure and report it as an error.
 
 * Replace `DotEnv` module with a private class method on `TWEnv`.

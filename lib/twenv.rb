@@ -3,6 +3,7 @@ class TWEnv
   require 'twitter'
   require 'tempfile'
   require 'paint'
+  require_relative 'twenv/pry/class_command'
   require_relative 'twenv/command'
   require_relative 'twenv/line'
   require_relative 'twenv/version'
