@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class TWEnv::Line
-  DESTRUCTIVE_BACKSPACE = "\b \b"
   RED_ERROR = Paint["ERR", "#CC0000", :bright]
   GREEN_OK  = Paint["OK", "#00FF00", :bright]
   ORANGE_WARNING = Paint["WARN", "#FFA500", :bright]
@@ -40,7 +39,7 @@ class TWEnv::Line
   end
 
   def rewind
-    @io.print DESTRUCTIVE_BACKSPACE * @size
+    @io.print "\b \b" * @size
     self
   end
 end
