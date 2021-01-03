@@ -16,14 +16,20 @@ class TWEnv::WriteTweet < TWEnv::Command
   # Delay for 60 seconds
   write-tweet --delay 60
 
+  # Delay for 5 hours
+  write-tweet --delay 5.hours
+
   # Delay for 1 day
   write-tweet --delay 1.day
 
   # Delay for 2 days
   write-tweet --delay 2.days
 
-  # Delay until 1:00am next occurs
+  # Delay using a 12-hour clock
   write-tweet --delay 1:00am
+
+  # Delay using a 24-hour clock
+  write-tweet --delay 19:00
   BANNER
 
   ONE_DAY = 3600 * 24
@@ -36,8 +42,9 @@ class TWEnv::WriteTweet < TWEnv::Command
   def process
     raise Pry::CommandError, "set $EDITOR and try again" if empty?(ENV['EDITOR'])
     files = opts[:files].map{|path| File.new(File.expand_path(path), 'r')}
+    delay = parse_delay_option(opts[:delay])
     tweet = read_tweet
-    opts[:delay] == "0" ? post_tweet(tweet, files) : delay_tweet(tweet, files)
+    Time.now >= delay ? post_tweet(tweet, files) : delay_tweet(tweet, files, delay)
   end
 
   private
@@ -53,7 +60,7 @@ class TWEnv::WriteTweet < TWEnv::Command
     line.print("Done.").end if print_progress
   end
 
-  def delay_tweet(tweet, files)
+  def delay_tweet(tweet, files, delay_until)
     line.ok("tweet will be published at around #{bold(format_time(delay_until, :upcase))}. " \
             "If this twenv.rb process exits before then the tweet won't be published.").end
     Thread.new do
@@ -74,33 +81,32 @@ class TWEnv::WriteTweet < TWEnv::Command
     file.close
   end
 
-  def parse_to_time(delay)
-    if delay =~ /^\s*(\d+)\s*$/
+  def parse_delay_option(delay)
+    case delay
+    when /^\s*(\d+)\s*$/
       Time.now + Regexp.last_match[1].to_i
-    elsif delay =~ /^\s*(\d+)\.days?\s*$/
-      days = Regexp.last_match[1].to_i
-      Time.now + (days * ONE_DAY)
-    elsif delay =~ /^\s*(\d+):(\d+)(am|pm)$/i
-      parse_timestamp(Regexp.last_match[1], Regexp.last_match[2], Regexp.last_match[3])
+    when /^\s*(\d+)\.hours?\s*$/
+      Time.now + (Regexp.last_match[1].to_i * 3600)
+    when /^\s*(\d+)\.days?\s*$/
+      Time.now + (Regexp.last_match[1].to_i * ONE_DAY)
+    when /^\s*(\d+):(\d+)(am|pm)?$/i
+      make_time(Regexp.last_match[1], Regexp.last_match[2], Regexp.last_match[3])
     else
-      raise Pry::CommandError, "'#{delay}' was not understood"
+      raise Pry::CommandError, "The --delay option is not valid"
     end
   end
 
-  def parse_timestamp(hour, minute, median)
-    format = '%H:%M'
-    time = "#{hour}:#{minute}"
+  def make_time(hour, minute, median)
     if median
-      time += " #{median.downcase}"
-      format += ' %p'
+      # 12 hour clock
+      time_obj = Time.strptime("#{hour}:#{minute} #{median.downcase}", "%I:%M %P")
+    else
+      # 24 hour clock
+      time_obj = Time.strptime("#{hour}:#{minute}", "%H:%M", "%k:%M")
     end
-    time = Time.strptime(time, format)
-    time < Time.now ? time + ONE_DAY : time
-  end
-
-
-  def delay_until
-    @delay_until ||= parse_to_time(opts[:delay])
+    time_obj < Time.now ? time_obj + ONE_DAY : time_obj
+  rescue ArgumentError
+    raise Pry::CommandError, "The --delay option couldn't be parsed into a Time object"
   end
 
   def empty?(o)

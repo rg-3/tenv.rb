@@ -2,6 +2,14 @@
 
 ## HEAD
 
+* The `write-tweet` --delay option is parsed before you write a tweet 
+  to catch errors early.
+
+* The `write-tweet` --delay option now understands the 24hour clock, 
+  in addition to the 12hour clock.
+
+* The `write-tweet` --delay option now understands `X.hours` syntax.
+
 * Implement strict option parsing within Pry. This means unknown 
   option switches will raise an error when passed to a twenv.rb
   command.  
