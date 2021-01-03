@@ -102,7 +102,7 @@ class TWEnv::WriteTweet < TWEnv::Command
       time_obj = Time.strptime("#{hour}:#{minute} #{median.downcase}", "%I:%M %P")
     else
       # 24 hour clock
-      time_obj = Time.strptime("#{hour}:#{minute}", "%H:%M", "%k:%M")
+      time_obj = Time.strptime("#{hour}:#{minute}", "%H:%M")
     end
     time_obj < Time.now ? time_obj + ONE_DAY : time_obj
   rescue ArgumentError
