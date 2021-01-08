@@ -2,7 +2,10 @@
 
 ## HEAD
 
-* Add `--is-reply-to=` option to the `delete-my-tweets` command.
+* Extend filters understood by the `delete-my-tweets` command to include 
+  `--has-media`, `--no-media`, `--has-likes` and `--has-outbound-links`.
+
+* Add `--is-reply-to=` filter option to the `delete-my-tweets` command.
 
 * The `write-tweet` --delay option is parsed before you write a tweet 
   to catch errors early.

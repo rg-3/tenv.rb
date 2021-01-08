@@ -23,7 +23,7 @@ module TWEnv::Command::ArchiveCommand
     tweets.select! {|t| t.urls.size > 0 }  if opts['has-links']
     tweets.select! {|t| t.user_mentions.size > 0} if opts['has-mentions']
     tweets.select! {|t| t.user_mentions.empty?} if opts['no-mentions']
-    is_reply_to_filter!(tweets)
+    is_reply_to_filter!(tweets, opts['is-reply-to'])
     tweets
   end
 

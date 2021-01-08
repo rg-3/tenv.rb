@@ -11,9 +11,13 @@ class TWEnv::DeleteMyTweets < TWEnv::Command
   attr_accessor :max_id
 
   def options(slop)
+    slop.on 'has-likes'     , "Only delete tweets with likes", as: :boolean, default: false
     slop.on 'has-no-likes'  , "Only delete tweets with no likes", as: :boolean, default: false
     slop.on 'is-reply'      , "Only delete tweets that are replies", as: :boolean, default: false
     slop.on 'is-reply-to='  , "Only delete tweets that are a reply to the given username", as: :string, default: nil
+    slop.on "has-media"     , "Only delete tweets that have media (either video or image)", default: false
+    slop.on "no-media"      , "Only delete tweets that don't have media (either video or image)", default: false
+    slop.on "has-outbound-links" , "Only delete tweets that link to somewhere outside Twitter", default: false, as: :boolean
   end
 
   def process
@@ -43,6 +47,10 @@ class TWEnv::DeleteMyTweets < TWEnv::Command
     tweets = tweets.dup
     tweets.select!(&:reply?) if opts['is-reply'] || opts['is-reply-to']
     tweets.select! {|tweet| tweet.favorite_count.zero?} if opts['has-no-likes']
+    tweets.select! {|tweet| tweet.favorite_count > 0 } if opts['has-likes']
+    tweets.select! {|t| t.media.empty? }   if opts['no-media']
+    tweets.select! {|t| t.media.size > 0 } if opts['has-media']
+    tweets.select! {|t| t.urls.any? { |url| url.expanded_url.host != 'twitter.com' } } if opts['has-outbound-links']
     is_reply_to_filter!(tweets, opts['is-reply-to'])
     tweets
   end
