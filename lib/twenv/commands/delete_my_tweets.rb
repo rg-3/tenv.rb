@@ -11,8 +11,9 @@ class TWEnv::DeleteMyTweets < TWEnv::Command
   attr_accessor :max_id
 
   def options(slop)
-    slop.on 'has-no-likes' , "Only delete tweets with no likes", as: :boolean, default: false
-    slop.on 'is-reply'     , "Only delete tweets that are replies", as: :boolean, default: false
+    slop.on 'has-no-likes'  , "Only delete tweets with no likes", as: :boolean, default: false
+    slop.on 'is-reply'      , "Only delete tweets that are replies", as: :boolean, default: false
+    slop.on 'is-reply-to='  , "Only delete tweets that are a reply to the given username", as: :string, default: nil
   end
 
   def process
@@ -40,8 +41,9 @@ class TWEnv::DeleteMyTweets < TWEnv::Command
 
   def filter_tweets(tweets)
     tweets = tweets.dup
-    tweets.select!(&:reply?) if opts['is-reply']
+    tweets.select!(&:reply?) if opts['is-reply'] || opts['is-reply-to']
     tweets.select! {|tweet| tweet.favorite_count.zero?} if opts['has-no-likes']
+    is_reply_to_filter!(tweets, opts['is-reply-to'])
     tweets
   end
 

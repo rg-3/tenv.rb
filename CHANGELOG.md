@@ -2,6 +2,8 @@
 
 ## HEAD
 
+* Add `--is-reply-to=` option to the `delete-my-tweets` command.
+
 * The `write-tweet` --delay option is parsed before you write a tweet 
   to catch errors early.
 
