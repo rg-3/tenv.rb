@@ -2,6 +2,8 @@
 
 ## HEAD
 
+* Add `--in-reply-to=` option to the `write-tweet` command.
+
 * Extend filters understood by the `delete-my-tweets` command to include 
   `--has-media`, `--no-media`, `--has-likes` and `--has-outbound-links`.
 
