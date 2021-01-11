@@ -37,35 +37,45 @@ class TWEnv::WriteTweet < TWEnv::Command
   def options(slop)
     slop.on :d, :delay=, 'Delay sending a tweet', as: :string, default: '0'
     slop.on :f, :files=, 'List of files to post with the tweet', as: :array, default: []
+    slop.on :r, 'in-reply-to=', 'Write a reply to the given tweet', as: :boolean, default: nil
   end
 
   def process
     raise Pry::CommandError, "set $EDITOR and try again" if empty?(ENV['EDITOR'])
     files = opts[:files].map{|path| File.new(File.expand_path(path), 'r')}
     delay = parse_delay_option(opts[:delay])
-    tweet = read_tweet
-    Time.now >= delay ? post_tweet(tweet, files) : delay_tweet(tweet, files, delay)
+    tweet, options = parse_reply_to_option(read_tweet, opts['in-reply-to'])
+    Time.now >= delay ? post_tweet(tweet, files, options) : delay_tweet(tweet, files, options, delay)
   end
 
   private
 
-  def post_tweet(tweet, files = [], print_progress=true)
+  def parse_reply_to_option(tweet, reply_to)
+    return [tweet, {}] unless reply_to
+    status   = client.status(reply_to)
+    author   = "@#{status.user.screen_name}"
+    mentions = status.user_mentions.map {|u| "@#{u.screen_name}" }.join(' ')
+    tweet = "#{author} #{mentions} #{tweet}"
+    [tweet, {in_reply_to_status: status}]
+  end
+
+  def post_tweet(tweet, files, options, print_progress=true)
     line.print "Posting tweet ... " if print_progress
     if files.empty?
-      client.update(tweet)
+      client.update(tweet, options)
     else
-      client.update_with_media(tweet, files)
+      client.update_with_media(tweet, files, options)
       files.each(&:close)
     end
     line.print("Done.").end if print_progress
   end
 
-  def delay_tweet(tweet, files, delay_until)
+  def delay_tweet(tweet, files, options, delay_until)
     line.ok("tweet will be published at around #{bold(format_time(delay_until, :upcase))}. " \
             "If this twenv.rb process exits before then the tweet won't be published.").end
     Thread.new do
       sleep delay_until.to_i - Time.now.to_i
-      post_tweet(tweet, files, false)
+      post_tweet(tweet, files, options, false)
     end
   end
 
