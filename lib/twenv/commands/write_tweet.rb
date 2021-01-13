@@ -35,17 +35,22 @@ class TWEnv::WriteTweet < TWEnv::Command
   ONE_DAY = 3600 * 24
 
   def options(slop)
-    slop.on :d, :delay=, 'Delay sending a tweet', as: :string, default: '0'
-    slop.on :f, :files=, 'List of files to post with the tweet', as: :array, default: []
-    slop.on :r, 'in-reply-to=', 'Write a reply to the given tweet', as: :boolean, default: nil
+    slop.on :d, :delay=         , 'Delay sending a tweet', as: :string, default: '0'
+    slop.on :f, :files=         , 'List of files to post with the tweet', as: :array, default: []
+    slop.on :r, 'in-reply-to='  , 'Write a reply to the given tweet', as: :boolean, default: nil
+    slop.on :s, 'show-schedule' , 'Show at what time delayed tweet(s) are scheduled to be published', as: :boolean, default: nil
   end
 
   def process
     raise Pry::CommandError, "set $EDITOR and try again" if empty?(ENV['EDITOR'])
-    files = opts[:files].map{|path| File.new(File.expand_path(path), 'r')}
-    delay = parse_delay_option(opts[:delay])
-    tweet, options = parse_reply_to_option(read_tweet, opts['in-reply-to'])
-    Time.now >= delay ? post_tweet(tweet, files, options) : delay_tweet(tweet, files, options, delay)
+    if opts['show-schedule']
+      show_schedule
+    else
+      files = opts[:files].map{|path| File.new(File.expand_path(path), 'r')}
+      delay = parse_delay_option(opts[:delay])
+      tweet, options = parse_reply_to_option(read_tweet, opts['in-reply-to'])
+      Time.now >= delay ? post_tweet(tweet, files, options) : delay_tweet(tweet, files, options, delay)
+    end
   end
 
   private
@@ -73,10 +78,11 @@ class TWEnv::WriteTweet < TWEnv::Command
   def delay_tweet(tweet, files, options, delay_until)
     line.ok("tweet will be published at around #{bold(format_time(delay_until, :upcase))}. " \
             "If this twenv.rb process exits before then the tweet won't be published.").end
-    Thread.new do
+    thr = Thread.new do
       sleep delay_until.to_i - Time.now.to_i
       post_tweet(tweet, files, options, false)
     end
+    schedule[delay_until] = thr
   end
 
   def read_tweet
@@ -106,6 +112,20 @@ class TWEnv::WriteTweet < TWEnv::Command
     end
   end
 
+  def show_schedule
+    if schedule.empty?
+      pager.page "There are no delayed tweets scheduled to be published"
+    else
+      pager.page [
+        bold("SCHEDULED TWEETS"),
+        schedule
+          .each_key
+          .map
+          .with_index(1) {|k, i| format "%{index} %{time}", index: blue(bold("##{i}")), time: bold(format_time(k, :upcase)) }
+      ].flatten.join("\n")
+    end
+  end
+
   def make_time(hour, minute, median)
     if median
       # 12 hour clock
@@ -121,6 +141,14 @@ class TWEnv::WriteTweet < TWEnv::Command
 
   def empty?(o)
     o.nil? || o.strip.empty?
+  end
+
+  def schedule
+    state[:schedule]
+  end
+
+  def state
+    super[:write_tweets] ||= {schedule: {}}
   end
 
   add_command self
