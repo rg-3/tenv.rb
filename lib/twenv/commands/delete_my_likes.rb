@@ -12,7 +12,7 @@ class TWEnv::DeleteMyLikes < TWEnv::Command
 
   def options(slop)
     slop.on 'is-reply'      , "Only delete likes that are replies", as: :boolean, default: false
-    slop.on 'no-replies'    , "Only delete likes that are not replies", as: :boolean, default: false
+    slop.on 'is-not-reply'  , "Only delete likes that are not replies", as: :boolean, default: false
     slop.on 'is-reply-to='  , "Only delete likes that are a reply to the given username", as: :string, default: nil
   end
 
@@ -38,7 +38,7 @@ class TWEnv::DeleteMyLikes < TWEnv::Command
     tweets = tweets.dup
     max_id = tweets[-1]&.id
     tweets.select!(&:reply?) if opts['is-reply'] || opts['is-reply-to']
-    tweets.reject!(&:reply?) if opts['no-replies']
+    tweets.reject!(&:reply?) if opts['is-not-reply']
     is_reply_to_filter!(tweets, opts['is-reply-to'])
     tweets.tap{ self.max_id = max_id }
   end

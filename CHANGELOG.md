@@ -2,6 +2,10 @@
 
 ## HEAD
 
+* Update the `delete-my-likes` `--no-replies` option to be `--is-not-reply`.
+
+* Add `--is-not-reply` option to `delete-my-tweets`.
+
 * Add `--in-reply-to=` option to the `write-tweet` command.
 
 * Extend filters understood by the `delete-my-tweets` command to include 
