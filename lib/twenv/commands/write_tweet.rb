@@ -81,6 +81,8 @@ class TWEnv::WriteTweet < TWEnv::Command
     thr = Thread.new do
       sleep delay_until.to_i - Time.now.to_i
       post_tweet(tweet, files, options, false)
+    ensure
+      schedule.delete(delay_until)
     end
     schedule[delay_until] = thr
   end
