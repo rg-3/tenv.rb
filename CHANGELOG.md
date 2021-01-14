@@ -2,6 +2,10 @@
 
 ## HEAD
 
+* Nothing so far.
+
+## v0.7.0
+
 * Add the `--show-schedule` option to `write-tweet` command.
 
 * Update the `delete-my-likes` `--no-replies` option to be `--is-not-reply`.
