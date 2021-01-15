@@ -2,7 +2,11 @@
 
 ## HEAD
 
-* Add `--delay-date` option to the `write-tweet` command.
+* Add `TWEnv::WriteTweet::DelayedTweet` struct.
+
+* Add `TWENV::Line#info`.
+
+* Add `--delay-date`, `--cancel` options to the `write-tweet` command.
 
 ## v0.7.0
 
