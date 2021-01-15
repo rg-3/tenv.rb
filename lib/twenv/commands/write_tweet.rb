@@ -36,7 +36,7 @@ class TWEnv::WriteTweet < TWEnv::Command
   BANNER
 
   DelayedTweet = Struct.new(:publish_at, :thr, :scheduled_tweets) do
-    def cancel!
+    def abort
       scheduled_tweets.delete(self)
       thr.kill
     end
@@ -97,7 +97,7 @@ class TWEnv::WriteTweet < TWEnv::Command
       post_tweet(tweet, files, options, false)
     ensure
       tweet = scheduled_tweets.find{|tweet| tweet.thr == thr}
-      tweet.cancel! if tweet
+      tweet.abort if tweet
     end
     scheduled_tweets.push DelayedTweet.new(delay_until, thr, scheduled_tweets)
   end
@@ -149,7 +149,7 @@ class TWEnv::WriteTweet < TWEnv::Command
       .find
       .with_index(1) { |_, index| index == cancel_index }
     if tweet
-      tweet.cancel!
+      tweet.abort
       line.ok("The delayed tweet was successfully cancelled and will not be published").end
     else
       line.error("A delayed tweet at the given index was not found").end
