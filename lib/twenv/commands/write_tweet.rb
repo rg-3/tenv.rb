@@ -37,8 +37,8 @@ class TWEnv::WriteTweet < TWEnv::Command
 
   DelayedTweet = Struct.new(:publish_at, :thr, :scheduled_tweets) do
     def cancel!
-      thr.kill
       scheduled_tweets.delete(self)
+      thr.kill
     end
   end
 
