@@ -4,6 +4,7 @@ class TWEnv::Line
   RED_ERROR = Paint["ERR", "#CC0000", :bright]
   GREEN_OK  = Paint["OK", "#00FF00", :bright]
   ORANGE_WARNING = Paint["WARN", "#FFA500", :bright]
+  BLUE_INFO = Paint["INFO", "#113DE0", :bright]
 
   def initialize(io)
     @io = io
@@ -31,6 +32,10 @@ class TWEnv::Line
 
   def warn(message)
     print "#{ORANGE_WARNING} #{message[0].upcase}#{message[1..-1]}"
+  end
+
+  def info(message)
+    print "#{BLUE_INFO} #{message[0].upcase}#{message[1..-1]}"
   end
 
   def end
