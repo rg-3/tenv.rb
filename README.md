@@ -13,9 +13,9 @@
   * [write-tweet](#commands-write-a-tweet)
   * [archive-timeline](#commands-archive-a-timeline)
   * [archive-likes](#commands-archive-likes)
-  * [read-links](#commands-read-links)
   * [delete-my-tweets](#commands-delete-your-tweets)
   * [delete-my-likes](#commands-delete-your-likes)
+  * [read-links](#commands-read-links)
 * [Customization](#custom)
   * [Write your own commands](#custom-write-your-own-commands)
 * [License](#license)
@@ -103,40 +103,9 @@ by 15 minutes and attach an image, you could do this:
 
     [1] twenv.rb (main)> write-tweet --delay #{60*15} --files ~/images/foobar.png
 
-__2) <a id='commands-read-links'>read-links</a>__
+Check out `write-tweet --help` for a complete overview of what this command can do.
 
-The `read-links` command lets you page through the external links being
-shared on your home timeline or the timeline of a user. The hope is that
-this command can reduce noise and enable you to discover new content to read
-instead of idling on Twitter. There's a [demo video](https://asciinema.org/a/YpxJ8N7AoOmlqUbzcehMBTfhk)
-to watch for this command.
-
-The following example demonstrates the help menu:
-
-    [1] twenv.rb (main)> read-links -h
-    read-links [OPTIONS] [user]
-
-    Read tweets that include external links
-
-    Examples
-
-    # Read links from the home timeline of `client.user`
-    twenv.rb (main)> read-links
-
-    # Read links from @rubyinside
-    twenv.rb (main)> read-links rubyinside --max 75
-
-    Options
-
-        -m, --max                  The max number of links to find. Default is 25.
-        -l, --list-bookmarks       List saved bookmarks.
-        -s, --save-bookmark        Bookmark an account to read another time.
-        -b, --bookmark             Read a bookmark by its index number.
-        -d, --delete-bookmark      Delete a bookmark by its index number.
-        -h, --help                 Show this message.
-
-
-__<a id='commands-archive-a-timeline'> 3) archive-timeline</a>__
+__<a id='commands-archive-a-timeline'> 2) archive-timeline</a>__
 
 The `archive-timeline` command lets you archive a user's timeline of tweets. Like
 other twenv.rb commands, this command sleeps and resumes when rate limited by
@@ -168,7 +137,7 @@ the `--continue` option:
     [4] twenv.rb (main)> archived_timeline.size
     => 20
 
-__<a id='commands-archive-likes'> 4) archive-likes</a>__
+__<a id='commands-archive-likes'> 3) archive-likes</a>__
 
 The `archive-likes` command lets you archive a user's likes. Like other twenv.rb
 commands, this command sleeps and resumes when rate limited by Twitter.
@@ -200,7 +169,7 @@ the `--continue` option:
     [4] twenv.rb (main)> archived_likes.size
     17
 
-__<a id='commands-delete-your-tweets'> 5) delete-my-tweets</a>__
+__<a id='commands-delete-your-tweets'> 4) delete-my-tweets</a>__
 
 The `delete-my-tweets` command can delete all your tweets, or a subset
 of them gathered by filtering. This command reads  your entire timeline; if
@@ -219,7 +188,7 @@ demonstrate deleting all your tweets or just a subset of them:
     # Show help
     [1] twenv.rb (main)> delete-my-tweets --help
 
-__<a id='commands-delete-your-likes'> 6) delete-my-likes</a>__
+__<a id='commands-delete-your-likes'> 5) delete-my-likes</a>__
 
 The `delete-my-likes` command deletes all your likes, or subset of them gathered
 by filtering . Run `delete-my-likes --help` to discover what options are
@@ -233,6 +202,36 @@ available. The following example demonstrates a few different scenarios:
 
     # Delete all your likes that are replies to a given username.
     [1] twenv.rb (main)> delete-my-likes --is-reply-to=username
+
+__<a id='commands-read-links'>6) read-links</a>__
+
+The `read-links` command lets you page through the external links being
+shared on your home timeline or the timeline of a user. 
+
+The following example demonstrates the help menu:
+
+    [1] twenv.rb (main)> read-links -h
+    read-links [OPTIONS] [user]
+
+    Read tweets that include external links
+
+    Examples
+
+    # Read links from the home timeline of `client.user`
+    twenv.rb (main)> read-links
+
+    # Read links from @rubyinside
+    twenv.rb (main)> read-links rubyinside --max 75
+
+    Options
+
+        -m, --max                  The max number of links to find. Default is 25.
+        -l, --list-bookmarks       List saved bookmarks.
+        -s, --save-bookmark        Bookmark an account to read another time.
+        -b, --bookmark             Read a bookmark by its index number.
+        -d, --delete-bookmark      Delete a bookmark by its index number.
+        -h, --help                 Show this message.
+
 
 [Back to top](#top)
 
