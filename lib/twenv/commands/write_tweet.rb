@@ -126,6 +126,7 @@ class TWEnv::WriteTweet < TWEnv::Command
         bold("SCHEDULED TWEETS"),
         schedule
           .each_key
+          .sort # ASC sort
           .map
           .with_index(1) {|k, i| format "%{index} %{time}", index: blue(bold("##{i}")), time: bold(format_time(k, :upcase)) }
       ].flatten.join("\n")
