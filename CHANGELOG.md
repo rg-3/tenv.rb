@@ -2,7 +2,7 @@
 
 ## HEAD
 
-* Nothing so far.
+* Add `--delay-date` option to the `write-tweet` command.
 
 ## v0.7.0
 
