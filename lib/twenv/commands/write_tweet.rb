@@ -144,7 +144,10 @@ class TWEnv::WriteTweet < TWEnv::Command
   end
 
   def cancel_tweet(cancel_index)
-    tweet = scheduled_tweets.sort_by(&:publish_at).find.with_index(1) { |_, index| index == cancel_index }
+    tweet = scheduled_tweets
+      .sort_by(&:publish_at) # ASC sort
+      .find
+      .with_index(1) { |_, index| index == cancel_index }
     if tweet
       tweet.cancel!
       line.ok("The delayed tweet was successfully cancelled and will not be published").end
