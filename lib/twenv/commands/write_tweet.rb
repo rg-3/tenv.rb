@@ -35,6 +35,8 @@ class TWEnv::WriteTweet < TWEnv::Command
   write-tweet --delay 09:00AM --delay-date 24/12/2022
   BANNER
 
+  include Twitter::TwitterText::Validation
+
   DelayedTweet = Struct.new(:publish_at, :thr, :scheduled_tweets) do
     def abort
       scheduled_tweets.delete(self)
@@ -62,7 +64,10 @@ class TWEnv::WriteTweet < TWEnv::Command
     else
       files = opts[:files].map{|path| File.new(File.expand_path(path), 'r')}
       delay = parse_delay_option(opts[:delay])
-      tweet, options = parse_reply_to_option(read_tweet, opts['in-reply-to'])
+      tweet = write_tweet
+      tweet, options = parse_reply_to_option(tweet, opts['in-reply-to'])
+      tweet = edit(tweet) while too_long?(tweet)
+      return unless tweet
       Time.now >= delay ? post_tweet(tweet, files, options) : delay_tweet(tweet, files, options, delay)
     end
   end
@@ -102,8 +107,9 @@ class TWEnv::WriteTweet < TWEnv::Command
     scheduled_tweets.push DelayedTweet.new(delay_until, thr, scheduled_tweets)
   end
 
-  def read_tweet
+  def write_tweet(contents='')
     file = Tempfile.new 'twenv', storage_path
+    File.write file.path, contents
     system ENV['EDITOR'], file.path
     raise Pry::CommandError, "editor failed with exit code #{$?.exitstatus}" if !$?.success?
     tweet = file.read
@@ -112,6 +118,15 @@ class TWEnv::WriteTweet < TWEnv::Command
   ensure
     file.unlink
     file.close
+  end
+
+  def edit(tweet)
+    line.warn("Your tweet is too long. Press enter to edit the tweet and try again. Press ^C to cancel. ")
+    $stdin.gets
+    write_tweet(tweet)
+  rescue Interrupt
+    line.end.warn("Interrupt received").end
+    nil
   end
 
   def parse_delay_option(delay)
@@ -170,8 +185,14 @@ class TWEnv::WriteTweet < TWEnv::Command
     raise Pry::CommandError, "The --delay option couldn't be parsed into a Time object"
   end
 
-  def empty?(o)
-    o.nil? || o.strip.empty?
+  def empty?(tweet)
+    tweet.nil? || tweet.strip.empty?
+  end
+
+  def too_long?(tweet)
+    return false unless tweet
+    result = parse_tweet(tweet)
+    result[:weighted_length] > 280
   end
 
   def scheduled_tweets

@@ -1,6 +1,7 @@
 class TWEnv
   require 'pry'
   require 'twitter'
+  require 'twitter-text'
   require 'tempfile'
   require 'paint'
   require_relative 'twenv/pry/class_command'
