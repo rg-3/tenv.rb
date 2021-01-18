@@ -2,6 +2,8 @@
 
 ## HEAD
 
+* Add `--before-date=` option to the `delete-my-tweets` command.
+
 * Perform a client-side verification on tweet size before attempting
   to send the tweet to Twitter. Tweets who exceed the maximum length
   can be edited until their size fits within Twitter's size constraint.

@@ -6,18 +6,22 @@ class TWEnv::DeleteMyTweets < TWEnv::Command
   delete-my-tweets [OPTIONS]
 
   #{description}
+
+  # Delete tweets who were published before 24th, Dec, 2020
+  delete-my-tweets --before-date 24/12/2020
   BANNER
 
   attr_accessor :max_id
 
   def options(slop)
-    slop.on 'has-likes'     , "Only delete tweets with likes", as: :boolean, default: false
-    slop.on 'has-no-likes'  , "Only delete tweets with no likes", as: :boolean, default: false
-    slop.on 'is-not-reply'  , "Only delete tweets that aren't replies", as: :boolean, default: false
-    slop.on 'is-reply'      , "Only delete tweets that are replies", as: :boolean, default: false
-    slop.on 'is-reply-to='  , "Only delete tweets that are a reply to the given username", as: :string, default: nil
-    slop.on "has-media"     , "Only delete tweets that have media (either video or image)", default: false
-    slop.on "no-media"      , "Only delete tweets that don't have media (either video or image)", default: false
+    slop.on 'has-likes'          , "Only delete tweets with likes", as: :boolean, default: false
+    slop.on 'has-no-likes'       , "Only delete tweets with no likes", as: :boolean, default: false
+    slop.on 'is-not-reply'       , "Only delete tweets that aren't replies", as: :boolean, default: false
+    slop.on 'is-reply'           , "Only delete tweets that are replies", as: :boolean, default: false
+    slop.on 'is-reply-to='       , "Only delete tweets that are a reply to the given username", as: :string, default: nil
+    slop.on "has-media"          , "Only delete tweets that have media (either video or image)", default: false
+    slop.on "no-media"           , "Only delete tweets that don't have media (either video or image)", default: false
+    slop.on "before-date="       , "Only delete tweets who were published before the given date", default: nil, as: :string
     slop.on "has-outbound-links" , "Only delete tweets that link to somewhere outside Twitter", default: false, as: :boolean
   end
 
@@ -53,6 +57,7 @@ class TWEnv::DeleteMyTweets < TWEnv::Command
     tweets.select! {|t| t.media.empty? }   if opts['no-media']
     tweets.select! {|t| t.media.size > 0 } if opts['has-media']
     tweets.select! {|t| t.urls.any? { |url| url.expanded_url.host != 'twitter.com' } } if opts['has-outbound-links']
+    tweets.reject! {|t| t.created_at >= Time.strptime(opts['before-date'], '%d/%m/%Y') } if opts['before-date']
     is_reply_to_filter!(tweets, opts['is-reply-to'])
     tweets
   end
