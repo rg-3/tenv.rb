@@ -4,7 +4,7 @@
 
 * Perform a client-side verification on tweet size before attempting
   to send the tweet to Twitter. Tweets who exceed the maximum length
-  can be edited until their size fits within the contraints.
+  can be edited until their size fits within Twitter's size constraint.
 
 * Add `TWEnv::WriteTweet::DelayedTweet` struct.
 
