@@ -142,7 +142,6 @@ class TWEnv::WriteTweet < TWEnv::Command
       line.info("There are no delayed tweets scheduled to be published").end
     else
       pager.page [
-        bold("SCHEDULED TWEETS\n"),
         scheduled_tweets
           .sort_by(&:delay_until) # ASC sort
           .map
