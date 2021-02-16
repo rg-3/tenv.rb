@@ -27,10 +27,6 @@ twenv.rb provides a Twitter environment where you can interact with Twitter
 through its web APIs using a REPL. The environment uses the [Ruby](https://www.ruby-lang.org) programming language,
 [Pry](https://github.com/pry/pry#top) and the [Twitter library](https://github.com/sferik/twitter).
 
-twenv.rb is a useful environment for learning, not only about Twitter, but
-also about Ruby and Pry. Pry allows a high degree of customization and twenv.rb
-follows that path as well.
-
 [Back to top](#top)
 
 ## <a id='install'> Installation </a>
