@@ -2,7 +2,7 @@ class TWEnv::WriteTweet < TWEnv::Command
   match 'write-tweet'
   description "Write a tweet on behalf of `client.user`"
   group 'twenv'
-  command_options storage: true
+  command_options storage: true, shellwords: false
   banner <<-BANNER
   write-tweet [OPTIONS]
 

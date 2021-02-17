@@ -2,6 +2,8 @@
 
 ## HEAD
 
+* Disable shellwords in the `write-tweet` command.
+ 
 * Show more information about scheduled tweets when using the 
   `--show-schedule` option of the `write-tweet` command.
 
