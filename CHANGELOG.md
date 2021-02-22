@@ -2,6 +2,8 @@
 
 ## HEAD
 
+* Add `Twitter::REST::Client#remove_follower!`.
+
 * Disable shellwords in the `write-tweet` command.
  
 * Show more information about scheduled tweets when using the 
