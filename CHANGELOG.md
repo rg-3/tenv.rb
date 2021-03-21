@@ -2,6 +2,9 @@
 
 ## HEAD
 
+* In the `delete-my-tweets` command, parse the `--before-date` option as a date 
+  in iso8601 format.
+  
 * In the `write-tweet` command, print an error when `--delay-date` is provided 
   but `--delay` is not.
 

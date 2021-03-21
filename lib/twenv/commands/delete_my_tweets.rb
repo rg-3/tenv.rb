@@ -21,7 +21,7 @@ class TWEnv::DeleteMyTweets < TWEnv::Command
     slop.on 'is-reply-to='       , "Only delete tweets that are a reply to the given username", as: :string, default: nil
     slop.on "has-media"          , "Only delete tweets that have media (either video or image)", default: false
     slop.on "no-media"           , "Only delete tweets that don't have media (either video or image)", default: false
-    slop.on "before-date="       , "Only delete tweets who were published before the given date", default: nil, as: :string
+    slop.on "before-date="       , "Only delete tweets that were published before the given date (iso8601 format)", default: nil, as: :string
     slop.on "has-outbound-links" , "Only delete tweets that link to somewhere outside Twitter", default: false, as: :boolean
   end
 
@@ -57,7 +57,7 @@ class TWEnv::DeleteMyTweets < TWEnv::Command
     tweets.select! {|t| t.media.empty? }   if opts['no-media']
     tweets.select! {|t| t.media.size > 0 } if opts['has-media']
     tweets.select! {|t| t.urls.any? { |url| url.expanded_url.host != 'twitter.com' } } if opts['has-outbound-links']
-    tweets.reject! {|t| t.created_at >= Time.strptime(opts['before-date'], '%d/%m/%Y') } if opts['before-date']
+    tweets.reject! {|t| t.created_at >= Time.strptime(opts['before-date'], '%Y-%m-%d') } if opts['before-date']
     is_reply_to_filter!(tweets, opts['is-reply-to'])
     tweets
   end
