@@ -81,6 +81,9 @@ to see what's possible.
 
 ## <a id='commands'> Built-in Commands </a>
 
+This section is for getting a taste of twenv.rb - it is not a comphrensive overview 
+but something to get you started.
+
 **<a id='commands-write-a-tweet'> 1) write-tweet</a>**
 
 You could write a tweet with the following Ruby code:
@@ -198,36 +201,6 @@ available. The following example demonstrates a few different scenarios:
 
     # Delete all your likes that are replies to a given username.
     [1] twenv.rb (main)> delete-my-likes --is-reply-to=username
-
-__<a id='commands-read-links'>6) read-links</a>__
-
-The `read-links` command lets you page through the external links being
-shared on your home timeline or the timeline of a user. 
-
-The following example demonstrates the help menu:
-
-    [1] twenv.rb (main)> read-links -h
-    read-links [OPTIONS] [user]
-
-    Read tweets that include external links
-
-    Examples
-
-    # Read links from the home timeline of `client.user`
-    twenv.rb (main)> read-links
-
-    # Read links from @rubyinside
-    twenv.rb (main)> read-links rubyinside --max 75
-
-    Options
-
-        -m, --max                  The max number of links to find. Default is 25.
-        -l, --list-bookmarks       List saved bookmarks.
-        -s, --save-bookmark        Bookmark an account to read another time.
-        -b, --bookmark             Read a bookmark by its index number.
-        -d, --delete-bookmark      Delete a bookmark by its index number.
-        -h, --help                 Show this message.
-
 
 [Back to top](#top)
 
