@@ -2,6 +2,8 @@
 
 ## HEAD
 
+* In the `write-tweet` command, parse `--delay-date` according to iso8601 format.
+
 * Add `Twitter::REST::Client#remove_follower!`.
 
 * Disable shellwords in the `write-tweet` command.

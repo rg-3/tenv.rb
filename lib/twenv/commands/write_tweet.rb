@@ -32,7 +32,7 @@ class TWEnv::WriteTweet < TWEnv::Command
   write-tweet --delay 19:00
 
   # Delay a tweet until Christmas Eve morning, 2022
-  write-tweet --delay 09:00AM --delay-date 24/12/2022
+  write-tweet --delay 09:00AM --delay-date 2022-12-24
   BANNER
 
   include Twitter::TwitterText::Validation
@@ -59,7 +59,7 @@ class TWEnv::WriteTweet < TWEnv::Command
     slop.on :f,  :files=         , 'List of files to post with the tweet', as: :array, default: []
     slop.on :r,  'in-reply-to='  , 'Write a reply to the given tweet', as: :boolean, default: nil
     slop.on :s,  'show-schedule' , 'Show at what time delayed tweet(s) are scheduled to be published', as: :boolean, default: nil
-    slop.on      'delay-date='   , 'The date to which the --delay option should be relative to. Defaults to today', as: :string, default: nil
+    slop.on      'delay-date='   , 'The date to which the --delay option should be relative to. Defaults to today, and the iso8601 format is expected.', as: :string, default: nil
     slop.on :c,  'cancel='       , 'Cancel the publish of a delayed tweet with an index number taken from --show-schedule', as: :integer, default: nil
   end
 
@@ -182,13 +182,13 @@ class TWEnv::WriteTweet < TWEnv::Command
   end
 
   def make_time(hour, minute, median)
-    delay_date = opts['delay-date'] || Date.today.strftime('%d/%m/%Y')
+    delay_date = opts['delay-date'] || Date.today.strftime('%Y-%m-%d')
     if median
       # 12 hour clock
-      time_obj = Time.strptime("#{hour}:#{minute} #{median.downcase} #{delay_date}", "%I:%M %P %d/%m/%Y")
+      time_obj = Time.strptime("#{hour}:#{minute} #{median.downcase} #{delay_date}", "%I:%M %P %Y-%m-%d")
     else
       # 24 hour clock
-      time_obj = Time.strptime("#{hour}:#{minute} #{delay_date}", "%H:%M %d/%m/%Y")
+      time_obj = Time.strptime("#{hour}:#{minute} #{delay_date}", "%H:%M %Y-%m-%d")
     end
     time_obj < Time.now ? time_obj + ONE_DAY : time_obj
   rescue ArgumentError
