@@ -2,6 +2,9 @@
 
 ## HEAD
 
+* In the `write-tweet` command, print an error when `--delay-date` is provided 
+  but `--delay` is not.
+
 * In the `write-tweet` command, parse `--delay-date` according to iso8601 format.
 
 * Add `Twitter::REST::Client#remove_follower!`.

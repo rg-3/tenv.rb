@@ -70,6 +70,7 @@ class TWEnv::WriteTweet < TWEnv::Command
     elsif opts['cancel']
       cancel_tweet(opts['cancel'])
     else
+      validate_options!(opts)
       files = opts[:files].map{|path| File.new(File.expand_path(path), 'r')}
       delay = parse_delay_option(opts[:delay])
       body = write_tweet
@@ -81,6 +82,12 @@ class TWEnv::WriteTweet < TWEnv::Command
   end
 
   private
+
+  def validate_options!(options)
+    if options.present?('delay-date') && !options.present?('delay')
+      raise Pry::CommandError.new("The --delay option is required when providing a --delay-date")
+    end
+  end
 
   def parse_reply_to_option(tweet, reply_to)
     return [tweet, {}] unless reply_to
