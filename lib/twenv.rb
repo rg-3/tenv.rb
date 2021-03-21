@@ -64,5 +64,5 @@ class TWEnv
 end
 
 Pry.configure do |config|
-  config.prompt_name = "twenv.rb "
+  config.prompt_name = config.color ? Paint["twenv.rb ", :green, :bold] : "twenv.rb "
 end
