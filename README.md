@@ -15,7 +15,6 @@
   * [archive-likes](#commands-archive-likes)
   * [delete-my-tweets](#commands-delete-your-tweets)
   * [delete-my-likes](#commands-delete-your-likes)
-  * [read-links](#commands-read-links)
 * [Customization](#custom)
   * [Write your own commands](#custom-write-your-own-commands)
 * [License](#license)
