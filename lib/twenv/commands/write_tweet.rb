@@ -35,8 +35,6 @@ class TWEnv::WriteTweet < TWEnv::Command
   write-tweet --delay 09:00AM --delay-date 2022-12-24
   BANNER
 
-  include Twitter::TwitterText::Validation
-
   ScheduledTweet = Struct.new(:body, :files, :delay_until, :thr, :scheduled_tweets) do
     def abort
       scheduled_tweets.delete(self)
@@ -208,8 +206,7 @@ class TWEnv::WriteTweet < TWEnv::Command
 
   def too_long?(tweet)
     return false unless tweet
-    result = parse_tweet(tweet)
-    result[:weighted_length] > 280
+    tweet.bytesize > 280
   end
 
   def scheduled_tweets

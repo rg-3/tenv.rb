@@ -2,6 +2,8 @@
 
 ## Next release
 
+* Remove `twitter-text` gem.
+
 * Remove the `read-links` command. 
 
 * In the `delete-my-tweets` command, parse the `--before-date` option as a date 
