@@ -1,6 +1,10 @@
 # CHANGELOG
 
-## Next release
+## Next
+
+* Nothing so far.
+
+## v0.8.0
 
 * Remove `twitter-text` gem.
 
