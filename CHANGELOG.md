@@ -2,18 +2,20 @@
 
 ## Next
 
-* Nothing so far.
+* Add the `--tweet-file` option to the `write-tweet` command. The
+ `--tweet-file` option accepts a file that's run through ERB and
+ then posted as the tweets' content.
 
 ## v0.8.0
 
 * Remove `twitter-text` gem.
 
-* Remove the `read-links` command. 
+* Remove the `read-links` command.
 
-* In the `delete-my-tweets` command, parse the `--before-date` option as a date 
+* In the `delete-my-tweets` command, parse the `--before-date` option as a date
   in iso8601 format.
-  
-* In the `write-tweet` command, print an error when `--delay-date` is provided 
+
+* In the `write-tweet` command, print an error when `--delay-date` is provided
   but `--delay` is not.
 
 * In the `write-tweet` command, parse `--delay-date` according to iso8601 format.
@@ -21,8 +23,8 @@
 * Add `Twitter::REST::Client#remove_follower!`.
 
 * Disable shellwords in the `write-tweet` command.
- 
-* Show more information about scheduled tweets when using the 
+
+* Show more information about scheduled tweets when using the
   `--show-schedule` option of the `write-tweet` command.
 
 * Add `--before-date=` option to the `delete-my-tweets` command.
@@ -47,22 +49,22 @@
 
 * Add `--in-reply-to=` option to the `write-tweet` command.
 
-* Extend filters understood by the `delete-my-tweets` command to include 
+* Extend filters understood by the `delete-my-tweets` command to include
   `--has-media`, `--no-media`, `--has-likes` and `--has-outbound-links`.
 
 * Add `--is-reply-to=` filter option to the `delete-my-tweets` command.
 
-* The `write-tweet` --delay option is parsed before you write a tweet 
+* The `write-tweet` --delay option is parsed before you write a tweet
   to catch errors early.
 
-* The `write-tweet` --delay option now understands the 24hour clock, 
+* The `write-tweet` --delay option now understands the 24hour clock,
   in addition to the 12hour clock.
 
 * The `write-tweet` --delay option now understands `X.hours` syntax.
 
-* Implement strict option parsing within Pry. This means unknown 
+* Implement strict option parsing within Pry. This means unknown
   option switches will raise an error when passed to a twenv.rb
-  command.  
+  command.
 
 * Monkey-patch `Pry::ClassCommand` to support receiving Slop options
   via `Pry::ClassCommand.slop_options`.
@@ -75,9 +77,9 @@
 
 * Simplify `FormatTime` module.
 
-* Add the `--files` option to `write-tweet`. The option allows you 
+* Add the `--files` option to `write-tweet`. The option allows you
   to attach files(media) to a tweet.
-  
+
 * Expand `write-tweet --delay` to understand more duration syntax.
 
 ## v0.6.1

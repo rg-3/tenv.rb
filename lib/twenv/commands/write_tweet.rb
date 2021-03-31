@@ -1,4 +1,6 @@
 class TWEnv::WriteTweet < TWEnv::Command
+  require 'erb'
+
   match 'write-tweet'
   description "Write a tweet on behalf of `client.user`"
   group 'twenv'
@@ -55,6 +57,7 @@ class TWEnv::WriteTweet < TWEnv::Command
   def options(slop)
     slop.on :d,  :delay=         , 'Delay sending a tweet', as: :string, default: '0'
     slop.on :f,  :files=         , 'List of files to post with the tweet', as: :array, default: []
+    slop.on :t,  'tweet-file='   , "Post the contents of a ERB file as a tweet", as: String, default: nil
     slop.on :r,  'in-reply-to='  , 'Write a reply to the given tweet', as: :boolean, default: nil
     slop.on :s,  'show-schedule' , 'Show at what time delayed tweet(s) are scheduled to be published', as: :boolean, default: nil
     slop.on      'delay-date='   , 'The date to which the --delay option should be relative to. Defaults to today, and the iso8601 format is expected.', as: :string, default: nil
@@ -71,7 +74,7 @@ class TWEnv::WriteTweet < TWEnv::Command
       validate_options!(opts)
       files = opts[:files].map{|path| File.new(File.expand_path(path), 'r')}
       delay = parse_delay_option(opts[:delay])
-      body = write_tweet
+      body = opts['tweet-file'] ? read_tweet_file(opts['tweet-file']) : write_tweet
       body, options = parse_reply_to_option(body, opts['in-reply-to'])
       body = edit(body) while too_long?(body)
       return unless body
@@ -131,6 +134,13 @@ class TWEnv::WriteTweet < TWEnv::Command
   ensure
     file.unlink
     file.close
+  end
+
+  def read_tweet_file(path)
+    path = File.expand_path(path)
+    raise Pry::CommandError, "The tweet file #{path} is not readable" unless File.readable?(path)
+    erb = ERB.new File.read(path), nil, '<>'
+    erb.result(binding)
   end
 
   def edit(tweet)
