@@ -37,14 +37,14 @@ class TWEnv::WriteTweet < TWEnv::Command
   write-tweet --delay 09:00AM --delay-date 2022-12-24
   BANNER
 
-  ScheduledTweet = Struct.new(:body, :files, :delay_until, :thr, :scheduled_tweets) do
+  DelayedTweet = Struct.new(:body, :files, :delay_until, :thr, :delayed_tweets) do
     def abort
-      scheduled_tweets.delete(self)
+      delayed_tweets.delete(self)
       thr.kill
     end
   end
 
-  ST_TMPL = <<-TMPL.each_line.map(&:lstrip).join
+  DELAYED_TWEET_TEMPLATE = <<-TMPL.each_line.map(&:lstrip).join
   %{index}
   #{Paint['When:', :bold]} %{time}
   #{Paint['Contents:', :bold]} %{body}
@@ -57,29 +57,30 @@ class TWEnv::WriteTweet < TWEnv::Command
   def options(slop)
     slop.on :d,  :delay=         , 'Delay sending a tweet', as: :string, default: '0'
     slop.on :f,  :files=         , 'List of files to post with the tweet', as: :array, default: []
-    slop.on :t,  'tweet-file='   , "Post the contents of a ERB file as a tweet", as: String, default: nil
+    slop.on :t,  'tweet-file='   , "Post the contents of a ERB file as a tweet", as: :string, default: nil
     slop.on :r,  'in-reply-to='  , 'Write a reply to the given tweet', as: :boolean, default: nil
-    slop.on :s,  'show-schedule' , 'Show at what time delayed tweet(s) are scheduled to be published', as: :boolean, default: nil
+    slop.on :s,  'show-delayed'  , 'Show at what time delayed tweet(s) are scheduled to be published', as: :boolean, default: nil
     slop.on      'delay-date='   , 'The date to which the --delay option should be relative to. Defaults to today, and the iso8601 format is expected.', as: :string, default: nil
     slop.on :c,  'cancel='       , 'Cancel the publish of a delayed tweet with an index number taken from --show-schedule', as: :integer, default: nil
+    slop.on :w,  'wakeup='       , 'Publish a delayed tweet early by waking up its thread. ' \
+                                   'An index shown by --show-delayed option can be passed ' \
+                                   'as the argument.', as: :integer, default: nil
   end
 
   def process
     raise Pry::CommandError, "set $EDITOR and try again" if empty?(ENV['EDITOR'])
-    if opts['show-schedule']
-      show_scheduled_tweets
-    elsif opts['cancel']
-      cancel_tweet(opts['cancel'])
-    else
-      validate_options!(opts)
-      files = opts[:files].map{|path| File.new(File.expand_path(path), 'r')}
-      delay = parse_delay_option(opts[:delay])
-      body = opts['tweet-file'] ? read_tweet_file(opts['tweet-file']) : write_tweet
-      body, options = parse_reply_to_option(body, opts['in-reply-to'])
-      body = edit(body) while too_long?(body)
-      return unless body
-      Time.now >= delay ? post_tweet(body, files, options) : delay_tweet(body, files, options, delay)
-    end
+    return show_delayed_tweets if opts['show-schedule']
+    return cancel_tweet(opts['cancel']) if opts['cancel']
+    return wakeup_thread(opts['wakeup']) if opts['wakeup']
+
+    validate_options!(opts)
+    files = opts[:files].map{|path| File.new(File.expand_path(path), 'r')}
+    delay = parse_delay_option(opts[:delay])
+    body = opts['tweet-file'] ? read_tweet_file(opts['tweet-file']) : write_tweet
+    body, options = parse_reply_to_option(body, opts['in-reply-to'])
+    body = edit(body) while too_long?(body)
+    return unless body
+    Time.now >= delay ? post_tweet(body, files, options) : delay_tweet(body, files, options, delay)
   end
 
   private
@@ -117,10 +118,10 @@ class TWEnv::WriteTweet < TWEnv::Command
       sleep delay_until.to_i - Time.now.to_i
       post_tweet(tweet, files, options, false)
     ensure
-      tweet = scheduled_tweets.find{|tweet| tweet.thr == thr}
+      tweet = delayed_tweets.find{|tweet| tweet.thr == thr}
       tweet.abort if tweet
     end
-    scheduled_tweets.push ScheduledTweet.new(tweet, files, delay_until, thr, scheduled_tweets)
+    delayed_tweets.push DelayedTweet.new(tweet, files, delay_until, thr, delayed_tweets)
   end
 
   def write_tweet(contents='')
@@ -152,32 +153,42 @@ class TWEnv::WriteTweet < TWEnv::Command
     nil
   end
 
-  def show_scheduled_tweets
-    if scheduled_tweets.empty?
+  def show_delayed_tweets
+    if delayed_tweets.empty?
       line.info("There are no delayed tweets scheduled to be published").end
     else
       pager.page [
-        scheduled_tweets
-          .sort_by(&:delay_until) # ASC sort
-          .map
-          .with_index(1) {|t, i|
-            format ST_TMPL, body: t.body.chomp, files: t.files.empty? ? 'None' : t.files.map(&:path).join(','),
-                            index: blue(bold("##{i}")), time: format_time(t.delay_until, :upcase)
-          }
+        delayed_tweets
+        .sort_by(&:delay_until) # ASC sort
+        .map
+        .with_index(1) {|t, i|
+          format DELAYED_TWEET_TEMPLATE,
+                 body:  t.body.chomp,
+                 files: t.files.empty? ? 'None' : t.files.map(&:path).join(','),
+                 index: blue(bold("##{i}")),
+                 time:  format_time(t.delay_until, :upcase)
+        }
       ].flatten.join("\n")
     end
   end
 
   def cancel_tweet(cancel_index)
-    tweet = scheduled_tweets
-      .sort_by(&:delay_until) # ASC sort
-      .find
-      .with_index(1) { |_, index| index == cancel_index }
+    tweet = find_by_index(cancel_index)
     if tweet
       tweet.abort
-      line.ok("The delayed tweet was successfully cancelled and will not be published").end
+      line.ok("The delayed tweet was canceled").end
     else
-      line.error("A delayed tweet at the given index was not found").end
+      line.error("A delayed tweet at the index #{cancel_index} was not found").end
+    end
+  end
+
+  def wakeup_thread(wakeup_index)
+    tweet = find_by_index(wakeup_index)
+    if tweet
+      tweet.thr.wakeup
+      line.ok("The delayed tweets' thread has woken up early to publish its tweet").end
+    else
+      line.error("A delayed tweet at the index #{wakeup_index} was not found").end
     end
   end
 
@@ -210,6 +221,13 @@ class TWEnv::WriteTweet < TWEnv::Command
     raise Pry::CommandError, "The --delay option couldn't be parsed into a Time object"
   end
 
+  def find_by_index(by_index)
+    delayed_tweets
+    .sort_by(&:delay_until) # ASC sort
+    .find
+    .with_index(1) { |_, index| index == by_index }
+  end
+
   def empty?(tweet)
     tweet.nil? || tweet.strip.empty?
   end
@@ -219,7 +237,7 @@ class TWEnv::WriteTweet < TWEnv::Command
     tweet.bytesize > 280
   end
 
-  def scheduled_tweets
+  def delayed_tweets
     state[:schedule]
   end
 
