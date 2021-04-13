@@ -38,50 +38,51 @@ class TWEnv::WriteTweet < TWEnv::Command
   BANNER
 
   DelayedTweet = Struct.new(:body, :files, :delay_until, :thr, :delayed_tweets) do
-    def abort
+    def cancel
       delayed_tweets.delete(self)
       thr.kill
     end
   end
 
   DELAYED_TWEET_TEMPLATE = <<-TMPL.each_line.map(&:lstrip).join
-  %{index}
+  %{pound_index}
   #{Paint['When:', :bold]} %{time}
   #{Paint['Contents:', :bold]} %{body}
   #{Paint['Files:', :bold]} %{files}
+  #{Paint['Index:', :bold]} %{index}
   \n
   TMPL
 
   ONE_DAY = 3600 * 24
 
   def options(slop)
-    slop.on :d,  :delay=         , 'Delay sending a tweet', as: :string, default: '0'
-    slop.on :f,  :files=         , 'List of files to post with the tweet', as: :array, default: []
-    slop.on :t,  'tweet-file='   , "Post the contents of a ERB file as a tweet", as: :string, default: nil
-    slop.on :r,  'in-reply-to='  , 'Write a reply to the given tweet', as: :boolean, default: nil
+    slop.on :d,  :delay=         , 'Delay sending a tweet.', as: :string, default: '0'
+    slop.on :f,  :files=         , 'List of files to post with the tweet.', as: :array, default: []
+    slop.on :t,  'tweet-file='   , "Post the contents of a ERB file as a tweet.", as: :string, default: nil
+    slop.on :r,  'in-reply-to='  , 'Write a reply to the given tweet.', as: :boolean, default: nil
 
-    slop.on :s,  'show-delayed'  , 'Show at what time delayed tweet(s) are scheduled to be ' \
-                                   'published',
+    slop.on     'show-delayed'  , 'Show at what time delayed tweet(s) are scheduled to be ' \
+                                  'published.',
                                    as: :boolean, default: nil
 
-    slop.on      'delay-date='   , 'The date to which the --delay option is relative to. ' \
-                                   'Defaults to today. A date in the iso8601 format is ' \
-                                   'expected.',
+    slop.on     'delay-date='   , 'The date to which the --delay option is relative to. ' \
+                                  'Defaults to today. A date in the iso8601 format is ' \
+                                  'expected.',
                                    as: :string, default: nil
 
-    slop.on :c,  'cancel='       , 'Cancel the publish of a delayed tweet with an index number ' \
-                                   'taken from --show-delayed',
+    slop.on :c, 'cancel='       , 'Cancel the publish of a delayed tweet with an index number ' \
+                                  'taken from --show-delayed.',
                                    as: :integer, default: nil
 
-    slop.on :w,  'wakeup='       , 'Publish a delayed tweet early by waking up its thread. ' \
-                                   'An index shown by the --show-delayed option can be passed ' \
-                                   'as the argument.',
+    slop.on :w, 'wakeup='       , 'Publish a delayed tweet early by waking up its thread. ' \
+                                  'An index shown by the --show-delayed option can be passed ' \
+                                  'as the argument.',
                                    as: :integer, default: nil
   end
 
   def process
     raise Pry::CommandError, "set $EDITOR and try again" if empty?(ENV['EDITOR'])
-    return show_delayed_tweets if opts['show-schedule']
+    return show_delayed_tweets if opts['show-delayed']
     return cancel_tweet(opts['cancel']) if opts['cancel']
     return wakeup_thread(opts['wakeup']) if opts['wakeup']
 
@@ -130,8 +131,7 @@ class TWEnv::WriteTweet < TWEnv::Command
       sleep delay_until.to_i - Time.now.to_i
       post_tweet(tweet, files, options, false)
     ensure
-      tweet = delayed_tweets.find{|tweet| tweet.thr == thr}
-      tweet.abort if tweet
+      delayed_tweets.delete_if{|tweet| tweet.thr == thr}
     end
     delayed_tweets.push DelayedTweet.new(tweet, files, delay_until, thr, delayed_tweets)
   end
@@ -177,7 +177,8 @@ class TWEnv::WriteTweet < TWEnv::Command
           format DELAYED_TWEET_TEMPLATE,
                  body:  t.body.chomp,
                  files: t.files.empty? ? 'None' : t.files.map(&:path).join(','),
-                 index: blue(bold("##{i}")),
+                 pound_index: blue(bold("##{i}")),
+                 index: i,
                  time:  format_time(t.delay_until, :upcase)
         }
       ].flatten.join("\n")
@@ -187,7 +188,7 @@ class TWEnv::WriteTweet < TWEnv::Command
   def cancel_tweet(cancel_index)
     tweet = find_by_index(cancel_index)
     if tweet
-      tweet.abort
+      tweet.cancel
       line.ok("The delayed tweet was canceled").end
     else
       line.error("A delayed tweet at the index #{cancel_index} was not found").end
