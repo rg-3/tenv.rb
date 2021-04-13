@@ -74,7 +74,7 @@ class TWEnv::WriteTweet < TWEnv::Command
                                    as: :integer, default: nil
 
     slop.on :w,  'wakeup='       , 'Publish a delayed tweet early by waking up its thread. ' \
-                                   'An index shown by --show-delayed option can be passed ' \
+                                   'An index shown by the --show-delayed option can be passed ' \
                                    'as the argument.',
                                    as: :integer, default: nil
   end
