@@ -59,12 +59,24 @@ class TWEnv::WriteTweet < TWEnv::Command
     slop.on :f,  :files=         , 'List of files to post with the tweet', as: :array, default: []
     slop.on :t,  'tweet-file='   , "Post the contents of a ERB file as a tweet", as: :string, default: nil
     slop.on :r,  'in-reply-to='  , 'Write a reply to the given tweet', as: :boolean, default: nil
-    slop.on :s,  'show-delayed'  , 'Show at what time delayed tweet(s) are scheduled to be published', as: :boolean, default: nil
-    slop.on      'delay-date='   , 'The date to which the --delay option should be relative to. Defaults to today, and the iso8601 format is expected.', as: :string, default: nil
-    slop.on :c,  'cancel='       , 'Cancel the publish of a delayed tweet with an index number taken from --show-schedule', as: :integer, default: nil
+
+    slop.on :s,  'show-delayed'  , 'Show at what time delayed tweet(s) are scheduled to be ' \
+                                   'published',
+                                   as: :boolean, default: nil
+
+    slop.on      'delay-date='   , 'The date to which the --delay option is relative to. ' \
+                                   'Defaults to today. A date in the iso8601 format is ' \
+                                   'expected.',
+                                   as: :string, default: nil
+
+    slop.on :c,  'cancel='       , 'Cancel the publish of a delayed tweet with an index number ' \
+                                   'taken from --show-delayed',
+                                   as: :integer, default: nil
+
     slop.on :w,  'wakeup='       , 'Publish a delayed tweet early by waking up its thread. ' \
                                    'An index shown by --show-delayed option can be passed ' \
-                                   'as the argument.', as: :integer, default: nil
+                                   'as the argument.',
+                                   as: :integer, default: nil
   end
 
   def process
