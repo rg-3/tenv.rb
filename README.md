@@ -10,7 +10,7 @@
   * [Start twenv.rb](#install-start-twenv.rb)
 * [The "client" local](#the-client-local)
 * [Built-in Commands](#commands)
-  * [write-tweet](#commands-write-a-tweet)
+  * [Writing tweets](#commands-write-a-tweet)
   * [delete-my-tweets](#commands-delete-your-tweets)
   * [delete-my-likes](#commands-delete-your-likes)
   * [archive-timeline](#commands-archive-a-timeline)
