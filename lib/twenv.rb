@@ -43,7 +43,7 @@ class TWEnv
   #  Returns the path to the `.env` file.
   #
   def self.dot_env_path
-    File.join TWEnv.root_path, '.env'
+    File.join root_path, '.env'
   end
 
   #
