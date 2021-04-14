@@ -92,9 +92,9 @@ You could write a tweet with the following Ruby code:
 
 **1.2 write-tweet command**
 
-The `write-tweet` command can open an editor and after you exit post
-your tweet. By default the `nano` editor is used, this can be changed
-in the `.env` file by setting `$EDITOR`.
+Or you could use the `write-tweet` command. The `write-tweet` command can
+open an editor and after you exit post your tweet. By default the `nano`
+editor is used. This can be changed from the `.env` file by setting `EDITOR`.
 
     [1] twenv.rb (main)> write-tweet
 
