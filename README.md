@@ -30,7 +30,7 @@ through its web APIs using a REPL. The environment uses the [Ruby](https://www.r
 
 ## <a id='install'> Installation </a>
 
-**<a id='install-clone'> 1) Clone repository </a>**
+**<a id='install-clone'> 1. Clone repository </a>**
 
 To get started clone a copy of the twenv.rb repository.
 The installation method for this project is to clone a copy of twenv.rb and
@@ -45,7 +45,7 @@ then adopt it as your own environment.
     git checkout tags/v0.9.0 -b my-twenv.rb
 
 
-**2) <a id='install-env'>Setup .env file</a>**
+**2. <a id='install-env'>Setup .env file</a>**
 
 For the next step, you should copy the sample `.env` file and then update it to
 have the correct consumer keys and access tokens for your Twitter user. If you
@@ -54,14 +54,14 @@ are unfamiliar or don't have access to these yet, head over to https://developer
 	cp .env.sample .env
 
 
-**3) <a id='install-deps'>Install dependencies</a>**
+**3. <a id='install-deps'>Install dependencies</a>**
 
 To install the dependencies, run the following from the root of the twenv.rb repository:
 
 	gem install -g gem.deps.rb
 
 
-**4) <a id='install-start-twenv.rb'>Start twenv.rb</a>**
+**4. <a id='install-start-twenv.rb'>Start twenv.rb</a>**
 
 From the twenv.rb root:
 
@@ -188,7 +188,7 @@ the `--continue` option:
     [4] twenv.rb (main)> archived_timeline.size
     => 20
 
-__<a id='commands-archive-likes'> 5) archive-likes</a>__
+__<a id='commands-archive-likes'> 5. archive-likes</a>__
 
 The `archive-likes` command lets you archive the likes of a Twitter account.
 Like other twenv.rb commands, this command sleeps and resumes when rate limited
@@ -222,7 +222,7 @@ the `--continue` option:
 
 ## <a id='custom'>Customization</a>
 
-**1) <a id='custom-write-your-own-commands'>Write your own commands</a>**
+**1. <a id='custom-write-your-own-commands'>Write your own commands</a>**
 
 The `scripts/` directory is a place where you can add Ruby scripts that will be
 loaded when twenv.rb starts. It's intended as a place you can add your own
