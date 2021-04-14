@@ -90,7 +90,7 @@ class TWEnv::WriteTweet < TWEnv::Command
     body = opts['tweet-file'] ? read_tweet_file(opts['tweet-file']) : write_tweet
     body, options = parse_reply_to_option(body, opts['in-reply-to'])
     body = edit(body) while too_long?(body)
-    return unless body
+    return files.each(&:close) unless body
     Time.now >= delay ? post_tweet(body, files, options) : delay_tweet(body, files, options, delay)
   end
 
