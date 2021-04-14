@@ -200,7 +200,7 @@ For example:
     => "my-user-agent"
 
 If you would like to change it to something else permanently you
-can edit the `TWEnv.user_agent` method in [/lib/twenv.rb](https://github.com/rg-3/twenv.rb/blob/master/lib/twenv.rb)
+can edit the `TWEnv.user_agent` method in [/lib/twenv.rb](https://github.com/rg-3/twenv.rb/blob/master/lib/twenv.rb).
 
 [Back to top](#top)
 
