@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## next
+
+* Call `validate_options!` first thing upon running the `write-tweet`
+  command.
+
 ## v0.9.0
 
 * In the `write-tweet` command, add a `--wakeup=` option that allows
