@@ -98,21 +98,6 @@ class TWEnv::WriteTweet < TWEnv::Command
 
   private
 
-  def validate_options!(options)
-    if options.present?('delay-date') && !options.present?('delay')
-      raise Pry::CommandError.new("The --delay option is required when providing a --delay-date")
-    end
-  end
-
-  def parse_reply_to_option(tweet, reply_to)
-    return [tweet, {}] unless reply_to
-    status   = client.status(reply_to)
-    author   = "@#{status.user.screen_name}"
-    mentions = status.user_mentions.map {|u| "@#{u.screen_name}" }.join(' ')
-    tweet = "#{author} #{mentions} #{tweet}"
-    [tweet, {in_reply_to_status: status}]
-  end
-
   def post_tweet(tweet, files, options, print_progress=true)
     line.print "Posting tweet ... " if print_progress
     if files.empty?
@@ -256,6 +241,21 @@ class TWEnv::WriteTweet < TWEnv::Command
 
   def state
     super[:write_tweets] ||= {schedule: []}
+  end
+
+  def validate_options!(options)
+    if options.present?('delay-date') && !options.present?('delay')
+      raise Pry::CommandError.new("The --delay option is required when providing a --delay-date")
+    end
+  end
+
+  def parse_reply_to_option(tweet, reply_to)
+    return [tweet, {}] unless reply_to
+    status   = client.status(reply_to)
+    author   = "@#{status.user.screen_name}"
+    mentions = status.user_mentions.map {|u| "@#{u.screen_name}" }.join(' ')
+    tweet = "#{author} #{mentions} #{tweet}"
+    [tweet, {in_reply_to_status: status}]
   end
 
   add_command self
