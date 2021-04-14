@@ -47,7 +47,7 @@ then adopt it as your own environment.
 **2. <a id='install-env'>Setup .env file</a>**
 
 For the next step, you should copy the sample `.env` file and then update it to
-have the correct consumer keys and access tokens for your Twitter user. If you
+have the correct consumer keys and access tokens for your Twitter account. If you
 are unfamiliar or don't have access to these yet, head over to https://developer.twitter.com.
 
 	cp .env.sample .env
