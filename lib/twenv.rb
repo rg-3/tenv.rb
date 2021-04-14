@@ -13,7 +13,7 @@ class TWEnv
   require_relative 'twitter/rest/client'
   Dir[File.join(__dir__, "twenv", "commands", "*.rb")].each{|file| require_relative file}
 
-  def self.start(twitter_options = {}, pry_options = {})
+  def self.start(pry_options = {})
     glob = File.join __dir__, '..', 'scripts', '*.rb'
     Dir[glob].each {|path| require_script(path)}
     ENV.update parse_dot_file(dot_env_path)
@@ -25,7 +25,6 @@ class TWEnv
           config.access_token        = ENV['TWENV_ACCESS_TOKEN']
           config.access_token_secret = ENV['TWENV_ACCESS_TOKEN_SECRET']
           config.user_agent = user_agent
-          twitter_options.each {|k,v| config.send("#{k}=", v)}
         }
       }
     }.merge!(pry_options)

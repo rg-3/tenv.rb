@@ -2,6 +2,8 @@
 
 ## next
 
+* Remove `twitter_options` argument from `TWEnv.start`.
+
 * Remove `pry-doc` as a dependency.
 
 * Set the default value for the user-agent header to `twenv.rb vX.X.X`.
