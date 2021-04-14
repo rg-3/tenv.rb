@@ -85,13 +85,13 @@ but something to get you started.
 
 **<a id='commands-write-a-tweet'> 1. Writing tweets </a>**
 
-**1.1** `client.update`
+**1.1 client.update**
 
 You could write a tweet with the following Ruby code:
 
     [1] twenv.rb (main)> client.update "I'm tweeting from twenv.rb"
 
-**1.2** `write-tweet` command
+**1.2 write-tweet command**
 
 The `write-tweet` command can open an editor and after you exit post
 your tweet. By default the `nano` editor is used, this can be changed
@@ -99,7 +99,7 @@ in the `.env` file by setting `$EDITOR`.
 
     [1] twenv.rb (main)> write-tweet
 
-**1.3** `write-tweet --files --delay`
+**1.3 write-tweet --files --delay**
 
 The `write-tweet` command also supports delayed tweets via the `--delay` option.
 Images and videos can be attached to a tweet with the `--files` option. For example,
@@ -107,7 +107,7 @@ to delay a tweet by 15 minutes and attach two photos:
 
     [1] twenv.rb (main)> write-tweet --delay #{60*15} --files ~/Pictures/photo1.jpg,~/Pictures/photo2.jpg
 
-**1.4** `write-tweet --tweet-file`
+**1.4 write-tweet --tweet-file**
 
 Another notable feature of the `write-tweet` command is the `--tweet-file=` option.
 It is used to read a file from disk, run it through ERB and then use the result as
