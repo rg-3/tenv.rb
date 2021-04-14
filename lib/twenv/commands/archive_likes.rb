@@ -1,6 +1,6 @@
 class TWEnv::ArchiveLikes < TWEnv::Command
   match 'archive-likes'
-  description 'Archive tweets a user has liked'
+  description 'Archive the likes of a Twitter account'
   command_options argument_required: true, storage: true
   group 'twenv'
   banner <<-BANNER

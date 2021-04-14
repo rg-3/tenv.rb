@@ -2,6 +2,10 @@
 
 ## next
 
+* Reduce README content
+
+* Update command descriptions of `archive-timeline` and `archive-likes`.
+
 * Remove `twitter_options` argument from `TWEnv.start`.
 
 * Remove `pry-doc` as a dependency.

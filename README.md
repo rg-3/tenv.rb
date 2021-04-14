@@ -13,8 +13,6 @@
   * [Writing tweets](#commands-write-a-tweet)
   * [delete-my-tweets](#commands-delete-your-tweets)
   * [delete-my-likes](#commands-delete-your-likes)
-  * [archive-timeline](#commands-archive-a-timeline)
-  * [archive-likes](#commands-archive-likes)
 * [Customization](#custom)
   * [Write your own commands](#custom-write-your-own-commands)
   * [Customize the user-agent header](#custom-customize-the-user-agent-header)
@@ -157,67 +155,6 @@ available. The following example demonstrates a few different scenarios:
 
     # Delete all your likes that are replies to a given username.
     [1] twenv.rb (main)> delete-my-likes --is-reply-to=username
-
-__<a id='commands-archive-a-timeline'> 4. archive-timeline</a>__
-
-The `archive-timeline` command lets you archive the tweets of a Twitter
-account. Like other twenv.rb commands, this command sleeps and resumes when
-rate limited by Twitter.
-
-`archive-timeline` supports filtering what and how many tweets to archive, run
-`archive-timeline --help` to see what options are available. By default all tweets
-on a Twitter accounts' timeline are archived, unless the `--max` option is passed or
-an interrupt is received(`^C`) while the command runs.
-
-The following is an example that archives recent retweets from [@computerscience](https://twitter.com/computerscience)
-
-    [1] twenv.rb (main)> archive-timeline computerscience --max 10 --is-retweet
-    OK 10 tweets archived
-    OK Archive saved to storage/archive-timeline/computerscience.json
-    OK Archive assigned to local variable `archived_timeline`
-    [2] twenv.rb (main)> archived_timeline.size
-    => 10
-
-It's possible to continue from where the `archive-timeline` command last stopped with
-the `--continue` option:
-
-    [3] twenv.rb (main)> archive-timeline computerscience --max 10 --is-retweet --continue
-    OK Continue from https://twitter.com/ComputerScience/status/1300306483863646210 (2020-08-31T05:36:38Z)
-    OK 10 tweets archived
-    OK Archive saved to storage/archive-timeline/computerscience.json
-    OK Archive assigned to local variable `archived_timeline`
-    [4] twenv.rb (main)> archived_timeline.size
-    => 20
-
-__<a id='commands-archive-likes'> 5. archive-likes</a>__
-
-The `archive-likes` command lets you archive the likes of a Twitter account.
-Like other twenv.rb commands, this command sleeps and resumes when rate limited
-by Twitter.
-
-`archive-likes` supports filtering what and how many likes to archive, run
-`archive-likes --help` to see what options are available. By default all likes
-belonging to a Twitter account are archived, unless the `--max` option is passed
-or an interrupt is received(`^C`) while the command runs.
-
-The following example archives the 10 most recent likes from
-[@computerscience](https://twitter.com/computerscience).
-
-    [1] twenv.rb (main)> archive-likes computerscience --max 10
-    OK 10 likes archived
-    OK Archive saved to storage/archive-likes/computerscience.json
-    OK Archive assigned to local variable `archived_likes`
-    [2] twenv.rb (main)> archived_likes.size
-    => 10
-
-You can continue from where the `archive-likes` command last stopped with
-the `--continue` option:
-
-    [2] twenv.rb (main)> archive-likes computerscience --max 10 --continue
-    OK Continue from https://twitter.com/Skittles/status/1369770902502662145 (2021-03-10T22:03:26Z)
-    OK 10 likes archived
-    OK Archive saved to storage/archive-likes/computerscience.json
-    OK Archive assigned to local variable `archived_likes`
 
 [Back to top](#top)
 
