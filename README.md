@@ -21,8 +21,9 @@
 ## <a id='introduction'> Introduction </a>
 
 
-twenv.rb provides a Twitter environment where you can interact with Twitter
-through its web APIs using a REPL. The environment uses the [Ruby](https://www.ruby-lang.org) programming language,
+twenv.rb provides a customizable Twitter environment where you
+can interact with Twitter through its web APIs using a REPL.
+The environment uses the [Ruby](https://www.ruby-lang.org) programming language,
 [Pry](https://github.com/pry/pry#top) and the [Twitter library](https://github.com/sferik/twitter).
 
 [Back to top](#top)
