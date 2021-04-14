@@ -17,6 +17,7 @@
   * [archive-likes](#commands-archive-likes)
 * [Customization](#custom)
   * [Write your own commands](#custom-write-your-own-commands)
+  * [Customize the user-agent header](#custom-customize-the-user-agent-header)
 * [License](#license)
 
 ## <a id='introduction'> Introduction </a>
@@ -250,6 +251,19 @@ class RandomTweet < TWEnv::Command
   add_command self
 end
 ```
+
+**2. <a id='custom-customize-the-user-agent-header'>Customize the user-agent header</a>**
+
+By default the user-agent header is sent as "twenv.rb vX.X.X".
+This can be changed at runtime by setting `client.user_agent`.
+
+For example:
+
+    [1] twenv.rb (main)> client.user_agent = "my-user-agent"
+    => "my-user-agent"
+
+If you would like to change it to something else permanently you
+can edit the `TWEnv.user_agent` method in [/lib/twenv.rb](https://github.com/rg-3/twenv.rb/blob/master/lib/twenv.rb)
 
 [Back to top](#top)
 

@@ -2,6 +2,8 @@
 
 ## next
 
+* Set the default value for the user-agent header to `twenv.rb vX.X.X`.
+
 * Call `validate_options!` first thing upon running the `write-tweet`
   command.
 

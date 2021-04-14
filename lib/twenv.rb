@@ -24,6 +24,7 @@ class TWEnv
           config.consumer_secret     = ENV['TWENV_CONSUMER_KEY_SECRET']
           config.access_token        = ENV['TWENV_ACCESS_TOKEN']
           config.access_token_secret = ENV['TWENV_ACCESS_TOKEN_SECRET']
+          config.user_agent = user_agent
           twitter_options.each {|k,v| config.send("#{k}=", v)}
         }
       }
@@ -32,7 +33,7 @@ class TWEnv
 
   #
   # @return [String]
-  #   The path to the root of the twenv.rb repository
+  #  The path to the root of the twenv.rb repository
   #
   def self.root_path
     @root_path ||= File.expand_path File.join(__dir__, "..")
@@ -40,13 +41,21 @@ class TWEnv
 
   #
   # @return [String]
-  #   Returns the path to the `.env` file.
+  #  Returns the path to the `.env` file.
   #
   def self.dot_env_path
     File.join TWEnv.root_path, '.env'
   end
 
-  private_class_method def self.parse_dot_file(path)
+  #
+  # @return [String]
+  #  Returns the default value for the user-agent header.
+  #
+  def self.user_agent
+    "twenv.rb v#{TWEnv::VERSION}"
+  end
+
+  def self.parse_dot_file(path)
     return {} unless File.exist? path
     Hash[
       File.read(path).each_line.map do |line|
@@ -55,12 +64,14 @@ class TWEnv
       end.compact
     ]
   end
+  private_class_method :parse_dot_file
 
-  private_class_method def self.require_script(path)
+  def self.require_script(path)
     require(path)
   rescue => ex
     warn "The script '#{path}' could not be loaded (#{ex.class})"
   end
+  private_class_method :require_script
 end
 
 Pry.configure do |config|
