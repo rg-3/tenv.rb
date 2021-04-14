@@ -173,7 +173,7 @@ is an example of a twenv.rb command:
 ```ruby
 class RandomTweet < TWEnv::Command
   match 'random-tweet'
-  description 'A random tweet from your home timeline'
+  description 'A random tweet from the home timeline of `client.user`'
 
   def process
     # Extended tweet mode provides access to the full tweet text rather
