@@ -81,12 +81,10 @@ class TWEnv::WriteTweet < TWEnv::Command
   end
 
   def process
-    raise Pry::CommandError, "set $EDITOR and try again" if empty?(ENV['EDITOR'])
+    validate_options!(opts)
     return show_delayed_tweets if opts['show-delayed']
     return cancel_tweet(opts['cancel']) if opts['cancel']
     return wakeup_thread(opts['wakeup']) if opts['wakeup']
-
-    validate_options!(opts)
     files = opts[:files].map{|path| File.new(File.expand_path(path), 'r')}
     delay = parse_delay_option(opts[:delay])
     body = opts['tweet-file'] ? read_tweet_file(opts['tweet-file']) : write_tweet
@@ -244,6 +242,9 @@ class TWEnv::WriteTweet < TWEnv::Command
   end
 
   def validate_options!(options)
+    if empty?(ENV['EDITOR'])
+      raise Pry::CommandError, "set $EDITOR and try again"
+    end
     if options.present?('delay-date') && !options.present?('delay')
       raise Pry::CommandError.new("The --delay option is required when providing a --delay-date")
     end
