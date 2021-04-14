@@ -2,6 +2,12 @@
 
 ## Next
 
+* In the `write-tweet` command, add a `--wakeup=` option that allows
+  a delayed tweet to be sent early.
+
+* In the `write-tweet` command, rename the option `--show-schedule`
+  to `--show-delayed`.
+
 * Add the `--tweet-file` option to the `write-tweet` command. The
  `--tweet-file` option accepts a file that's run through ERB and
  then posted as the tweets' content.
