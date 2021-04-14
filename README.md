@@ -42,7 +42,7 @@ then adopt it as your own environment.
 
     # Fork a branch from the latest version of twenv.rb.
     git fetch --tags
-    git checkout tags/v0.8.0 -b my-twenv.rb
+    git checkout tags/v0.9.0 -b my-twenv.rb
 
 
 **2) <a id='install-env'>Setup .env file</a>**
@@ -80,7 +80,7 @@ to see what's possible.
 
 ## <a id='commands'> Built-in Commands </a>
 
-This section is for getting a taste of twenv.rb - it is not a comphrensive overview 
+This section is for getting a taste of twenv.rb - it is not a comphrensive overview
 but something to get you started.
 
 **<a id='commands-write-a-tweet'> 1) write-tweet</a>**
