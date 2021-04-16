@@ -14,7 +14,8 @@
   * [delete-my-tweets](#commands-delete-your-tweets)
   * [delete-my-likes](#commands-delete-your-likes)
 * [Customization](#custom)
-  * [Write your own commands](#custom-write-your-own-commands)
+  * [Add scripts](#custom-add-scripts)
+  * [Write commands](#custom-write-your-own-commands)
   * [Customize the user-agent header](#custom-customize-the-user-agent-header)
 * [License](#license)
 
@@ -161,15 +162,25 @@ available. The following example demonstrates a few different scenarios:
 
 ## <a id='custom'>Customization</a>
 
-**1. <a id='custom-write-your-own-commands'>Write your own commands</a>**
+<a id='custom-add-scripts'> **1. Add scripts** </a>
 
-The `scripts/` directory is a place where you can add Ruby scripts that will be
-loaded when twenv.rb starts. It's intended as a place you can add your own
-commands and scripts that can be kept outside version control.
+The `scripts/` directory is a directory where you can add
+Ruby files that are kept outside of version control.
+
+The file `scripts/01_init.rb` is the entry point that's
+automatically required when twenv.rb starts. In that file
+you can add and require other code. You could add `02_foo.rb`
+if you wanted to load it after `01_init.rb`, and so on.
+
+Only files that follow that naming convention are automatically
+required. A file named `example.rb` or `foobar.rb` would have to
+be required manually.
+
+**2. <a id='custom-write-your-own-commands'>Write commands</a>**
 
 The [twenv.rb command class](https://github.com/rg-3/tenv.rb/blob/master/lib/twenv/command.rb)
-inherits from the Pry command class and implements useful methods such as `client`. The following
-is an example of a twenv.rb command:
+inherits from the Pry command class and implements useful methods such as `client`.
+The following is an example of a twenv.rb command:
 
 ```ruby
 class RandomTweet < TWEnv::Command
@@ -190,7 +201,7 @@ class RandomTweet < TWEnv::Command
 end
 ```
 
-**2. <a id='custom-customize-the-user-agent-header'>Customize the user-agent header</a>**
+**3. <a id='custom-customize-the-user-agent-header'>Customize the user-agent header</a>**
 
 By default the user-agent header is sent as "twenv.rb vX.X.X".
 This can be changed at runtime by setting `client.user_agent`.

@@ -2,6 +2,13 @@
 
 ## next
 
+* By default `scripts/01_init.rb` is automatically required by
+  twenv.rb - as opposed to trying to require every file in the
+  directory.
+
+  Only files following that naming convention are eligible for
+  automatic require from now on.
+
 * Reduce README content
 
 * Update command descriptions of `archive-timeline` and `archive-likes`.
