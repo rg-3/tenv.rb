@@ -61,8 +61,8 @@ class TWEnv::WriteTweet < TWEnv::Command
     slop.on :t,  'tweet-file='   , "Post the contents of a ERB file as a tweet.", as: :string, default: nil
     slop.on :r,  'in-reply-to='  , 'Write a reply to the given tweet.', as: :boolean, default: nil
 
-    slop.on     'show-delayed'  , 'Show at what time delayed tweet(s) are scheduled to be ' \
-                                  'published.',
+    slop.on  :s,  'show-delayed' , 'Show at what time delayed tweet(s) are scheduled to be ' \
+                                   'published.',
                                    as: :boolean, default: nil
 
     slop.on     'delay-date='   , 'The date to which the --delay option is relative to. ' \
