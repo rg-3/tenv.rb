@@ -17,9 +17,7 @@ class TWEnv::DeleteMyLikes < TWEnv::Command
   end
 
   def process
-    perform_action_on_tweets method(:read_tweets),
-      lambda { |tweet| client.unfavorite(tweet) },
-      lambda { |total| line.rewind.ok("#{total} tweets unliked") }
+    perform_action_on_tweets method(:read_tweets), method(:unfavorite), method(:print_total)
     line.end
   rescue Interrupt
     line.end
@@ -41,6 +39,14 @@ class TWEnv::DeleteMyLikes < TWEnv::Command
     tweets.reject!(&:reply?) if opts["is-not-reply"]
     is_reply_to_filter!(tweets, opts["is-reply-to"])
     tweets.tap { self.max_id = max_id }
+  end
+
+  def unfavorite(tweet)
+    client.unfavorite(tweet)
+  end
+
+  def print_total(total)
+    line.rewind.ok("#{total} tweets unliked")
   end
 
   add_command self

@@ -17,10 +17,7 @@ class TWEnv::ArchiveLikes < TWEnv::Command
     self.path = File.join storage_path, "#{user}.json"
     archive = opts["continue"] ? read_archive(path) : []
     opts["continue"] ? resume_from_previous_archive(archive) : write_archive(path, archive)
-    perform_action_on_tweets method(:read_tweets),
-      method(:archive_tweet),
-      method(:print_total),
-      archive.map(&:id)
+    perform_action_on_tweets method(:read_tweets), method(:archive_tweet), method(:print_total), archive.map(&:id)
     line.end
     complete_archive(path, archive, local_name: "archived_likes")
   rescue TWEnv::Error::ArchiveNotFoundError

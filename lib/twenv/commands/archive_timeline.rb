@@ -46,9 +46,7 @@ class TWEnv::ArchiveTimeline < TWEnv::Command
   private
 
   def read_tweets
-    read_and_filter method(:timeline_tweets),
-      method(:filter_tweets),
-      max_id
+    read_and_filter method(:timeline_tweets), method(:filter_tweets), max_id
   end
 
   def timeline_tweets

@@ -26,9 +26,7 @@ class TWEnv::DeleteMyTweets < TWEnv::Command
   end
 
   def process
-    perform_action_on_tweets method(:read_tweets),
-      lambda { |tweet| client.destroy_tweet(tweet) },
-      lambda { |total| line.rewind.ok("#{total} tweets deleted") }
+    perform_action_on_tweets method(:read_tweets), method(:destroy_tweet), method(:print_total)
     line.end
   rescue Interrupt
     line.end
@@ -38,9 +36,7 @@ class TWEnv::DeleteMyTweets < TWEnv::Command
   private
 
   def read_tweets
-    read_and_filter method(:tweet_reader),
-      method(:filter_tweets),
-      max_id
+    read_and_filter method(:tweet_reader), method(:filter_tweets), max_id
   end
 
   def tweet_reader
@@ -60,6 +56,14 @@ class TWEnv::DeleteMyTweets < TWEnv::Command
     tweets.reject! { |t| t.created_at >= Time.strptime(opts["before-date"], "%Y-%m-%d") } if opts["before-date"]
     is_reply_to_filter!(tweets, opts["is-reply-to"])
     tweets
+  end
+
+  def destroy_tweet(tweet)
+    client.destroy_tweet(tweet)
+  end
+
+  def print_total(total)
+    line.rewind.ok("#{total} tweets deleted")
   end
 
   add_command self
