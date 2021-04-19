@@ -2,9 +2,13 @@
 
 ## next
 
+* Nothing so far.
+
+## v0.10.0
+
 * Commit the result of `rake standard:fix`.
 
-* Add the standard ruby linter
+* Add the standard ruby linter to `gem.deps.rb`.
 
 * By default `scripts/01_init.rb` is automatically required by
   twenv.rb - as opposed to trying to require every file in the
