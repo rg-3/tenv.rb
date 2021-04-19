@@ -12,12 +12,14 @@ module TWEnv::Command::TweetFilter
   end
 
   def is_reply_to_filter!(tweets, screen_name)
-    tweets.select! do |tweet|
-      next unless tweet.reply?
-      user = client.user(tweet.in_reply_to_user_id)
-      user.screen_name == screen_name
-    rescue Twitter::Error::NotFound, Twitter::Error::Forbidden
-      nil
-    end if screen_name
+    if screen_name
+      tweets.select! do |tweet|
+        next unless tweet.reply?
+        user = client.user(tweet.in_reply_to_user_id)
+        user.screen_name == screen_name
+      rescue Twitter::Error::NotFound, Twitter::Error::Forbidden
+        nil
+      end
+    end
   end
 end

@@ -9,12 +9,12 @@ class TWEnv::Struct < OpenStruct
   #
   def self.from_hash(hash)
     result = {}
-    hash.each do |k,v|
+    hash.each do |k, v|
       case v
       when Array
-        result[k] = v.map{|e| Array === e || Hash === e ? from_hash(e) : e}
+        result[k] = v.map { |e| Array === e || Hash === e ? from_hash(e) : e }
       when Hash
-        v.each {|k,v2| v[k] = Array === v2 || Hash === v2 ? from_hash(v2) : v2}
+        v.each { |k, v2| v[k] = Array === v2 || Hash === v2 ? from_hash(v2) : v2 }
         result[k] = new(v)
       else
         result[k] = v

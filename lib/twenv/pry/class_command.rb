@@ -20,7 +20,7 @@ class Pry::ClassCommand < Pry::Command
       opt.banner(unindent(self.class.banner))
       subcommands(opt)
       options(opt)
-      opt.on :h, :help, 'Show this message.'
+      opt.on :h, :help, "Show this message."
     end
   end
 end

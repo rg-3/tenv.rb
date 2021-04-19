@@ -1,6 +1,6 @@
 class TWEnv::Command < Pry::ClassCommand
-  require 'fileutils'
-  Dir.glob(File.join(__dir__, 'command_mixins', '*.rb')) { |f| require_relative(f) }
+  require "fileutils"
+  Dir.glob(File.join(__dir__, "command_mixins", "*.rb")) { |f| require_relative(f) }
 
   include PerformActionOnTweets
   include TwitterActions
@@ -25,7 +25,7 @@ class TWEnv::Command < Pry::ClassCommand
   #
   def relative_to_root(path)
     path = File.expand_path(path)
-    path.sub(%r(^#{Regexp.escape TWEnv.root_path}/), '')
+    path.sub(%r{^#{Regexp.escape TWEnv.root_path}/}, "")
   end
 
   #
@@ -43,7 +43,7 @@ class TWEnv::Command < Pry::ClassCommand
   #  Returns the path to a directory where a command can store files.
   #
   def storage_path
-    File.join TWEnv.root_path, 'storage', self.class.command_name
+    File.join TWEnv.root_path, "storage", self.class.command_name
   end
 
   #

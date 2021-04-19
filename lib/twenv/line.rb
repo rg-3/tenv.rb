@@ -2,7 +2,7 @@
 
 class TWEnv::Line
   RED_ERROR = Paint["ERR", "#CC0000", :bright]
-  GREEN_OK  = Paint["OK", "#00FF00", :bright]
+  GREEN_OK = Paint["OK", "#00FF00", :bright]
   ORANGE_WARNING = Paint["WARN", "#FFA500", :bright]
   BLUE_INFO = Paint["INFO", "#113DE0", :bright]
 
@@ -16,7 +16,7 @@ class TWEnv::Line
   end
 
   def print(str)
-    str   = str.gsub(/[\n]*/, '')
+    str = str.gsub(/\n*/, "")
     @size = str.size
     @io.print str
     self

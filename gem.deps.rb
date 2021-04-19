@@ -1,4 +1,5 @@
-source 'https://rubygems.org'
-gem 'twitter'
-gem 'pry'
-gem 'paint'
+source "https://rubygems.org"
+gem "twitter"
+gem "pry"
+gem "paint"
+gem "standard"
