@@ -73,7 +73,7 @@ From the twenv.rb root:
 ## <a id='the-client-local'>The "client" local</a>
 
 Once twenv.rb starts you'll have access to a `client` local. It returns an instance
-of `Twitter::REST::Client`, from there you can play around with numerous
+of `Twitter::REST::Client`. From there you can play around with numerous
 Twitter APIs. I recommend checking out the [documentation for the Twitter library](https://www.rubydoc.info/gems/twitter)
 to see what's possible.
 
@@ -127,7 +127,7 @@ Check out `write-tweet --help` for a complete overview of what this command can 
 __<a id='commands-delete-your-tweets'> 2. delete-my-tweets</a>__
 
 The `delete-my-tweets` command can delete all your tweets, or a subset
-of them gathered by filtering. This command reads  your entire timeline; if
+of them gathered by filtering. This command reads your entire timeline; if
 there's a lot of tweets it might take a while. What follows are examples that
 demonstrate deleting all your tweets or just a subset of them:
 
@@ -172,9 +172,9 @@ automatically required when twenv.rb starts. In that file
 you can add and require other code. You could add `02_foo.rb`
 if you wanted to load it after `01_init.rb`, and so on.
 
-Only files that follow that naming convention are automatically
-required. A file named `example.rb` or `foobar.rb` would have to
-be required manually.
+Only files that follow the mentioned naming convention are 
+automatically required. A file named `example.rb` or `foobar.rb` 
+would have to be required manually.
 
 **2. <a id='custom-write-your-own-commands'>Write commands</a>**
 
